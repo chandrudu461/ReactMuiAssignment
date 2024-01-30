@@ -2,7 +2,6 @@ import * as React from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
-// import './MuiCustomTable.css'
 import { Typography } from '@mui/material'
 import { useTheme } from '@mui/material'
 
@@ -10,7 +9,7 @@ import { useState, useEffect } from 'react'
 import { Box, Button } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-// import './MuiCustomTable.css'
+
 const rows = [
     {
         subject: 'Subject 01',

@@ -131,99 +131,91 @@ const DashboardPage = () => {
 
                     {/* chart grid */}
                     <Stack direction={"column"}>
-                        <Stack >
-                            <Grid container >
-                                <Grid item xs={8.3}
-                                    sx={{
-                                        // border: '1px solid red',
-                                        height: '352px',
-                                        marginTop: '28px'
-                                    }}>
+                        <Grid container >
+                            <Grid item xs={8.3}
+                                sx={{
+                                    // border: '1px solid red',
+                                    height: '352px',
+                                    marginTop: '28px'
+                                }}>
 
-                                    <Stack spacing={2} direction='row' sx={{
-                                        marginLeft: '23px',
-                                        marginTop: '16px',
-                                    }}>
-                                        <Stack sx={{
-                                            width: '50%',
-                                        }}>
-                                            <Typography
-                                                variant="body1"
-                                                sx={{
-                                                    color: '#161C24',
-                                                    fontFamily: 'Poppins',
-                                                    fontSize: '20px',
-                                                    fontStyle: 'normal',
-                                                    fontWeight: 500,
-                                                    lineHeight: '28px',
-                                                }}
-                                            >Recent Assessments</Typography>
-                                        </Stack>
-                                        <Stack direction='row' spacing={2} sx={{
-                                            width: '100%',
-                                            // border: '2px solid red',
-                                            justifyContent: 'flex-end',
-                                        }}>
-                                            <Bubble color={'#0B58F5'} />
-                                            <Typography>Attempted</Typography>
-                                            <Bubble color={'#F44336'} />
-                                            <Typography>Unattempted</Typography>
-                                            <MuiSmallDropDown data={[{ name: 'subject 01', color: 'red' }, { name: 'subject 01', color: 'red' }, { name: 'subject 01', color: 'red' }, { name: 'subject 01', color: 'red' }]} />
-                                        </Stack>
-                                    </Stack>
-
-                                    <Stack direction='column'>
-                                        {recentAssessmentsData && recentAssessmentsData.analysis && <MuiColumnChart
-                                            series={[
-                                                {
-                                                    name: recentAssessmentsData.title,
-                                                    data: recentAssessmentsData.analysis.map(item => Math.floor(item?.percentage))
-                                                }
-                                            ]}
-                                            categories={recentAssessmentsData.analysis.map(item => item?.name)}
-                                            yaxisTitle={"Tests"}
-                                            xaxisTitle={"Performance"}
-                                            width={'100%'}
-                                            height={'230px'}
-                                            primaryBarColor={theme.palette.primary[700]}
-                                        />}
-                                        <Box
-                                            sx={{
-                                                height: '535px',
-                                                border: '1px solid red'
-                                            }}
-                                        ></Box>
-
-                                        <Courses data={coursesData} />
-                                    </Stack>
-                                </Grid>
-
-                                <Grid item xs={3.7}
-                                    style={{
-                                        // border: '1px solid red',
-                                        height: '108px',
-                                        marginTop: '28px',
-                                        marginLeft: '24px',
-                                        maxWidth: '319px'
-                                    }}>
-                                    <Stack spacing={'12px'} direction={'column'} sx={{
-                                        padding: '10px',
+                                <Stack spacing={2} direction='row' sx={{
+                                    marginLeft: '23px',
+                                    marginTop: '16px',
+                                }}>
+                                    <Stack sx={{
+                                        width: '50%',
                                     }}>
                                         <Typography
-                                            style={{
+                                            variant="body1"
+                                            sx={{
+                                                color: '#161C24',
+                                                fontFamily: 'Poppins',
                                                 fontSize: '20px',
                                                 fontStyle: 'normal',
                                                 fontWeight: 500,
                                                 lineHeight: '28px',
                                             }}
-                                        > User Profile </Typography>
-                                        <UserProfile name={'Maharrm Hasanli'} email={'maga.hesenli@gmail.com'} />
-                                        <CalenderComponent />
-                                        <LeaderBoardCard data={leaderBoardData} width='319px' height='425px' />
+                                        >Recent Assessments</Typography>
                                     </Stack>
-                                </Grid>
+                                    <Stack direction='row' spacing={2} sx={{
+                                        justifyContent: 'flex-end',
+                                    }}>
+                                        <Bubble color={'#0B58F5'} />
+                                        <Typography>Attempted</Typography>
+                                        <Bubble color={'#F44336'} />
+                                        <Typography>Unattempted</Typography>
+                                        <MuiSmallDropDown data={[{ name: 'subject 01', color: 'red' }, { name: 'subject 01', color: 'red' }, { name: 'subject 01', color: 'red' }, { name: 'subject 01', color: 'red' }]} />
+                                    </Stack>
+                                </Stack>
+
+                                <Stack direction='column'>
+                                    {recentAssessmentsData && recentAssessmentsData.analysis && <MuiColumnChart
+                                        series={[
+                                            {
+                                                name: recentAssessmentsData.title,
+                                                data: recentAssessmentsData.analysis.map(item => Math.floor(item?.percentage))
+                                            }
+                                        ]}
+                                        categories={recentAssessmentsData.analysis.map(item => item?.name)}
+                                        yaxisTitle={"Tests"}
+                                        xaxisTitle={"Performance"}
+                                        width={'100%'}
+                                        height={'230px'}
+                                        primaryBarColor={theme.palette.primary[700]}
+                                    />}
+                                    <Box
+                                        sx={{
+                                            height: '535px',
+                                            border: '1px solid red'
+                                        }}
+                                    ></Box>
+                                    <Courses data={coursesData} />
+                                </Stack>
                             </Grid>
-                        </Stack>
+
+                            <Grid item xs={3.7}
+                                style={{
+                                    height: '108px',
+                                    marginTop: '28px',
+                                }}>
+                                <Stack spacing={'12px'} direction={'column'} sx={{
+                                    padding: '10px',
+                                }}>
+                                    <Typography
+                                        style={{
+                                            fontSize: '20px',
+                                            fontStyle: 'normal',
+                                            fontWeight: 500,
+                                            lineHeight: '28px',
+                                        }}
+                                    > User Profile </Typography>
+                                    <UserProfile name={'Maharrm Hasanli'} email={'maga.hesenli@gmail.com'} />
+                                    <CalenderComponent />
+                                    <LeaderBoardCard data={leaderBoardData} width='319px' height='425px' />
+                                </Stack>
+                            </Grid>
+                        </Grid>
                     </Stack>
                 </Box >
             </Box >
