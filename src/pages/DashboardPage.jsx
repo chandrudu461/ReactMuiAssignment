@@ -165,7 +165,7 @@ const DashboardPage = () => {
                                         <Typography>Attempted</Typography>
                                         <Bubble color={'#F44336'} />
                                         <Typography>Unattempted</Typography>
-                                        <MuiSmallDropDown data={[{ name: 'subject 01', color: 'red' }, { name: 'subject 01', color: 'red' }, { name: 'subject 01', color: 'red' }, { name: 'subject 01', color: 'red' }]} />
+                                        <MuiSmallDropDown data={[{ name: 'subject 01' }, { name: 'subject 01' }, { name: 'subject 01' }, { name: 'subject 01' }]} />
                                     </Stack>
                                 </Stack>
 

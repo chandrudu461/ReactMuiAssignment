@@ -63,9 +63,9 @@ export default function MuiSmallDropDown({
         <Select
           labelId='dropdown-small'
           id='dropdown-small'
-          value={dropDownValue ? dropDownValue : ''}
+          // value={dropDownValue ? dropDownValue : ''}
           displayEmpty
-          onChange={handleChange}
+          // onChange={handleChange}
           disabled={isDisabled}
           sx={{
             padding: '5px',

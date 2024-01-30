@@ -18,17 +18,17 @@ const router = createBrowserRouter([
     children: [
       { path: 'dashboard', element: <DashboardPage /> },
       { path: 'test', element: <TestElement /> },
-      { path: '/course/:courseId', element: <CoursePage /> }
+      { path: '/course/:courseId', element: <CoursePage /> },
+      {
+        path: '/pdfview/:url',
+        element: <PdfViewer />,
+        errorElement: <ErrorPage />
+      }
     ]
   },
   {
     path: '/login',
     element: <LoginPage />,
-    errorElement: <ErrorPage />
-  },
-  {
-    path: '/pdfview/:url',
-    element: <PdfViewer />,
     errorElement: <ErrorPage />
   }
 ])

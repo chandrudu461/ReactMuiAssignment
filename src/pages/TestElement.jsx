@@ -8,7 +8,6 @@ import ContinueReadingCard from '../components/common/ContinueReadingCard';
 import Units from '../components/common/Units';
 import MuiCustomTableWithSortandSelect from '../components/common/MuiCustomTableWithSortandSelect';
 import CustomTable from '../components/common/CustomTable'
-import PdfViewerComponent from '../components/common/PdfViewerComponent';
 import { useTheme } from '@mui/material'
 const TestElement = (props) => {
 
