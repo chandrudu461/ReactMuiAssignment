@@ -91,7 +91,6 @@ const DashboardPage = () => {
         fetchTableDataFromApi();
     }, []);
 
-
     const handleSemesterChange = (semester) => {
         const filtered = rankedTableData.filter((item) => item.semester === semester);
         setFilteredData(filtered);
