@@ -12,8 +12,8 @@ const Navbar = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleLogout = () => {
-        dispatch(loginActions.login())
-        navigate('/login');
+        dispatch(loginActions.logout())
+        navigate('/');
     }
     const handleDashboardIconClick = () => {
         navigate('/dashboard');

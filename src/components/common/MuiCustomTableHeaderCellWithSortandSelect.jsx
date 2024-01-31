@@ -49,6 +49,23 @@ const MuiCustomTableHeaderCellWithSortandSelect = ({
   }
 
   const changeSortOrder = (key) => {
+
+    if (key === 'Time Spent') {
+      key = "total_timespent";
+    }
+
+    else if (key === 'Submission Type') {
+      key = "submission_type";
+    }
+
+    else if (key === "Internet Speed") {
+      key = "internet_speed";
+    }
+
+    else if (key === "Mark") {
+      key = "percentage_scored";
+    }
+
     if (sortOrder === 'asc') {
       sortHandler('des', key)
       setSortOrder('des')
@@ -67,8 +84,8 @@ const MuiCustomTableHeaderCellWithSortandSelect = ({
             index === 0
               ? '5px 0 0 5px'
               : index === arrayLength - 1
-              ? '0 5px 5px 0'
-              : '0',
+                ? '0 5px 5px 0'
+                : '0',
           border: 'none',
         }}
       >

@@ -19,8 +19,8 @@ const Header = () => {
         setAnchorEl(null);
     };
     const handleLogout = () => {
-        dispatch(loginActions.login())
-        navigate('/login');
+        dispatch(loginActions.logout())
+        navigate('/');
     }
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
