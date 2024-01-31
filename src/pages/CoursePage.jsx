@@ -89,7 +89,14 @@ function CoursePage() {
                             viewBox="0 0 22 19.602"
                             width="22px"
                             height="19.602px"
-                            sx={{ strokeWidth: '3px', stroke: '#252525' }} onClick={handleBack}>
+                            sx={{
+                                strokeWidth: '3px',
+                                stroke: '#252525',
+                                '&:hover': {
+                                    cursor: 'pointer',
+                                },
+                            }}
+                            onClick={handleBack}>
                             <BackButtonIcon />
                         </Box>
                         <Typography sx={{

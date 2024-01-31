@@ -10,6 +10,7 @@ import {
   Checkbox,
 } from '@mui/material'
 import { useTheme } from '@mui/material'
+import Circle from '../../svg/Circle';
 // import { ArrowDown } from '../../../../assets/Svg/ArrowDown'
 // import { ArrowUp } from '../../../../assets/Svg/ArrowUp'
 // import { DownArrow2 } from '../../../../assets/Svg/DownArrow2'
@@ -32,9 +33,10 @@ const MuiCustomTableHeaderCellWithSortandSelect = ({
   sortHandler,
   selectHandler,
 }) => {
-  const { submissionTypesToShowinStudentTable } = useSelector(
-    (state) => state.assessment
-  )
+  // const { submissionTypesToShowinStudentTable } = useSelector(
+  //   (state) => state.assessment
+  // )
+  const submissionTypesToShowinStudentTable = [1, 2, 3];
   const [sortOrder, setSortOrder] = useState('asc')
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
@@ -91,11 +93,13 @@ const MuiCustomTableHeaderCellWithSortandSelect = ({
               sx={{ padding: '0' }}
               onClick={changeSortOrder}
             >
-              {/* {sortOrder === 'asc' ? (
-                <ArrowUp fontsize='small' color={theme.palette.grey[500]} />
+              {sortOrder === 'asc' ? (
+                // <ArrowUp fontsize='small' color={theme.palette.grey[500]} />
+                <Circle />
               ) : (
-                <ArrowDown fontsize='small' color={theme.palette.grey[500]} />
-              )} */}
+                // <ArrowDown fontsize='small' color={theme.palette.grey[500]} />
+                <Circle />
+              )}
             </IconButton>
           ) : null}
           {isSelectable ? (
@@ -133,9 +137,9 @@ const MuiCustomTableHeaderCellWithSortandSelect = ({
                           },
                         }}
                         onChange={(e) => selectHandler(e, option.id)}
-                      // checked={submissionTypesToShowinStudentTable?.includes(
-                      //   option.id
-                      // )}
+                        checked={submissionTypesToShowinStudentTable?.includes(
+                          option.id
+                        )}
                       />
                       <Typography
                         variant='body1'

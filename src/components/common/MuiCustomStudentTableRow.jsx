@@ -9,7 +9,7 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material'
 import { RightArrowIcon } from '../../svg/RightButtonIcon'
-import { ArrowUp } from '../../svg/ArrowUp'
+import ArrowUp from '../../svg/ArrowUp'
 
 function secondsToMinutes(seconds) {
   const minutes = Math.floor(seconds / 60)
@@ -27,11 +27,12 @@ function getInternetQuality(speed) {
 
 const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
   const theme = useTheme()
-  const { currentSectionTab } = useSelector((state) => state.assessment)
+  // const { currentSectionTab } = useSelector((state) => state.assessment)
+  const currentSectionTab = "tab1";
   return (
     <TableRow
       onClick={() => {
-        viewStudentResult(stu)
+        // viewStudentResult(stu)
       }}
       key={key}
       sx={{
@@ -53,16 +54,14 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
         sx={{ border: 'none', borderRadius: '6px 0 0 6px' }}
       >
         <Typography variant='body1' sx={{ color: theme.palette.grey[900] }}>
-          {stu.name}
+          {stu.subject}
         </Typography>
       </TableCell>
-      {currentSectionTab === 'tab1' ? (
-        <TableCell scope='row' sx={{ border: 'none' }}>
-          <Typography variant='body1' sx={{ color: theme.palette.grey[900] }}>
-            {stu.class_section_name}
-          </Typography>
-        </TableCell>
-      ) : null}
+      <TableCell scope='row' sx={{ border: 'none' }}>
+        <Typography variant='body1' sx={{ color: theme.palette.grey[900] }}>
+          {stu.total_timespent} Min
+        </Typography>
+      </TableCell>
       <TableCell scope='row' sx={{ border: 'none' }}>
         <Typography
           variant='body1'
@@ -88,26 +87,29 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
                 : 'Tabswitch'}
         </Typography>
       </TableCell>
-      <TableCell scope='row' sx={{ border: 'none' }}>
-        <Typography variant='body1' sx={{ color: theme.palette.grey[900] }}>
-          {stu.total_timespent} Min
-        </Typography>
-      </TableCell>
-      <TableCell scope='row' sx={{ border: 'none' }}>
-        <Typography variant='body1' sx={{ color: theme.palette.grey[900] }}>
-          {stu.effective_time_utilization}%
-        </Typography>
-      </TableCell>
+      {/* {currentSectionTab === 'tab1' ? (
+        <TableCell scope='row' sx={{ border: 'none' }}>
+          <Typography variant='body1' sx={{ color: theme.palette.grey[900] }}>
+            {stu.class_section_name}
+          </Typography>
+        </TableCell>
+      ) : null} */}
       <TableCell scope='row' sx={{ border: 'none' }}>
         <Typography variant='body1' sx={{ color: theme.palette.grey[900] }}>
           {getInternetQuality(stu.internet_speed)}
         </Typography>
       </TableCell>
+
       <TableCell scope='row' sx={{ border: 'none' }}>
         <Typography variant='body1' sx={{ color: theme.palette.grey[900] }}>
-          {stu.submitted_at}
+          {stu.rank}
         </Typography>
       </TableCell>
+      {/* <TableCell scope='row' sx={{ border: 'none' }}>
+        <Typography variant='body1' sx={{ color: theme.palette.grey[900] }}>
+          {stu.effective_time_utilization}%
+        </Typography>
+      </TableCell> */}
       <TableCell
         scope='row'
         sx={{ border: 'none', borderRadius: '0 6px 6px 0' }}
@@ -120,7 +122,7 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
           <Typography variant='body3' sx={{ color: theme.palette.grey[900] }}>
             {stu.percentage_scored}%
           </Typography>
-          <IconButton
+          {/* <IconButton
             aria-label='delete'
             onClick={() => {
               viewStudentResult(stu)
@@ -135,15 +137,15 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
               },
             }}
           >
-            {/* <ArrowUp
+            <ArrowUp
               color={theme.palette.grey[100]}
               sx={{
                 transform: 'rotate(90deg)',
                 fontSize: '20px',
                 fontWeight: 600,
               }}
-            /> */}
-          </IconButton>
+            />
+          </IconButton> */}
         </Stack>
       </TableCell>
     </TableRow>

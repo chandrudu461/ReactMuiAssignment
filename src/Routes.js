@@ -13,6 +13,11 @@ import PdfViewer from './components/common/pdfViewer'
 const router = createBrowserRouter([
   {
     path: '/',
+    element: <LoginPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: '/',
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
@@ -26,11 +31,7 @@ const router = createBrowserRouter([
       }
     ]
   },
-  {
-    path: '/login',
-    element: <LoginPage />,
-    errorElement: <ErrorPage />
-  }
+
 ])
 
 const AppRouter = () => {

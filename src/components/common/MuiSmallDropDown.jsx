@@ -17,7 +17,7 @@ export default function MuiSmallDropDown({
   const handleChange = (event) => {
     console.log('value changed')
     setDropDownValue(event.target.value)
-    // onChange(event);
+    onChange(event);
   }
 
   const isDisabled = disabled ? true : false
@@ -63,9 +63,9 @@ export default function MuiSmallDropDown({
         <Select
           labelId='dropdown-small'
           id='dropdown-small'
-          // value={dropDownValue ? dropDownValue : ''}
+          value={dropDownValue ? dropDownValue : ''}
           displayEmpty
-          // onChange={handleChange}
+          onChange={handleChange}
           disabled={isDisabled}
           sx={{
             padding: '5px',
@@ -74,9 +74,9 @@ export default function MuiSmallDropDown({
             },
           }}
         >
-          <MenuItem disabled={true} value='' sx={{ display: 'none' }}>
+          {/* <MenuItem disabled={true} value='' sx={{ display: 'none' }}>
             Subjects
-          </MenuItem>
+          </MenuItem> */}
           {data &&
             data?.map((input, index) => (
               <MenuItem

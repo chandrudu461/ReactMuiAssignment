@@ -16,15 +16,27 @@ const MuiCustomTableWithSortandSelect = (props) => {
   const {
     HeaderArr,
     tableData,
-    viewStudentResult,
+    // viewStudentResult,
     sortHandler,
     selectHandler,
     loading_reportData,
-    currentPageforTablepaginaton,
-    tablePaginationHandler,
+    // currentPageforTablepaginaton,
+    // tablePaginationHandler,
     filtered_studentAssessmentList,
     submissionTypesToShowinStudentTable,
   } = props
+
+  const [page, setPage] = React.useState(1)
+  const rowsPerPage = 8
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage)
+  }
+
+  const paginatedRows = tableData.slice(
+    (page - 1) * rowsPerPage,
+    page * rowsPerPage
+  )
 
   return (
     <>
@@ -50,11 +62,11 @@ const MuiCustomTableWithSortandSelect = (props) => {
             />
           </TableHead>
           <TableBody>
-            {tableData?.map((stu, i) => (
+            {paginatedRows?.map((stu, i) => (
               <MuiCustomStudentTableRow
                 stu={stu}
                 key={i}
-                viewStudentResult={viewStudentResult}
+              // viewStudentResult={viewStudentResult}
               />
             ))}
           </TableBody>
@@ -73,8 +85,8 @@ const MuiCustomTableWithSortandSelect = (props) => {
               submissionTypesToShowinStudentTable.includes(stu.submission_type)
             ).length / 15
           )}
-          page={currentPageforTablepaginaton}
-          onChange={tablePaginationHandler}
+          page={page}
+          onChange={handleChangePage}
         />
       </Stack>
     </>

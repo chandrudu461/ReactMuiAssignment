@@ -9,4 +9,4 @@ const ArrowUp = () => {
     )
 }
 
-export default ArrowUp;
+export default ArrowUp

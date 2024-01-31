@@ -16,12 +16,7 @@ function LoginPage() {
         width: '100%',
     };
 
-    const childStyle = {
-        flex: '1',
-    };
-
     const loginStyle = {
-        flex: '1',
         margin: 'auto'
     }
 
@@ -29,7 +24,7 @@ function LoginPage() {
         // <Login />
         <div>
             <div style={containerStyle}>
-                <div style={childStyle}>
+                <div>
                     <LoginIcon />
                 </div>
                 <div style={loginStyle}>

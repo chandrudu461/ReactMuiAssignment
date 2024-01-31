@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Box } from '@mui/material';
+import { Typography, Box, Drawer } from '@mui/material';
 import DashboardChip from '../components/common/DashboardChip';
 import CalenderIcon from '../svg/CalenderIcon';
 import Stack from '@mui/material/Stack'
@@ -21,6 +21,8 @@ import MuiSmallDropDown from '../components/common/MuiSmallDropDown';
 import Courses from '../components/common/Courses';
 // import data from '../../src/data/data'
 import { useSelector } from "react-redux";
+import MuiCustomTableWithSortandSelect from '../components/common/MuiCustomTableWithSortandSelect'
+import LeaderBoardForDrawer from '../components/common/LeaderBoardForDrawer'
 
 const DashboardPage = () => {
     const [data, setData] = useState(null);
@@ -30,6 +32,12 @@ const DashboardPage = () => {
     const [coursesData, setCourseData] = useState(null)
     const isLoggedIn = useSelector((state) => state.login)
     const theme = useTheme();
+    const [tableData, setTableData] = useState(null)
+    const [tableAssessmentsData, setTableAssessmentsData] = useState(null)
+    const [tableDataWithRank, setTableDataWithRank] = useState(null)
+    const [filteredData, setFilteredData] = useState(null)
+    const [dropDownValue, setDropDownValue] = useState('semester 1')
+    const [drawerState, setDrawerState] = useState(null)
 
     const fetchData = async (url) => {
         try {
@@ -41,6 +49,15 @@ const DashboardPage = () => {
             throw error;
         }
     };
+
+    const headerArr = [
+        { label: 'Subject', isSortable: true, isSelectable: false },
+        { label: 'Time Spent', isSortable: true, isSelectable: true },
+        { label: 'Submission Type', isSortable: true, isSelectable: false },
+        { label: 'Internet Speed', isSortable: true, isSelectable: false },
+        { label: 'Rank', isSortable: true, isSelectable: false },
+        { label: 'Mark', isSortable: true, isSelectable: false },
+    ];
 
     useEffect(() => {
         // static data
@@ -60,10 +77,31 @@ const DashboardPage = () => {
                 throw error
             }
         };
+        const fetchTableDataFromApi = async () => {
+            try {
+                const result = await fetchData('https://stagingstudentpython.edwisely.com/reactProject/assessments');
+                setTableData(result)
+                setTableAssessmentsData(result.assessments)
+            } catch (error) {
+                throw error
+            }
+        };
 
         fetchDataFromApi();
+        fetchTableDataFromApi();
     }, []);
 
+
+    const handleSemesterChange = (semester) => {
+        const filtered = rankedTableData.filter((item) => item.semester === semester);
+        setFilteredData(filtered);
+    }
+
+    let rankedTableData = tableAssessmentsData ? tableAssessmentsData.map((row) => ({
+        ...row,
+        rank: 1 + tableAssessmentsData.filter((r) => r.percentage_scored > row.percentage_scored).length,
+    })) : [];
+    // console.log(rankedTableData);
 
     if (!isLoggedIn) {
         return (
@@ -71,6 +109,27 @@ const DashboardPage = () => {
                 <Typography>Login before Trying!!!</Typography>
             </Box>
         )
+    }
+
+    const sortHandler = (order, column) => {
+        const sortedData = [...rankedTableData];
+        if (order === 'asc') {
+            sortedData.sort((a, b) => {
+                return a[column] - b[column];
+            })
+            console.log(order)
+        }
+        else {
+            sortedData.sort((a, b) => {
+                return b[column] - a[column];
+            })
+            console.log(order)
+        }
+        rankedTableData = sortedData;
+    }
+
+    const toggleDrawer = () => {
+        setDrawerState(!drawerState);
     }
 
     return (
@@ -187,9 +246,37 @@ const DashboardPage = () => {
                                     <Box
                                         sx={{
                                             height: '535px',
-                                            border: '1px solid red'
+                                            // border: '1px solid red'
                                         }}
-                                    ></Box>
+                                    >
+                                        <Box>
+                                            <Stack direction='row'>
+                                                <Typography>Assessments</Typography>
+                                                <Box sx={{
+                                                    position: 'absolute',
+                                                    right: '30vw'
+                                                }}>
+                                                    <MuiSmallDropDown
+                                                        data={[
+                                                            { name: 'semester 1' },
+                                                            { name: 'semester 2' },
+                                                            { name: 'semester 3' },
+                                                        ]}
+                                                        onChange={handleSemesterChange}
+                                                        dropDownValue={dropDownValue}
+                                                        setDropDownValue={setDropDownValue}
+                                                    />
+                                                </Box>
+                                            </Stack>
+                                        </Box>
+                                        <MuiCustomTableWithSortandSelect
+                                            HeaderArr={headerArr}
+                                            tableData={rankedTableData}
+                                            submissionTypesToShowinStudentTable={[1, 2, 3, 4]}
+                                            sortHandler={sortHandler}
+                                            filtered_studentAssessmentList={rankedTableData}
+                                        />
+                                    </Box>
                                     <Courses data={coursesData} />
                                 </Stack>
                             </Grid>
@@ -212,8 +299,30 @@ const DashboardPage = () => {
                                     > User Profile </Typography>
                                     <UserProfile name={'Maharrm Hasanli'} email={'maga.hesenli@gmail.com'} />
                                     <CalenderComponent />
-                                    <LeaderBoardCard data={leaderBoardData} width='319px' height='425px' />
-                                </Stack>
+                                    <Box onClick={toggleDrawer} sx={{
+                                        '&:hover': {
+                                            cursor: 'pointer',
+                                        },
+                                    }}>
+                                        <LeaderBoardCard data={leaderBoardData} width='319px' height='425px' />
+                                    </Box>
+                                    <Drawer
+                                        anchor="right"
+                                        open={drawerState}
+                                        onClose={toggleDrawer}
+                                        sx={{
+                                            '& .MuiDrawer-paper': {
+                                                width: '30%',
+                                            },
+                                        }}
+                                    >
+                                        <Box sx={{
+                                            width: '100%', p: 2
+                                        }}>
+                                            <Typography variant="h6">Leaderboard</Typography>
+                                            <LeaderBoardForDrawer data={leaderBoardData} width='100%' height='100%' />
+                                        </Box>
+                                    </Drawer></Stack>
                             </Grid>
                         </Grid>
                     </Stack>
