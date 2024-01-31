@@ -49,8 +49,8 @@ const MuiCustomTableWithSortandSelect = (props) => {
         <Table sx={{ width: '100%' }} aria-label='sticky table'>
           <TableHead
             sx={{
-              position: 'sticky',
-              top: '162px',
+              position: 'relative',
+              // top: '162px',
               zIndex: 100,
               background: 'white',
             }}

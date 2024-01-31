@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Stack, Box, Typography } from '@mui/material'
-import { Worker, Viewer, Document } from '@react-pdf-viewer/core'
+import { Worker, Viewer } from '@react-pdf-viewer/core'
 import '@react-pdf-viewer/core/lib/styles/index.css'
 import { useParams } from 'react-router'
 import { zoomPlugin } from '@react-pdf-viewer/zoom'
