@@ -10,7 +10,7 @@ import {
   Checkbox,
 } from '@mui/material'
 import { useTheme } from '@mui/material'
-import Circle from '../../svg/Circle';
+import Circle from '../../svg/Circle'
 // import { ArrowDown } from '../../../../assets/Svg/ArrowDown'
 // import { ArrowUp } from '../../../../assets/Svg/ArrowUp'
 // import { DownArrow2 } from '../../../../assets/Svg/DownArrow2'
@@ -36,7 +36,7 @@ const MuiCustomTableHeaderCellWithSortandSelect = ({
   // const { submissionTypesToShowinStudentTable } = useSelector(
   //   (state) => state.assessment
   // )
-  const submissionTypesToShowinStudentTable = [1, 2, 3];
+  const submissionTypesToShowinStudentTable = [1, 2, 3]
   const [sortOrder, setSortOrder] = useState('asc')
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
@@ -48,12 +48,12 @@ const MuiCustomTableHeaderCellWithSortandSelect = ({
     setAnchorEl(null)
   }
 
-  const changeSortOrder = () => {
+  const changeSortOrder = (key) => {
     if (sortOrder === 'asc') {
-      sortHandler('des', index)
+      sortHandler('des', key)
       setSortOrder('des')
     } else {
-      sortHandler('asc', index)
+      sortHandler('asc', key)
       setSortOrder('asc')
     }
   }
@@ -67,8 +67,8 @@ const MuiCustomTableHeaderCellWithSortandSelect = ({
             index === 0
               ? '5px 0 0 5px'
               : index === arrayLength - 1
-                ? '0 5px 5px 0'
-                : '0',
+              ? '0 5px 5px 0'
+              : '0',
           border: 'none',
         }}
       >
@@ -91,7 +91,7 @@ const MuiCustomTableHeaderCellWithSortandSelect = ({
             <IconButton
               aria-label='delete'
               sx={{ padding: '0' }}
-              onClick={changeSortOrder}
+              onClick={() => changeSortOrder(itemData.label)}
             >
               {sortOrder === 'asc' ? (
                 // <ArrowUp fontsize='small' color={theme.palette.grey[500]} />

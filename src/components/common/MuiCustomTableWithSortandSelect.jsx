@@ -33,7 +33,7 @@ const MuiCustomTableWithSortandSelect = (props) => {
     setPage(newPage)
   }
 
-  const paginatedRows = tableData.slice(
+  const paginatedRows = tableData?.slice(
     (page - 1) * rowsPerPage,
     page * rowsPerPage
   )
@@ -66,7 +66,7 @@ const MuiCustomTableWithSortandSelect = (props) => {
               <MuiCustomStudentTableRow
                 stu={stu}
                 key={i}
-              // viewStudentResult={viewStudentResult}
+                // viewStudentResult={viewStudentResult}
               />
             ))}
           </TableBody>
