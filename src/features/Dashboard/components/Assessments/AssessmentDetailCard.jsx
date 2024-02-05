@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, Stack, Typography, Icon } from '@mui/material'
 import CountUp from 'react-countup'
+import { useTheme } from '@mui/material'
 
 const AssessmentDetailCard = ({
   icon,
@@ -11,6 +12,11 @@ const AssessmentDetailCard = ({
   contentType,
   showCountingAnimation,
 }) => {
+
+  const theme = useTheme();
+  const greyColor = theme.palette.grey[100]
+  console.log(greyColor)
+
   return (
     <Box
       sx={{
@@ -25,15 +31,16 @@ const AssessmentDetailCard = ({
         width: '100%',
         maxWidth: '230px',
         borderRadius: '10px',
-        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1)',
-        padding: '8px 8px 8px 8px',
+        boxShadow: ' 10px 10px 32px 0px rgba(22, 22, 22, 0.04);',
+        padding: '10px 27px 10px 10px',
+        border: '1px solid ${greyColor}'
       }}
     >
       <Stack
         direction={'row'}
         gap='0 10px'
         alignItems='center'
-        sx={{ width: '100%', height: '100%' }}
+        sx={{ width: '50%', height: '100%' }}
       >
         <Stack
           direction='row'
@@ -51,7 +58,9 @@ const AssessmentDetailCard = ({
         </Stack>
 
         <Stack direction='column' justifyContent='center'>
-          <Typography variant='caption2'>{title}</Typography>
+          <Box width={'126px'}>
+            <Typography variant='caption2'>{title}</Typography>
+          </Box>
           <Typography variant='h5'>
             {showCountingAnimation ? (
               <CountUp

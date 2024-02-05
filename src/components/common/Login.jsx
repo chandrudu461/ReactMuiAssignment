@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
-import PasswordIcon from '../../svg/PasswordIcon';
+import PasswordIcon from '../../assets/svg/PasswordIcon.jsx';
 import { Box, FormControlLabel } from '@mui/material';
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom'

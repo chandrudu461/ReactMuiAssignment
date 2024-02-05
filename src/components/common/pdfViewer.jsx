@@ -4,8 +4,8 @@ import { Worker, Viewer } from '@react-pdf-viewer/core'
 import '@react-pdf-viewer/core/lib/styles/index.css'
 import { useParams } from 'react-router'
 import { zoomPlugin } from '@react-pdf-viewer/zoom'
-import BackButtonIcon from '../../svg/BackButtonIcon.jsx'
-import PdfRotateIcon from '../../svg/PdfRotateIcon.jsx'
+import BackButtonIcon from '../../assets/svg/BackButtonIcon.jsx'
+import PdfRotateIcon from '../../assets/svg/PdfRotateIcon.jsx'
 import {
     fullScreenPlugin,
     RenderEnterFullScreenProps,
@@ -18,7 +18,7 @@ import {
     UpArrowIcon,
 } from '@react-pdf-viewer/page-navigation'
 import { Button } from '@mui/material'
-import FullScreenIcon from '../../svg/FullScreenIcon.jsx'
+import FullScreenIcon from '../../assets/svg/FullScreenIcon.jsx'
 
 const PdfViewer = () => {
     const { url } = useParams()

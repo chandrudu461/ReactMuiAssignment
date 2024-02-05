@@ -1,9 +1,9 @@
 import React from 'react';
 import { Stack, Box } from '@mui/material';
-import EdwiselyIcon from '../../svg/EdwiselyIcon';
-import DashboardIcon from '../../svg/DashboardIcon';
-import BookIcon from '../../svg/BookIcon';
-import LogoutIcon from '../../svg/LogoutIcon'
+import EdwiselyIcon from '../../assets/svg/EdwiselyIcon';
+import DashboardIcon from '../../assets/svg/DashboardIcon';
+import BookIcon from '../../assets/svg/BookIcon';
+import LogoutIcon from '../../assets/svg/LogoutIcon'
 import { useNavigate } from 'react-router';
 import { loginActions } from '../../store/index.js'
 import { useDispatch } from 'react-redux';
@@ -39,7 +39,6 @@ const Navbar = () => {
                 <div style={{ marginTop: 40 }}>
                     <BookIcon />
                 </div>
-
             </Stack >
             <Stack justifyContent='flex-end' alignItems='center' sx={{
                 height: '100%',

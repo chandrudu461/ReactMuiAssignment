@@ -4,6 +4,7 @@ import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import { FormLabel } from '@mui/material'
 // import { DownArrowIcon } from '../../assets/Svg/DownArrowIcon'
+// import { ArrowDropDown } from '@mui/icons-material'
 export default function MuiSmallDropDown({
   label,
   data,
@@ -15,18 +16,21 @@ export default function MuiSmallDropDown({
   ...props
 }) {
   const handleChange = (event) => {
-    console.log('value changed')
+    // console.log('value changed')
     setDropDownValue(event.target.value)
-    onChange(event);
+    onChange(event.target.value);
+    console.log('event ;', event.target.name);
   }
-
   const isDisabled = disabled ? true : false
 
   React.useEffect(() => {
     if (isDisabled && data) {
       setDropDownValue(data[0]?.value)
     }
-  }, [isDisabled, data])
+    // if (data && data[0]) {
+    //   setDropDownValue(data[0]?.value)
+    // }
+  }, [data, isDisabled])
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', ...props }}>
@@ -35,7 +39,7 @@ export default function MuiSmallDropDown({
         sx={{
           ml: 0.5,
           minWidth: 50,
-          backgroundColor: '#f5f5f5',
+          backgroundColor: (theme) => theme.palette.primary[0],
           borderRadius: '4px',
           '& .MuiSelect-root': {
             height: '20px',
@@ -67,6 +71,7 @@ export default function MuiSmallDropDown({
           displayEmpty
           onChange={handleChange}
           disabled={isDisabled}
+          // IconComponent={ArrowDropDown}
           sx={{
             padding: '5px',
             '& .css-eghtey-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input': {
@@ -74,9 +79,9 @@ export default function MuiSmallDropDown({
             },
           }}
         >
-          {/* <MenuItem disabled={true} value='' sx={{ display: 'none' }}>
+          <MenuItem disabled={true} value='' sx={{ display: 'none' }}>
             Subjects
-          </MenuItem> */}
+          </MenuItem>
           {data &&
             data?.map((input, index) => (
               <MenuItem

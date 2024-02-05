@@ -1,4 +1,5 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
+import dashboardReducer from './reducers/dashboard.reducers'
 
 const initialLoginState = { login: true }
 const initialUnitState = { selectedUnitId: null }
@@ -29,11 +30,11 @@ const unitSlice = createSlice({
     }
 })
 
-
 export const store = configureStore({
     reducer: {
         login: loginSlice.reducer,
-        unit: unitSlice.reducer
+        unit: unitSlice.reducer,
+        dashboard: dashboardReducer
     }
 });
 

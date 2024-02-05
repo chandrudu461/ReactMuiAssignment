@@ -1,6 +1,6 @@
 // import { Typography } from '@mui/material';
 import Login from '../components/common/Login.jsx'
-import LoginIcon from '../svg/LoginIcon.jsx'
+import LoginIcon from '../assets/svg/LoginIcon.jsx'
 // import './App.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import BackButtonIcon from "../svg/BackButtonIcon.jsx";
+import BackButtonIcon from "../assets/svg/BackButtonIcon.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 import Slider from "@mui/material/Slider";
 import { Chip, Box, Typography } from '@mui/material'
@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import data from "../data/courseData.js"
 import ContinueReadingCard from "../components/common/ContinueReadingCard.jsx";
 import PresentationIcon from "../components/common/PresentationIcon.jsx";
-import DocumentIcon from "../svg/DocumentIcon.jsx";
+import DocumentIcon from "../assets/svg/DocumentIcon.jsx";
 
 function CoursePage() {
     const [courseData, setCourseData] = useState({});
@@ -152,6 +152,7 @@ function CoursePage() {
                             fontWeight: 400,
                             lineHeight: 'normal',
                             marginLeft: '12px',
+                            width: '100px;'
                         }}
                             style={{ color: palette.primary[700] }}>
                             Avg. {data.percentage}%
@@ -175,7 +176,7 @@ function CoursePage() {
                                     key={pdf.id}
                                     name={pdf.name}
                                     url={pdf.url}
-                                    icon={(pdf.id == 123) ? <DocumentIcon /> : <PresentationIcon />}
+                                    icon={(pdf.id === 123) ? <DocumentIcon /> : <PresentationIcon />}
                                 // onClick={() => openPdf(`${pdf.url}`)}
                                 />
                             ))}

@@ -1,7 +1,7 @@
 import React from "react";
 // import './Search.css'
 import { Box } from "@mui/material"
-import SearchStatusIcon from "../../svg/SearchStatusIcon";
+import SearchStatusIcon from "../../assets/svg/SearchStatusIcon";
 
 const Search = () => {
     return (

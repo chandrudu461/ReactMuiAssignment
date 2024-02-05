@@ -1,7 +1,7 @@
 import { Box, Stack } from '@mui/material'
 import React from 'react'
-import RightButtonIcon from '../../svg/RightButtonIcon'
-import DocumentIcon from '../../svg/DocumentIcon'
+import RightButtonIcon from '../../assets/svg/RightButtonIcon'
+import DocumentIcon from '../../assets/svg/DocumentIcon'
 import { Link } from 'react-router-dom'
 
 const ContinueReadingCard = ({ name, url, onClick, icon }) => {

@@ -8,8 +8,8 @@ import {
   Stack,
 } from '@mui/material'
 import { useTheme } from '@mui/material'
-import { RightArrowIcon } from '../../svg/RightButtonIcon'
-import ArrowUp from '../../svg/ArrowUp'
+import { RightArrowIcon } from '../../assets/svg/RightButtonIcon'
+import ArrowUp from '../../assets/svg/ArrowUp'
 
 function secondsToMinutes(seconds) {
   const minutes = Math.floor(seconds / 60)

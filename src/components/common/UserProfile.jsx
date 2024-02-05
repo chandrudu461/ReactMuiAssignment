@@ -1,5 +1,5 @@
 import React from 'react'
-import UserProfileSvg from '../../svg/UserProfileSvg';
+import UserProfileSvg from '../../assets/svg/UserProfileSvg';
 import Stack from '@mui/material/Stack';
 import { Typography, Box, useTheme } from '@mui/material';
 

@@ -10,7 +10,9 @@ import {
   Checkbox,
 } from '@mui/material'
 import { useTheme } from '@mui/material'
-import Circle from '../../svg/Circle'
+import Circle from '../../assets/svg/Circle'
+import SortIcon from '../../assets/svg/SortIcon'
+import ArrowDown from '../../assets/svg/ArrowDown';
 // import { ArrowDown } from '../../../../assets/Svg/ArrowDown'
 // import { ArrowUp } from '../../../../assets/Svg/ArrowUp'
 // import { DownArrow2 } from '../../../../assets/Svg/DownArrow2'
@@ -112,10 +114,11 @@ const MuiCustomTableHeaderCellWithSortandSelect = ({
             >
               {sortOrder === 'asc' ? (
                 // <ArrowUp fontsize='small' color={theme.palette.grey[500]} />
-                <Circle />
+                <SortIcon />
               ) : (
-                // <ArrowDown fontsize='small' color={theme.palette.grey[500]} />
-                <Circle />
+
+                // <ArrowDown />
+                <SortIcon />
               )}
             </IconButton>
           ) : null}

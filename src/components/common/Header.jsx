@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Box, Popover, Button, Stack } from '@mui/material';
-import ProfileImageIcon from './ProfileImageIcon';
-import LogoutIcon from '../../svg/LogoutIcon';
+import ProfileImageIcon from '../../assets/svg/UserProfileSvg.jsx';
+import LogoutIcon from '../../assets/svg/LogoutIcon.jsx';
 import { useNavigate } from 'react-router';
 import { loginActions } from '../../store/index.js'
 import { useDispatch } from 'react-redux';

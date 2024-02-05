@@ -1,13 +1,13 @@
 import React from 'react'
 import { Typography, Box, Drawer } from '@mui/material'
 import DashboardChip from '../components/common/DashboardChip'
-import CalenderIcon from '../svg/CalenderIcon'
+import CalenderIcon from '../assets/svg/CalenderIcon'
 import Stack from '@mui/material/Stack'
-import PerformanceIcon from '../svg/PerformanceIcon'
-import AssessmentIcon from '../svg/AssessmentIcon'
-import AssignmentIcon from '../svg/AssignmentIcon'
-import CodingIcon from '../svg/CodingIcon'
-import AssessmentDetailCard from '../components/common/AssessmentDetailCard'
+import PerformanceIcon from '../assets/svg/PerformanceIcon'
+import AssessmentIcon from '../assets/svg/AssessmentIcon'
+import AssignmentIcon from '../assets/svg/AssignmentIcon'
+import CodingIcon from '../assets/svg/CodingIcon'
+import AssessmentDetailCard from '../features/Dashboard/components/Assessments/AssessmentDetailCard'
 import { Grid } from '@mui/material'
 import MuiColumnChart from '../components/common/MuiColumnChart'
 import { useState, useEffect } from 'react'
@@ -16,13 +16,14 @@ import { useTheme } from '@emotion/react'
 import UserProfile from '../components/common/UserProfile'
 import LeaderBoardCard from '../components/common/LeaderBoardCard'
 import Bubble from '../components/common/Bubble'
-import QWAColumnChart from '../components/common/QWAColumnChart'
 import MuiSmallDropDown from '../components/common/MuiSmallDropDown'
 import Courses from '../components/common/Courses'
 // import data from '../../src/data/data'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import MuiCustomTableWithSortandSelect from '../components/common/MuiCustomTableWithSortandSelect'
 import LeaderBoardForDrawer from '../components/common/LeaderBoardForDrawer'
+import Assignments from '../features/Dashboard/components/Assessments/Assessments';
+import Chart from '../features/Dashboard/components/Chart/Chart';
 
 const DashboardPage = () => {
     const [data, setData] = useState(null)
@@ -30,7 +31,7 @@ const DashboardPage = () => {
     const [leaderBoardData, setLeaderBoardData] = useState(null)
     const [recentAssessmentsData, setRecentAssessmentsData] = useState(null)
     const [coursesData, setCourseData] = useState(null)
-    const isLoggedIn = useSelector((state) => state.login)
+    const isLoggedIn = useSelector((state) => state.login.login)
     const theme = useTheme()
     const [tableData, setTableData] = useState(null)
     const [tableAssessmentsData, setTableAssessmentsData] = useState(null)
@@ -40,6 +41,11 @@ const DashboardPage = () => {
     const [filteredData, setFilteredData] = useState(null)
     const [dropDownValue, setDropDownValue] = useState('semester 1')
     const [drawerState, setDrawerState] = useState(null)
+    const [uniqueSemesters, setUniqueSemesters] = useState(null)
+    const tableDataRedux = useSelector(state => state.dashboard);
+    const dispatch = useDispatch()
+
+    console.group("tableDataRedux : ", tableDataRedux);
 
     const fetchData = async (url) => {
         try {
@@ -73,6 +79,7 @@ const DashboardPage = () => {
                     'https://stagingstudentpython.edwisely.com/reactProject/dashboardData'
                 )
                 setData(result)
+                console.log(result);
                 setAnalyticsData(result.analytics)
                 setLeaderBoardData(result.leaderboard)
                 setRecentAssessmentsData(result.recent_assessments)
@@ -99,33 +106,49 @@ const DashboardPage = () => {
                     : []
                 setTableAssessmentsData(rankedTableData)
                 setFilteredData(rankedTableData)
+                let uniqueValues = [...new Set(rankedTableData.map(item => item.semester))];
+                let semesters = uniqueValues.map(sem => ({
+                    name: "semester " + sem,
+                    value: sem,
+                }))
+                semesters = [...semesters, {
+                    name: "semesters",
+                    value: 0,
+                }]
+                // semesters.sort((a, b) => {
+                //     return a < b;
+                // })
+                setUniqueSemesters(semesters);
+                // console.log(semesters);
             } catch (error) {
                 throw error
             }
         }
 
+
         fetchDataFromApi()
         fetchTableDataFromApi()
+        console.log('assessments data : ', data);
     }, [])
 
     const handleSemesterChange = (semester) => {
         let filteringData = [...tableAssessmentsData]
-        filteringData.map((row) => row.semester === semester);
-        setFilteredData(filteringData);
-        console.log(semester);
+        if (semester === 0) {
+            setFilteredData(filteringData)
+            return;
+        }
+        filteringData = filteringData.filter((item) => {
+            console.log(item.semester, semester, item.semester === semester)
+            return (item.semester === semester)
+        })
+        // filteringData.map((row) => {
+        //     console.log(row.semester, semester)
+        //     return row.semester === semester;
+        // });
+        // // setFilteredData(filteringData);
+        console.log(filteringData);
+        setFilteredData(filteringData)
     }
-
-    //   let rankedTableData = tableAssessmentsData
-    //     ? tableAssessmentsData.map((row) => ({
-    //         ...row,
-    //         rank:
-    //           1 +
-    //           tableAssessmentsData.filter(
-    //             (r) => r.percentage_scored > row.percentage_scored
-    //           ).length,
-    //       }))
-    //     : []
-    // console.log(rankedTableData);
 
     if (!isLoggedIn) {
         return (
@@ -139,18 +162,6 @@ const DashboardPage = () => {
         console.log(order, key)
         let sortedData = [...tableAssessmentsData]
         console.log(sortedData)
-        // if (order === 'asc') {
-        //   sortedData.sort((a, b) => {
-        //     return a[column] - b[column]
-        //   })
-        //   console.log(order)
-        // } else {
-        //   sortedData.sort((a, b) => {
-        //     return b[column] - a[column]
-        //   })
-        //   console.log(order)
-        // }
-        // rankedTableData = sortedData
 
         sortedData.sort((a, b) => {
             const valueA =
@@ -220,14 +231,14 @@ const DashboardPage = () => {
                     }}
                 >
                     <Typography
-                        variant='body1'
+                        variant='h6'
                         sx={{
-                            color: 'var(--Basic-700, #2E3A59)',
-                            fontFamily: 'Poppins',
-                            fontSize: '20px',
-                            fontStyle: 'normal',
-                            fontWeight: 600,
-                            lineHeight: '28px',
+                            // color: 'var(--Basic-700, #2E3A59)',
+                            // fontFamily: 'Poppins',
+                            // fontSize: '20px',
+                            // fontStyle: 'normal',
+                            // fontWeight: 600,
+                            // lineHeight: '28px',
                             marginTop: '93px',
                         }}
                     >
@@ -248,56 +259,7 @@ const DashboardPage = () => {
                             justifyContent: 'space-between',
                         }}
                     >
-                        <Grid item xs>
-                            <AssessmentDetailCard
-                                icon={<CalenderIcon />}
-                                iconBgColor={'#E7EEFE'}
-                                title={'Attendance'}
-                                contentMagnitude={92}
-                                contentType={'percent'}
-                                showCountingAnimation
-                            />
-                        </Grid>
-                        <Grid item xs>
-                            <AssessmentDetailCard
-                                icon={<PerformanceIcon />}
-                                iconBgColor={'#E6F2FD'}
-                                title={'Avg. Performance'}
-                                contentMagnitude={88}
-                                contentType={'percent'}
-                                showCountingAnimation
-                            />
-                        </Grid>
-                        <Grid item xs>
-                            <AssessmentDetailCard
-                                icon={<AssessmentIcon />}
-                                iconBgColor={'#FFF8EC'}
-                                title={'Assessment'}
-                                contentMagnitude={45}
-                                contentType={'percent'}
-                                showCountingAnimation
-                            />
-                        </Grid>
-                        <Grid item xs>
-                            <AssessmentDetailCard
-                                icon={<AssignmentIcon />}
-                                iconBgColor={'#FEECEB'}
-                                title={'Assignment'}
-                                contentMagnitude={79}
-                                contentType={'percent'}
-                                showCountingAnimation
-                            />
-                        </Grid>
-                        <Grid item xs>
-                            <AssessmentDetailCard
-                                icon={<CodingIcon />}
-                                iconBgColor={'#EDFAEE'}
-                                title={'code'}
-                                contentMagnitude={65}
-                                contentType={'percent'}
-                                showCountingAnimation
-                            />
-                        </Grid>
+                        <Assignments />
                     </Grid>
 
                     {/* chart grid */}
@@ -312,113 +274,41 @@ const DashboardPage = () => {
                                     marginTop: '28px',
                                 }}
                             >
-                                <Stack
-                                    spacing={2}
-                                    direction='row'
+
+                                <Chart recentAssessmentsData={recentAssessmentsData} />
+
+                                <Box
                                     sx={{
-                                        marginLeft: '23px',
-                                        marginTop: '16px',
+                                        height: '535px',
                                     }}
                                 >
-                                    <Stack
-                                        sx={{
-                                            width: '50%',
-                                        }}
-                                    >
-                                        <Typography
-                                            variant='body1'
-                                            sx={{
-                                                color: '#161C24',
-                                                fontFamily: 'Poppins',
-                                                fontSize: '20px',
-                                                fontStyle: 'normal',
-                                                fontWeight: 500,
-                                                lineHeight: '28px',
-                                            }}
-                                        >
-                                            Recent Assessments
-                                        </Typography>
-                                    </Stack>
-                                    <Stack
-                                        direction='row'
-                                        spacing={2}
-                                        sx={{
-                                            justifyContent: 'flex-end',
-                                        }}
-                                    >
-                                        <Bubble color={'#0B58F5'} />
-                                        <Typography>Attempted</Typography>
-                                        <Bubble color={'#F44336'} />
-                                        <Typography>Unattempted</Typography>
-                                        <MuiSmallDropDown
-                                            data={[
-                                                { name: 'subject 01' },
-                                                { name: 'subject 01' },
-                                                { name: 'subject 01' },
-                                                { name: 'subject 01' },
-                                            ]}
-                                        />
-                                    </Stack>
-                                </Stack>
-
-                                <Stack direction='column'>
-                                    {recentAssessmentsData && recentAssessmentsData.analysis && (
-                                        <MuiColumnChart
-                                            series={[
-                                                {
-                                                    name: recentAssessmentsData.title,
-                                                    data: recentAssessmentsData.analysis.map((item) =>
-                                                        Math.floor(item?.percentage)
-                                                    ),
-                                                },
-                                            ]}
-                                            categories={recentAssessmentsData.analysis.map(
-                                                (item) => item?.name
-                                            )}
-                                            yaxisTitle={'Tests'}
-                                            xaxisTitle={'Performance'}
-                                            width={'100%'}
-                                            height={'230px'}
-                                            primaryBarColor={theme.palette.primary[700]}
-                                        />
-                                    )}
-                                    <Box
-                                        sx={{
-                                            height: '535px',
-                                        }}
-                                    >
-                                        <Box>
-                                            <Stack direction='row'>
-                                                <Typography>Assessments</Typography>
-                                                <Box
-                                                    sx={{
-                                                        position: 'absolute',
-                                                        right: '30vw',
-                                                    }}
-                                                >
-                                                    <MuiSmallDropDown
-                                                        data={[
-                                                            { name: 'semester 1', valu: 1 },
-                                                            { name: 'semester 2', value: 2 },
-                                                            { name: 'semester 3', value: 3 },
-                                                        ]}
-                                                        onChange={handleSemesterChange}
-                                                        dropDownValue={dropDownValue}
-                                                        setDropDownValue={setDropDownValue}
-                                                    />
-                                                </Box>
-                                            </Stack>
-                                        </Box>
-                                        <MuiCustomTableWithSortandSelect
-                                            HeaderArr={headerArr}
-                                            tableData={filteredData}
-                                            submissionTypesToShowinStudentTable={[1, 2, 3, 4]}
-                                            sortHandler={sortHandler}
-                                            filtered_studentAssessmentList={tableAssessmentsData}
-                                        />
+                                    <Box>
+                                        <Stack direction='row'>
+                                            <Typography>Assessments</Typography>
+                                            <Box
+                                                sx={{
+                                                    position: 'absolute',
+                                                    right: '30vw',
+                                                }}
+                                            >
+                                                <MuiSmallDropDown
+                                                    data={uniqueSemesters}
+                                                    onChange={handleSemesterChange}
+                                                    dropDownValue={dropDownValue}
+                                                    setDropDownValue={setDropDownValue}
+                                                />
+                                            </Box>
+                                        </Stack>
                                     </Box>
-                                    <Courses data={coursesData} />
-                                </Stack>
+                                    <MuiCustomTableWithSortandSelect
+                                        HeaderArr={headerArr}
+                                        tableData={filteredData}
+                                        submissionTypesToShowinStudentTable={[1, 2, 3, 4]}
+                                        sortHandler={sortHandler}
+                                        filtered_studentAssessmentList={filteredData}
+                                    />
+                                </Box>
+                                <Courses data={coursesData} />
                             </Grid>
 
                             <Grid

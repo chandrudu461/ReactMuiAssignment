@@ -89,7 +89,8 @@ const MuiColumnChart = ({
         },
       },
       lines: {
-        show: false,
+        // show: false,
+        show: true,
       },
       axisBorder: {
         show: true,
@@ -112,7 +113,7 @@ const MuiColumnChart = ({
       },
     },
     grid: {
-      show: false,
+      show: true,
     },
     colors: [
       function ({ value, seriesIndex, w, dataPointIndex }) {

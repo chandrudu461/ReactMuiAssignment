@@ -4,14 +4,14 @@ import { Box } from '@mui/material'
 import AccordionActions from "@mui/material/AccordionActions";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import ExpandMoreIcon from "../../svg/ExpandMoreIcon";
-import RightButtonIcon from "../../svg/RightButtonIcon";
-import VideoPlayIcon from "../../svg/VideoPlayIcon";
-import LinkIcon from "../../svg/LinkIcon";
+import ExpandMoreIcon from "../../assets/svg/ExpandMoreIcon";
+import RightButtonIcon from "../../assets/svg/RightButtonIcon";
+import VideoPlayIcon from "../../assets/svg/VideoPlayIcon";
+import LinkIcon from "../../assets/svg/LinkIcon";
 import "./Accordian.css";
 import palette from "../../theme/palette";
 import SingleAccordion from "./SingleAccordion";
-import DocumentIcon from "../../svg/DocumentIcon";
+import DocumentIcon from "../../assets/svg/DocumentIcon";
 import PresentationIcon from "./PresentationIcon";
 import { useState } from "react";
 

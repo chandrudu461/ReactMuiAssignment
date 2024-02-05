@@ -1,5 +1,5 @@
 import React from 'react';
-import User from '../assets/images/userProfile.png';
+import User from '../images/userProfile.png';
 const UserProfileSvg = () => {
     return (
         <div>
