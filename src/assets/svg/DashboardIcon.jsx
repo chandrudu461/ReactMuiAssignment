@@ -1,8 +1,9 @@
+import { Box } from '@mui/material'
 import React from 'react'
 
 const DashboardIcon = () => {
     return (
-        <div style={{
+        <Box style={{
             borderRadius: 8,
             background: '#CEDEFD',
             width: '40px',
@@ -12,7 +13,7 @@ const DashboardIcon = () => {
             alignItems: 'center'
         }}
         >
-            <div style={{marginTop : 6}}>
+            <Box style={{ marginTop: 6 }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="vuesax/linear/element-equal">
                         <g id="element-equal">
@@ -24,8 +25,8 @@ const DashboardIcon = () => {
                         </g>
                     </g>
                 </svg>
-            </div>
-        </div >
+            </Box>
+        </Box >
     )
 }
 

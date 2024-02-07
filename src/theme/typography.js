@@ -267,6 +267,11 @@ const typography = {
     fontWeight: 400,
     lineHeight: pxToRem(25 * 1.6),
     fontSize: pxToRem(24),
+  },
+  pageNumber: {
+    fontFamily: FONT_PRIMARY_REGULAR,
+    fontWeight: 500,
+    fontSize: pxToRem(12),
   }
 };
 

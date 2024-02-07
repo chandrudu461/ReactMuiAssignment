@@ -10,7 +10,7 @@ import CustomTable from '../components/common/CustomTable'
 import { useTheme } from '@mui/material'
 import MuiCustomTableWithSortadnSelect from '../features/Dashboard/components/Table/MuiCustomTableWithSortandSelect'
 import ErrorPage from '../components/common/ErrorPage';
-import PdfViewer from '../components/common/pdfViewer';
+import PdfViewer from '../features/PdfViewer/PdfViewer';
 import Chart from '../features/Dashboard/components/Chart/Chart';
 import MuiCustomTab from '../components/common/MuiCustomTab'
 
@@ -22,9 +22,17 @@ const TestElement = (props) => {
     const theme = useTheme();
     const [selectedTabIndex, setSelectedTabIndex] = useState(0);
 
+
+    const [activeTab, setActiveTab] = useState(0);
+
     const handleTabChange = (event, newValue) => {
-        setSelectedTabIndex(newValue);
+        setActiveTab(newValue);
     };
+    const tabContent = [
+        // { id: 0, content: <TabPanel>Content for Tab 1</TabPanel> },
+        // { id: 1, content: <TabPanel>Content for Tab 2</TabPanel> },
+        // // Add more tab content as needed
+    ];
 
     const handleEdit = () => {
         // Logic for handling the edit action
@@ -84,10 +92,10 @@ const TestElement = (props) => {
             <div>
                 <div style={{
                     // margin: '100px',
-                    padding: '100px'
+                    // padding: '100px'
                 }}>
                     {/* <LeaderBoardCard data={leaderBoardData} width='319px' height='425px' /> */}
-                    <Courses data={courseData} />
+                    {/* <Courses data={courseData} /> */}
                     {/* <CalendarComponent /> */}
                     {/* <CustomTable /> */}
                     {/* <PdfViewerComponent /> */}
@@ -103,12 +111,21 @@ const TestElement = (props) => {
                         <ErrorPage />
                     </Box> */}
                     {/* <PdfViewer /> */}
-                    <MuiCustomTab
-                        handleTabChange={handleTabChange}
-                        value={selectedTabIndex}
-                        data={sampleData}
-                        edit={handleEdit}
-                    />
+                    {/* <div>
+                        <MuiCustomTab
+                            value={activeTab}
+                            handleTabChange={handleTabChange}
+                            data={tabContent}
+                        />
+                        {tabContent.map(tab => (
+                            <div key={tab.id} hidden={activeTab !== tab.id}>
+                                {tab.content}
+                            </div>
+                        ))}
+                    </div> */}
+
+                    <PdfViewer />
+
                 </div>
             </div>
 

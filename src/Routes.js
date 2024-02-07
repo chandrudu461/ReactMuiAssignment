@@ -7,7 +7,7 @@ import ErrorPage from './components/common/ErrorPage';
 import Layout from './components/common/Layout'
 import DashboardPage from './pages/DashboardPage';
 import CoursePage from './pages/CoursePage';
-import PdfViewer from './components/common/pdfViewer'
+import PdfViewer from './features/PdfViewer/PdfViewer'
 
 
 const router = createBrowserRouter([

@@ -14,6 +14,7 @@ import SingleAccordion from "./SingleAccordion";
 import DocumentIcon from "../../assets/svg/DocumentIcon";
 import PresentationIcon from "./PresentationIcon";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const AccordianComponent = ({ title, topics, expand }) => {
     return (
@@ -38,11 +39,32 @@ const AccordianComponent = ({ title, topics, expand }) => {
                                 margin: 0,
                             }}
                         >
-
                             <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content" id="panel1-header">
                                 {topic.topic_name}
                             </AccordionSummary>
-                            <AccordionDetails key={topic.topic_id}>
+
+                            {topic.materials.map((material) => (
+                                <AccordionDetails key={topic.topic_id}>
+                                    <div id="titles">
+                                        <VideoPlayIcon />
+                                        {material.name}
+                                    </div>
+                                    <div id="start-button">
+                                        <Link to={`/pdfview/${encodeURIComponent(material.url)}`}
+                                            style={{
+                                                textDecoration: 'none'
+                                            }}
+                                        >
+                                            <Box id="start">Start</Box>
+                                        </Link>
+                                        <span id="button">
+                                            <RightButtonIcon />
+                                        </span>
+                                    </div>
+                                </AccordionDetails>
+                            ))}
+
+                            {/*<AccordionDetails key={topic.topic_id}>
                                 <div id="titles">
                                     <VideoPlayIcon />
                                     {topic.topic_name}
@@ -90,13 +112,13 @@ const AccordianComponent = ({ title, topics, expand }) => {
                                         <RightButtonIcon />
                                     </span>
                                 </div>
-                            </AccordionDetails>
+                            </AccordionDetails> */}
                         </Accordion>
                     </>
                 ))}
             </Box>
             <hr style={{ width: "600px", margin: "0" }} />
-        </div>
+        </div >
     );
 }
 
