@@ -24,7 +24,7 @@ import {
     UpArrowIcon,
 } from '@react-pdf-viewer/page-navigation'
 import { useTheme } from '@mui/material'
-
+import { createStore, PluginFunctions, SpecialZoomLevel } from '@react-pdf-viewer/core';
 const options = {
     cMapUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/cmaps/`,
 };
@@ -43,14 +43,36 @@ const PdfViewer = () => {
     const { EnterFullScreen } = fullScreenPluginInstance
     const pageNavigationPluginInstance = pageNavigationPlugin()
     const theme = useTheme();
-    const [zoomLevel, setZoomLevel] = useState(100);
+    const store = React.useMemo(() => createStore(), []);
+    const [scale, setScale] = useState(1);
+    const [currentZoomLevel, setCurrentZoomLevel] = useState(100)
 
-    // useEffect(() => {
-    //     const storedPage = localStorage.getItem("selectedPage");
-    //     if (storedPage) {
-    //         setPageNumber(parseInt(storedPage, 10));
-    //     }
-    // }, []);
+    const customZoomPluginInstance = {
+        zoomTo: (newScale) => {
+            setScale(newScale);
+        },
+    };
+
+    function roundToDecimal(number, decimalPlaces) {
+        const factor = Math.pow(10, decimalPlaces);
+        return Math.round(number * factor) / factor;
+    }
+
+    const zoomOut = () => {
+        let zoomLevel = currentZoomLevel;
+        zoomLevel -= 5;
+        const newScale = roundToDecimal(zoomLevel / 100, 2); // Assuming 2 decimal places
+        customZoomPluginInstance.zoomTo(newScale);
+        setCurrentZoomLevel(currentZoomLevel - 5);
+    };
+
+    const zoomIn = () => {
+        let zoomLevel = currentZoomLevel;
+        zoomLevel += 5; // Change subtraction to addition here
+        const newScale = roundToDecimal(zoomLevel / 100, 2); // Assuming 2 decimal places
+        customZoomPluginInstance.zoomTo(newScale);
+        setCurrentZoomLevel(currentZoomLevel + 5);
+    };
 
     const handleNextPage = () => {
         setPageNumber((pageNumber) => pageNumber + 1);
@@ -125,79 +147,95 @@ const PdfViewer = () => {
                     </Box>
                 </Stack>
 
-                <ZoomOutIcon />
-                <ZoomInIcon />
+                <Box style={{ borderLeft: '1px solid #BDBDC7', height: '20px' }}></Box>
 
-                <EnterFullScreen>
-                    {(props) => (
-                        <FullScreenIcon />
-                    )}
-                </EnterFullScreen>
+                <Stack direction={"row"} spacing={2}>
+                    <Box onClick={zoomOut}>
+                        <ZoomOutIcon />
+                    </Box>
+                    <Box height={'24px'} padding={'8px 7px 8px 7px'} display={'flex'}
+                        justifyContent={'center'} alignItems={'center'}>
+                        <Typography variant="courseChip">
+                            {currentZoomLevel}
+                        </Typography>
+                    </Box>
+                    <Box onClick={zoomIn}>
+                        <ZoomInIcon />
+                    </Box>
+                </Stack>
+
+                <Box style={{ borderLeft: '1px solid #BDBDC7', height: '20px' }}></Box>
+
+                <fullScreenPluginInstance.EnterFullScreen>
+                    {(props) => <Box onClick={props.onClick}> <FullScreenIcon /></Box>}
+                </fullScreenPluginInstance.EnterFullScreen>
                 <PdfRotateIcon />
-            </Stack>
-            <Grid container spacing={3}>
-                <Grid item md={6} xs={12} marginLeft={'32%'}>
-                    <Box sx={{
-                        boxShadow: `1px 2px 12px 0px rgba(0, 0, 0, 0.15)`
-                    }}>
-                        <Document
-                            options={options}
-                            file={pdfUrl}
-                            onLoadSuccess={onDocumentLoadSuccess}
-
+            </Stack >
+            <Box width={'100%'} height={'100%'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
+                <Box sx={{
+                    boxShadow: `1px 2px 12px 0px rgba(0, 0, 0, 0.15)`,
+                    width: '415.511px',
+                    height: '588px',
+                    marginLeft: '100px'
+                }}>
+                    <Document
+                        options={options}
+                        file={pdfUrl}
+                        onLoadSuccess={onDocumentLoadSuccess}
+                    >
+                        <Page scale={scale}
+                            plugins={[customZoomPluginInstance, fullScreenPluginInstance]}
+                            width={415.511}
+                            height={588}
+                            pageNumber={pageNumber} />
+                    </Document>
+                </Box>
+                <Box style={{ width: "30px", height: "40px" }}>
+                    <Document
+                        options={options}
+                        file={pdfUrl}
+                        onLoadSuccess={onDocumentLoadSuccess}
+                    >
+                        <Box
+                            className="p-4"
+                            style={{
+                                right: 31,
+                                top: 170,
+                                position: "absolute",
+                                overflowY: "scroll",
+                                height: "100vh",
+                            }}
                         >
-                            <Page width={415.511} height={588} pageNumber={pageNumber} />
-                        </Document>
-                    </Box>
-                </Grid>
-                <Grid item md={6} xs={12} className="mb-3">
-                    <Box style={{ width: "30px", height: "40px" }}>
-                        <Document
-                            options={options}
-                            file={pdfUrl}
-                            onLoadSuccess={onDocumentLoadSuccess}
-                        >
-                            <Box
-                                className="p-4"
-                                style={{
-                                    right: 31,
-                                    top: 170,
-                                    position: "absolute",
-                                    overflowY: "scroll",
-                                    height: "100vh",
-                                }}
-                            >
-                                {[...Array(numPages).keys()].map((i) => (
-                                    <>
-                                        <Box
-                                            key={i + 1}
-                                            style={{
-                                                border:
-                                                    i + 1 === pageNumber ? "4px solid #9EBDFA" : "none",
-                                                marginBottom: '5px'
-                                            }}
-                                        >
-                                            <Page
-                                                onClick={() => handleSelectPage(i + 1)}
-                                                pageNumber={i + 1}
-                                                renderAnnotationLayer={false}
-                                                renderTextLayer={false}
-                                                width={115}
-                                                height={157}
-                                            />
-                                        </Box>
-                                        <Box display={'flex'} justifyContent={'center'} alignContent={'center'} styles={{
-                                            marginBottom: '8px'
-                                        }}>
-                                            <Typography variant="subtitle2" >{pageCount++}</Typography>
-                                        </Box>
-                                    </>
-                                ))}
-                            </Box>
-                        </Document>
-                    </Box>
-                </Grid>
-            </Grid >
+                            {[...Array(numPages).keys()].map((i) => (
+                                <>
+                                    <Box
+                                        key={i + 1}
+                                        style={{
+                                            border:
+                                                i + 1 === pageNumber ? "4px solid #9EBDFA" : "none",
+                                            marginBottom: '5px'
+                                        }}
+                                    >
+                                        <Page
+                                            onClick={() => handleSelectPage(i + 1)}
+                                            pageNumber={i + 1}
+                                            renderAnnotationLayer={false}
+                                            renderTextLayer={false}
+                                            width={115}
+                                            height={157}
+                                        />
+                                    </Box>
+                                    <Box display={'flex'} justifyContent={'center'} alignContent={'center'} styles={{
+                                        marginBottom: '8px'
+                                    }}>
+                                        <Typography variant="subtitle2" >{pageCount++}</Typography>
+                                    </Box>
+                                </>
+                            ))}
+                        </Box>
+                    </Document>
+                </Box>
+            </Box>
         </>
 
     );
