@@ -32,16 +32,20 @@ const LeaderRanking = ({ data, index, value }) => {
         <Stack direction={'row'} alignItems={'center'} gap={'16px'}>
           <Avatar alt="Avatar" sx={{ width: 30, height: 30 }} src={data.profile_pic} />
           <Stack>
-            <Typography component={'p'} sx={{
-              fontFamily: 'Poppins-Medium',
-              fontSize: '14px',
-              color: (theme) => theme.palette.grey[900]
-            }}>{data.name}</Typography>
-            <Typography component={'p'} sx={{
-              fontFamily: 'Poppins-SemiBold',
-              fontSize: '14px',
-              color: (theme) => theme.palette.grey[800]
-            }}>Avg: {value}%</Typography>
+            <Typography
+              variant='leaderboardEmail'
+              component={'p'} sx={{
+                fontFamily: 'Poppins-Medium',
+                fontSize: '14px',
+                // color: (theme) => theme.palette.grey[900]
+              }}>{data.name}</Typography>
+            <Typography
+              variant='leaderboardText'
+              component={'p'} sx={{
+                fontFamily: 'Poppins-SemiBold',
+                fontSize: '14px',
+                // color: (theme) => theme.palette.grey[800]
+              }}>Avg: {value}%</Typography>
           </Stack>
         </Stack>
 

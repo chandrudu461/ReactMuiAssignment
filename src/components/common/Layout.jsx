@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
     return (
         <div>
             <Navbar />
-            <Box sx={{ width: '94vw', position: 'absolute', left: '6vw' }}>
+            <Box sx={{}}>
                 <Header />
             </Box>
             <Box sx={{

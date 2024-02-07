@@ -19,7 +19,7 @@ const Navbar = () => {
         navigate('/dashboard');
     }
     return (
-        <Stack spacing={'24px'} width={'6vw'} height={'100vh'} position='fixed' direction='column'
+        <Stack spacing={'24px'} height={'100vh'} width={'80px'} position='fixed' direction='column'
             style={{
                 background: '#F4F6F8',
                 display: 'flex',

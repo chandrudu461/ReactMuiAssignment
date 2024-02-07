@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Box, Tab, Tabs, IconButton, Skeleton, Chip } from '@mui/material'
-import { EditIcon } from '../../assets/Svg/EditIcon'
+// import { EditIcon } from '../../assets/Svg/EditIcon'
 import { styled } from '@mui/material/styles'
 import MuiCustomChipCount from './MuiCustomChipCount'
 
@@ -67,15 +67,15 @@ export default function MuiCustomTab({ handleTabChange, value, data, edit }) {
               '&::before':
                 part.group === 'changed'
                   ? {
-                      content: '""',
-                      position: 'absolute',
-                      left: 0,
-                      top: '50%',
-                      height: '20px', // Adjust the height of the line
-                      width: '2px', // Adjust the width of the line
-                      backgroundColor: theme.palette.primary.main, // Adjust color as needed
-                      transform: 'translateY(-30%)', // Center the line vertically
-                    }
+                    content: '""',
+                    position: 'absolute',
+                    left: 0,
+                    top: '50%',
+                    height: '20px', // Adjust the height of the line
+                    width: '2px', // Adjust the width of the line
+                    backgroundColor: theme.palette.primary.main, // Adjust color as needed
+                    transform: 'translateY(-30%)', // Center the line vertically
+                  }
                   : '',
             })}
             value={part.id}
@@ -83,7 +83,7 @@ export default function MuiCustomTab({ handleTabChange, value, data, edit }) {
           />
         )
       })}
-
+      {/* 
       {edit && (
         <Chip
           onClick={edit}
@@ -98,7 +98,7 @@ export default function MuiCustomTab({ handleTabChange, value, data, edit }) {
           }}
           label={<EditIcon />}
         />
-      )}
+      )} */}
     </CustomTab>
   )
 }

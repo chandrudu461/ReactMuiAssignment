@@ -18,19 +18,22 @@ const UserProfile = ({ name, email }) => {
                     <UserProfileSvg />
                     <Stack padding={'0 0 0 22px'}>
                         <Typography
+                            variant='body8'
                             sx={{
                                 color: theme.palette.grey[800],
-                                fontWeight: 600,
-                                lineHeight: '24px'
+                                // fontWeight: 600,
+                                // lineHeight: '24px'
                             }}>{name}</Typography>
-                        <Typography style={{
-                            color: theme.palette.grey[400],
-                            fontFamily: 'Poppins',
-                            fontSize: '12px',
-                            fontStyle: 'normal',
-                            fontWeight: 400,
-                            lineHeight: '16px',
-                        }}>{email}</Typography>
+                        <Typography
+                            variant='body1'
+                            style={{
+                                color: theme.palette.grey[400],
+                                // fontFamily: 'Poppins',
+                                // fontSize: '12px',
+                                // fontStyle: 'normal',
+                                // fontWeight: 400,
+                                // lineHeight: '16px',
+                            }}>{email}</Typography>
                     </Stack>
                 </Stack>
             </Box >

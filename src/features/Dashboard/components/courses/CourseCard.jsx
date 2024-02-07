@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Typography, Button, Hidden } from '@mui/material'
-import ImageComponent from '../../../components/common/ImageComponent';
+import ImageComponent from '../../../../components/common/ImageComponent';
 const CourseCard = ({ id, name, image, tag }) => {
     const boxStyles = {
         borderRadius: '10px',

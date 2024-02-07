@@ -2,7 +2,7 @@ import { Box, Typography, Grid, Stack } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 // import CalendarComponent from '../components/common/CalendarComponent'
 import LeaderBoardCard from '../features/Dashboard/components/LeaderBoard/LeaderBoardCard';
-import Courses from '../features/Dashboard/courses/Courses'
+import Courses from '../features/Dashboard/components/courses/Courses'
 import ContinueReadingCard from '../components/common/ContinueReadingCard';
 import Units from '../components/common/Units';
 import MuiCustomTableWithSortandSelect from '../features/Dashboard/components/Table/MuiCustomTableWithSortandSelect';
@@ -12,6 +12,7 @@ import MuiCustomTableWithSortadnSelect from '../features/Dashboard/components/Ta
 import ErrorPage from '../components/common/ErrorPage';
 import PdfViewer from '../components/common/pdfViewer';
 import Chart from '../features/Dashboard/components/Chart/Chart';
+import MuiCustomTab from '../components/common/MuiCustomTab'
 
 const TestElement = (props) => {
     const [data, setData] = useState(null);
@@ -19,6 +20,23 @@ const TestElement = (props) => {
     const [courseData, setCourseData] = useState(null);
     const [recentAssessmentsData, setRecentAssessmentsData] = useState(null);
     const theme = useTheme();
+    const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+
+    const handleTabChange = (event, newValue) => {
+        setSelectedTabIndex(newValue);
+    };
+
+    const handleEdit = () => {
+        // Logic for handling the edit action
+    };
+
+    // Sample data
+    const sampleData = [
+        { id: 1, name: 'Tab 1', content: 'xyz' },
+        { id: 2, name: 'Tab 2', content: 'abc' },
+        { id: 3, name: 'Tab 3', content: '123' },
+    ];
+
 
     useEffect(() => {
         const apiUrl = 'http://127.0.0.1:5000/reactProject/dashboardData';
@@ -84,7 +102,13 @@ const TestElement = (props) => {
                     {/* <Box width={'500px'} heigh={'500px'}>
                         <ErrorPage />
                     </Box> */}
-                    <PdfViewer />
+                    {/* <PdfViewer /> */}
+                    <MuiCustomTab
+                        handleTabChange={handleTabChange}
+                        value={selectedTabIndex}
+                        data={sampleData}
+                        edit={handleEdit}
+                    />
                 </div>
             </div>
 

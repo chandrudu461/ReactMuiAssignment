@@ -168,7 +168,6 @@ const MuiCustomTable = () => {
                 sortHandler={sortHandler}
                 filtered_studentAssessmentList={filteredData}
             />
-
         </>
     )
 }

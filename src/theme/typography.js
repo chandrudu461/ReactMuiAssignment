@@ -249,6 +249,24 @@ const typography = {
     lineHeight: pxToRem(20),
     fontSize: pxToRem(14),
     fontWeight: fontWeightMedium
+  },
+  leaderboardEmail: {
+    fontFamily: FONT_PRIMARY_REGULAR,
+    lineHeight: pxToRem(24),
+    fontSize: pxToRem(16),
+    fontWeight: 500
+  },
+  leaderboardText: {
+    fontFamily: FONT_PRIMARY_REGULAR,
+    lineHeight: pxToRem(18),
+    fontSize: pxToRem(12),
+    fontWeight: 400
+  },
+  headerText: {
+    fontFamily: FONT_PRIMARY_REGULAR,
+    fontWeight: 400,
+    lineHeight: pxToRem(25 * 1.6),
+    fontSize: pxToRem(24),
   }
 };
 

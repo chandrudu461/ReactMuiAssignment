@@ -6,10 +6,11 @@ import { useState, useEffect } from 'react'
 import CalenderComponent from '../features/Dashboard/components/Calender/CalendarComponent'
 import { useTheme } from '@emotion/react'
 import LeaderBoardCard from '../features/Dashboard/components/LeaderBoard/LeaderBoardCard'
-import Courses from '../features/Dashboard/courses/Courses'
+import Courses from '../features/Dashboard/components/courses/Courses'
 import UserProfileComponent from '../features/Dashboard/components/UserProfile/UserProfileComponent'
 // import data from '../../src/data/data'
 import { useDispatch, useSelector } from 'react-redux'
+import CustomCard from '../components/common/CustomCard'
 import LeaderBoardForDrawer from '../features/Dashboard/components/LeaderBoard/LeaderBoardForDrawer'
 import Assignments from '../features/Dashboard/components/Assessments/Assessments';
 import Chart from '../features/Dashboard/components/Chart/Chart';
@@ -90,31 +91,23 @@ const DashboardPage = () => {
             <Box
                 style={{
                     backgroundColor: theme.palette.primary[0],
-                    height: '1500px',
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
                 }}
             >
                 <Box
                     style={{
                         display: 'flex',
-                        // justifyContent: 'center',
                         alignItems: 'center',
-                        width: '96vw',
-                        // border: '2px solid red',
-                        marginLeft: '7vw',
-                        maxWidth: '80%',
+                        width: '100%',
+                        marginLeft: '98px',
                     }}
                 >
                     <Typography
                         variant='h6'
                         sx={{
-                            // color: 'var(--Basic-700, #2E3A59)',
-                            // fontFamily: 'Poppins',
-                            // fontSize: '20px',
-                            // fontStyle: 'normal',
-                            // fontWeight: 600,
-                            // lineHeight: '28px',
-                            marginTop: '93px',
-                            // marginLeft: '18px'
+                            marginTop: '12px',
                         }}
                     >
                         Dashboard
@@ -122,7 +115,7 @@ const DashboardPage = () => {
                 </Box>
                 <Box
                     style={{
-                        marginLeft: '7vw',
+                        marginLeft: '94px',
                         maxWidth: '100%',
                         marginTop: '20px',
                     }}
@@ -137,7 +130,6 @@ const DashboardPage = () => {
                         <Assignments loading={loading} />
                     </Grid>
 
-                    {/* chart grid */}
                     <Stack direction={'column'}>
                         <Grid container>
                             <Grid
@@ -147,17 +139,16 @@ const DashboardPage = () => {
                                     // border: '1px solid red',
                                     height: '352px',
                                     marginTop: '28px',
+                                    margniLeft: '20px'
                                 }}
                             >
-
-                                <Chart recentAssessmentsData={dashBoardData.recent_assessments} loading={loading} />
-
-                                <Box
-                                    sx={{
-                                        height: '535px',
-                                    }}
-                                >
-                                    <MuiCustomTable />
+                                <CustomCard>
+                                    <Chart recentAssessmentsData={dashBoardData.recent_assessments} loading={loading} />
+                                </CustomCard>
+                                <Box marginTop={'21px'} >
+                                    <CustomCard>
+                                        <MuiCustomTable />
+                                    </CustomCard>
                                 </Box>
                                 <Courses data={coursesData} />
                             </Grid>

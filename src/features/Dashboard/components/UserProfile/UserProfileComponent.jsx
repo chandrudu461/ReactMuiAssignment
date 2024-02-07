@@ -6,12 +6,13 @@ const UserProfileComponent = () => {
     return (
         <>
             <Typography
-                style={{
-                    fontSize: '20px',
-                    fontStyle: 'normal',
-                    fontWeight: 500,
-                    lineHeight: '28px',
-                }}
+                variant='h5'
+            // style={{
+            //     fontSize: '20px',
+            //     fontStyle: 'normal',
+            //     fontWeight: 500,
+            //     lineHeight: '28px',
+            // }}
             >
                 User Profile
             </Typography>

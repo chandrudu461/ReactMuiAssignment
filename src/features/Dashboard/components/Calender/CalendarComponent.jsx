@@ -8,13 +8,14 @@ const CalendarComponent = () => {
     return (
         <Box width={'100%'}>
             <Typography
+                variant='h5'
                 sx={{
                     color: 'var(--Basic-700, #2E3A59)',
-                    fontSize: '20px',
-                    fontStyle: 'normal',
-                    fontWeight: 500,
-                    lineHeight: '28px',
-                    marginTop: '5 px',
+                    // fontSize: '20px',
+                    // fontStyle: 'normal',
+                    // fontWeight: 500,
+                    // lineHeight: '28px',
+                    // marginTop: '5 px',
                 }}
             >
                 Calendar

@@ -3,13 +3,18 @@ import { useState } from 'react';
 import { Box, Typography } from '@mui/material'
 import LeaderBoardCard from './LeaderBoardCard';
 import LeaderBoardForDrawer from './LeaderBoardForDrawer';
-import { Drawer } from '@mui/material';
+import { Drawer, Stack } from '@mui/material';
+import BackButtonIcon from '../../../../assets/svg/BackButtonIcon'
 
 const LeaderBoard = ({ leaderBoardData }) => {
     const [drawerState, setDrawerState] = useState(null)
 
     const toggleDrawer = () => {
         setDrawerState(!drawerState)
+    }
+
+    const closeDrawer = () => {
+        setDrawerState(false);
     }
 
     return (
@@ -44,7 +49,20 @@ const LeaderBoard = ({ leaderBoardData }) => {
                         p: 2,
                     }}
                 >
-                    <Typography variant='h6'>Leaderboard</Typography>
+                    <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+                        <Box>
+                            <Typography variant='h6'>Leaderboard</Typography>
+                        </Box>
+                        <Box
+                            onClick={closeDrawer}
+                            sx={{
+                                '&:hover': {
+                                    cursor: 'pointer',
+                                },
+                            }}>
+                            <BackButtonIcon />
+                        </Box>
+                    </Stack>
                     <LeaderBoardForDrawer
                         data={leaderBoardData}
                         width='100%'

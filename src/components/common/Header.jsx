@@ -28,23 +28,22 @@ const Header = () => {
         <>
             <Box style={{
                 display: 'flex',
-                // justifyContent: 'center',
+                marginLeft: '80px',
                 alignItems: 'center',
                 height: '80px',
                 background: '#ffffff',
-                // position: 'absolute',
-                width: '93vw',
+                width: '94%',
                 borderBottom: '1px solid #DFE3E8',
             }}>
                 <Typography
-                    variant="body1"
+                    variant="headerText"
                     style={{
-                        color: 'var(--Basic-700, #2E3A59)',
-                        fontFamily: 'Poppins',
-                        fontSize: '24px',
-                        fontStyle: 'normal',
-                        fontWeight: 400,
-                        lineHeight: '32px',
+                        // color: 'var(--Basic-700, #2E3A59)',
+                        // fontFamily: 'Poppins',
+                        // fontSize: '24px',
+                        // fontStyle: 'normal',
+                        // fontWeight: 400,
+                        // lineHeight: '32px',
                         marginLeft: '20px'
                     }}
                 >Good morning, Maharram 👋</Typography>
@@ -54,9 +53,14 @@ const Header = () => {
                     style={{
                         borderRadius: '24px'
                     }}>
-                    <div onClick={handleClick} style={{ ":hover": { cursor: 'pointer' } }} >
+                    <Box onClick={handleClick} sx={{
+                        cursor: 'pointer',
+                        '&:hover': {
+                            cursor: 'pointer',
+                        },
+                    }} >
                         <ProfileImageIcon />
-                    </div>
+                    </Box>
                     <Popover
                         id={id}
                         open={open}
