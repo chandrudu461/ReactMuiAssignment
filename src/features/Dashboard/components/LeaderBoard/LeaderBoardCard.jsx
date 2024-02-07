@@ -1,10 +1,10 @@
 import React from 'react'
-import CustomCard from './CustomCard'
+import CustomCard from '../../../../components/common/CustomCard'
 import { Skeleton, Stack, Typography } from '@mui/material'
 // import crownSvg from './../../../../assets/remedial/svg/crown.svg'
 import LeaderRanking from './LeaderRanking'
 
-const LeaderBoardForDrawer = ({ data, width = '100%', height = '100%' }) => {
+const LeaderBoardCard = ({ data, width = '100%', height = '100%' }) => {
 
     // console.log(data, '--> LeaderBoardCard')
 
@@ -20,7 +20,7 @@ const LeaderBoardForDrawer = ({ data, width = '100%', height = '100%' }) => {
                     }}>Leader Board</Typography>
                 </Stack>
                 {data ? <Stack gap={'22px'}>
-                    {data.map((item, index) => <LeaderRanking key={index + 1} data={item} value={item.percentage} index={item.rank} />)}
+                    {data.slice(0, 6).map((item, index) => <LeaderRanking key={index + 1} data={item} value={item.percentage} index={item.rank} />)}
                 </Stack> :
                     <LeaderPlaceHolder />
                 }
@@ -29,7 +29,7 @@ const LeaderBoardForDrawer = ({ data, width = '100%', height = '100%' }) => {
     )
 }
 
-export default LeaderBoardForDrawer
+export default LeaderBoardCard
 
 
 const LeaderPlaceHolder = () => {

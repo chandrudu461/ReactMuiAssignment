@@ -15,7 +15,7 @@ const AssessmentDetailCard = ({
 
   const theme = useTheme();
   const greyColor = theme.palette.grey[100]
-  console.log(greyColor)
+  // console.log(greyColor)
 
   return (
     <Box
@@ -32,7 +32,7 @@ const AssessmentDetailCard = ({
         maxWidth: '230px',
         borderRadius: '10px',
         boxShadow: ' 10px 10px 32px 0px rgba(22, 22, 22, 0.04);',
-        padding: '10px 27px 10px 10px',
+        // padding: '10px 27px 10px 10px',
         border: '1px solid ${greyColor}'
       }}
     >
@@ -59,7 +59,7 @@ const AssessmentDetailCard = ({
 
         <Stack direction='column' justifyContent='center'>
           <Box width={'126px'}>
-            <Typography variant='caption2'>{title}</Typography>
+            <Typography variant='assessmentCard'>{title}</Typography>
           </Box>
           <Typography variant='h5'>
             {showCountingAnimation ? (

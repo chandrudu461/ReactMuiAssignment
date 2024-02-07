@@ -3,6 +3,7 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import { FormLabel } from '@mui/material'
+import { Typography } from '@mui/material'
 // import { DownArrowIcon } from '../../assets/Svg/DownArrowIcon'
 // import { ArrowDropDown } from '@mui/icons-material'
 export default function MuiSmallDropDown({
@@ -24,12 +25,9 @@ export default function MuiSmallDropDown({
   const isDisabled = disabled ? true : false
 
   React.useEffect(() => {
-    if (isDisabled && data) {
+    if (data && !dropDownValue) {
       setDropDownValue(data[0]?.value)
     }
-    // if (data && data[0]) {
-    //   setDropDownValue(data[0]?.value)
-    // }
   }, [data, isDisabled])
 
   return (
@@ -70,7 +68,7 @@ export default function MuiSmallDropDown({
           value={dropDownValue ? dropDownValue : ''}
           displayEmpty
           onChange={handleChange}
-          disabled={isDisabled}
+          // disabled={isDisabled}
           // IconComponent={ArrowDropDown}
           sx={{
             padding: '5px',
@@ -79,9 +77,9 @@ export default function MuiSmallDropDown({
             },
           }}
         >
-          <MenuItem disabled={true} value='' sx={{ display: 'none' }}>
+          {/* <MenuItem disabled={true} value='' sx={{ display: 'none' }}>
             Subjects
-          </MenuItem>
+          </MenuItem> */}
           {data &&
             data?.map((input, index) => (
               <MenuItem
@@ -92,7 +90,7 @@ export default function MuiSmallDropDown({
                 }}
                 value={input?.value}
               >
-                {input?.name}
+                <Typography variant='body2'>{input?.name}</Typography>
               </MenuItem>
             ))}
         </Select>

@@ -12,15 +12,18 @@ const Courses = ({ data }) => {
                 padding: '2px',
                 marginTop: '50px'
             }}>
-                <Typography style={{
-                    color: 'var(--Basic-700, #2E3A59)',
-                    fontFamily: 'Poppins',
-                    fontSize: '20px',
-                    fontStyle: 'normal',
-                    fontWeight: 500,
-                    lineHeight: '28px',
-                    marginBottom: '15px'
-                }}>
+                <Typography
+                    variant='h5'
+                    style={{
+                        color: '#2E3A59',
+                        // fontFamily: 'Poppins',
+                        // fontSize: '20px',
+                        // fontStyle: 'normal',
+                        // fontWeight: 500,
+                        // lineHeight: '28px',
+                        // marginBottom: '15px'
+
+                    }}>
                     Your Courses
                 </Typography>
                 <Stack spacing={'22px'} direction={'row'}>

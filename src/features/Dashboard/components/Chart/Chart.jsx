@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Stack, Typography, Box } from '@mui/material';
+import { Skeleton, Stack, Typography, Box } from '@mui/material';
 import Bubble from '../../../../components/common/Bubble';
 import MuiSmallDropDown from '../../../../components/common/MuiSmallDropDown';
 import MuiColumnChart from '../../../../components/common/MuiColumnChart';
 import { useTheme } from '@mui/material';
 
-const Chart = ({ recentAssessmentsData }) => {
+const Chart = ({ recentAssessmentsData, loading }) => {
     const theme = useTheme();
     const [selectedSubject, setSelectedSubject] = useState(null);
 
@@ -37,72 +37,82 @@ const Chart = ({ recentAssessmentsData }) => {
 
     return (
         <>
-            <Stack
-                spacing={2}
-                direction='row'
-                sx={{
-                    marginLeft: '23px',
-                    marginTop: '16px',
-                }}
-            >
-                <Stack
-                    sx={{
-                        width: '50%',
-                    }}
-                >
-                    <Typography
-                        variant='body1'
+            {loading ? (
+                <Skeleton variant='rectangular' height={200} animation="wave" />
+            ) : (
+                <>
+                    <Stack
+                        spacing={2}
+                        direction='row'
                         sx={{
-                            color: '#161C24',
-                            fontFamily: 'Poppins',
-                            fontSize: '20px',
-                            fontStyle: 'normal',
-                            fontWeight: 500,
-                            lineHeight: '28px',
+                            marginLeft: '23px',
+                            marginTop: '16px',
                         }}
                     >
-                        Recent Assessments
-                    </Typography>
-                </Stack>
-                <Stack
-                    direction='row'
-                    spacing={2}
-                    sx={{
-                        justifyContent: 'flex-end',
-                    }}
-                >
-                    <Box sx={{
-                        marginTop: '2px'
-                    }}>
-                        <Bubble color={'#0B58F5'} />
-                    </Box>
-                    <Typography>Attempted</Typography>
-                    <Box sx={{
-                        marginTop: '2px'
-                    }}>
-                        <Bubble color={'#F44336'} />
-                    </Box>
-                    <Typography>Unattempted</Typography>
-                    <MuiSmallDropDown
-                        data={subjects}
-                        onChange={handleSubjectChange}
-                        dropDownValue={selectedSubject}
-                        setDropDownValue={setSelectedSubject}
-                        disable={true}
-                    />
-                </Stack>
-            </Stack>
-            <Stack direction='column'>
-                <MuiColumnChart
-                    series={series}
-                    categories={categories}
-                    yaxisTitle={'Tests'}
-                    xaxisTitle={'Performance'}
-                    width={'100%'}
-                    height={'230px'}
-                    primaryBarColor={theme.palette.primary[700]}
-                />
-            </Stack>
+                        <Stack
+                            sx={{
+                                width: '50%',
+                            }}
+                        >
+                            <Typography
+                                variant='h5'
+                                sx={{
+                                    // color: '#161C24',
+                                    // fontFamily: 'Poppins',
+                                    // fontSize: '20px',
+                                    // fontStyle: 'normal',
+                                    // fontWeight: 500,
+                                    // lineHeight: '28px',
+                                }}
+                            >
+                                Recent Assessments
+                            </Typography>
+                        </Stack>
+                        <Stack
+                            direction='row'
+                            spacing={2}
+                            sx={{
+                                justifyContent: 'flex-end',
+                            }}
+                        >
+                            <Box sx={{
+                                marginTop: '0px'
+                            }}>
+                                <Bubble color={'#0B58F5'} />
+                            </Box>
+                            <Box>
+                                <Typography variant='body9'>Attempted</Typography>
+                            </Box>
+                            <Box sx={{
+                                marginTop: '0px'
+                            }}>
+                                <Bubble color={'#F44336'} />
+                            </Box>
+                            <Box>
+                                <Typography variant='body9'>Unattempted</Typography>
+                            </Box>
+                            <MuiSmallDropDown
+                                data={subjects}
+                                onChange={handleSubjectChange}
+                                dropDownValue={selectedSubject}
+                                setDropDownValue={setSelectedSubject}
+                                disable={false}
+                            />
+                        </Stack>
+                    </Stack>
+                    <Stack direction='column'>
+                        <MuiColumnChart
+                            series={series}
+                            categories={categories}
+                            yaxisTitle={'Tests'}
+                            xaxisTitle={'Performance'}
+                            width={'100%'}
+                            height={'230px'}
+                            primaryBarColor={theme.palette.primary[700]}
+                        />
+                    </Stack>
+                </>
+            )}
         </>
     )
 }

@@ -1,53 +1,20 @@
-// import axios from 'axios'
-import { setTableData } from '../actions/dashboard.actions'
+import axios from 'axios'
+import {
+    fetchDataRequest,
+    fetchDataSuccess,
+    fetchDataFailure,
+} from '../reducers/dashboard.reducers'
 
-export const getAssessmentdata = () => {
+export const fetchDashboardData = () => {
     return async (dispatch) => {
-        const fetchData = async () => {
-            let endpoint = `https://stagingstudentpython.edwisely.com/reactProject/assessments`
-            let options = {
-                method: 'GET',
-                redirect: 'follow',
-            }
-            const response = await fetch(endpoint, options)
-            //console.log(response)
-
-            if (response?.data?.status !== 200) {
-                console.log('error caught')
-                throw response
-            }
-
-            dispatch(
-                setTableData({
-                    tableData: response?.data?.assessments,
-                    loadingTableData: false,
-                    errorLoadingTableData: false,
-                })
-            )
-            return response
-        }
-
         try {
-            dispatch(
-                setTableData({
-                    tableData: [],
-                    loadingTableData: true,
-                    errorLoadingTableData: false,
-                })
+            dispatch(fetchDataRequest())
+            const response = await axios.get(
+                'https://stagingstudentpython.edwisely.com/reactProject/dashboardData'
             )
-            const fetchedData = await fetchData()
-            //console.log(fetchedData)
-            return fetchedData
+            dispatch(fetchDataSuccess(response.data))
         } catch (error) {
-            console.log(error)
-            dispatch(
-                setTableData({
-                    tableData: [],
-                    loadingTableData: false,
-                    errorLoadingTableData: true,
-                })
-            )
-            return error
+            dispatch(fetchDataFailure(error.message))
         }
     }
 }

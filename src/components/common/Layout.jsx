@@ -11,7 +11,11 @@ const Layout = ({ children }) => {
             <Box sx={{ width: '94vw', position: 'absolute', left: '6vw' }}>
                 <Header />
             </Box>
-            <Outlet />
+            <Box sx={{
+                // margin: '80px 0 0 6vw'
+            }}>
+                <Outlet />
+            </Box>
             {/* <Header /> */}
             {children}
         </div>

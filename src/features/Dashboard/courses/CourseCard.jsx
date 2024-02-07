@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Typography, Button, Hidden } from '@mui/material'
-import ImageComponent from './ImageComponent';
+import ImageComponent from '../../../components/common/ImageComponent';
 const CourseCard = ({ id, name, image, tag }) => {
     const boxStyles = {
         borderRadius: '10px',
@@ -40,23 +40,27 @@ const CourseCard = ({ id, name, image, tag }) => {
                     marginLeft: '14px',
                     height: '12px'
                 }}>
-                    <Typography sx={{
-                        color: '#0B58F5'
-                    }}>{tag}</Typography>
+                    <Typography
+                        variant='courseChip'
+                        sx={{
+                            color: '#0B58F5'
+                        }}>{tag}</Typography>
                 </Box>
                 <Box sx={{
                     height: '40px'
                 }}>
-                    <Typography sx={{
-                        color: '#161C24',
-                        fontFamily: 'Poppins',
-                        fontSize: '14px',
-                        fontStyle: 'normal',
-                        fontWeight: 500,
-                        lineHeight: '20px',
-                        letterSpacing: '-0.14px',
-                        marginLeft: '14px'
-                    }}>{name}</Typography>
+                    <Typography
+                        variant='cardText'
+                        sx={{
+                            color: '#161C24',
+                            // fontFamily: 'Poppins',
+                            // fontSize: '14px',
+                            // fontStyle: 'normal',
+                            // fontWeight: 500,
+                            // lineHeight: '20px',
+                            // letterSpacing: '-0.14px',
+                            // marginLeft: '14px'
+                        }}>{name}</Typography>
                 </Box>
             </Box>
         </>

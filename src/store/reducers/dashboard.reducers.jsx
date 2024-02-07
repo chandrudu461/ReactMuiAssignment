@@ -1,18 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const dashboardReducer = createSlice({
+const initialState = {
+    dashBoardData: [],
+    loading: false,
+    error: null,
+}
+
+const dashboardSlice = createSlice({
     name: 'dashboard',
-    initialState: {
-        tableData: [],
-        loadingTableData: true,
-        errorLoadingTableData: false,
-    },
+    initialState,
     reducers: {
-        setTableData: (state, action) => {
-            console.log('command dispatched')
+        fetchDataRequest: (state) => {
+            state.loading = true
+            state.error = null
+        },
+        fetchDataSuccess: (state, action) => {
+            state.loading = false
+            state.dashBoardData = action.payload
+        },
+        fetchDataFailure: (state, action) => {
+            state.loading = false
+            state.error = action.payload
         },
     },
 })
 
-export const { setTableData } = dashboardReducer.actions
-export default dashboardReducer
+export const { fetchDataRequest, fetchDataSuccess, fetchDataFailure } =
+    dashboardSlice.actions
+export default dashboardSlice.reducer

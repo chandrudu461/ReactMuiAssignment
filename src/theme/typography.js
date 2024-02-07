@@ -147,6 +147,18 @@ const typography = {
     fontSize: pxToRem(10),
     fontWeight: fontWeightRegular
   },
+  body8: {
+    fontFamily: FONT_PRIMARY_MEDIUM,
+    lineHeight: pxToRem(15 * 1.6),
+    fontSize: pxToRem(16),
+    fontWeight: fontWeightBold,
+  },
+  body9: {
+    fontWeight: 400,
+    fontSize: pxToRem(14),
+    lineHeight: pxToRem(16),
+    fontFamily: FONT_PRIMARY_REGULAR,
+  },
   caption1: {
     fontFamily: FONT_PRIMARY_REGULAR,
     lineHeight: pxToRem(10 * 1.57),
@@ -188,7 +200,6 @@ const typography = {
     fontSize: pxToRem(10),
     color: palette.grey[500],
     fontWeight: fontWeightBold
-
   },
   overline: {
     fontWeight: 700,
@@ -202,6 +213,43 @@ const typography = {
     fontSize: pxToRem(14),
     textTransform: 'capitalize',
   },
+  loginHeading: {
+    fontWeight: 700,
+    lineHeight: 72 / 48,
+    fontSize: pxToRem(48),
+    color: palette.grey[900],
+  },
+  assessmentCard: {
+    fontFamily: FONT_PRIMARY_MEDIUM,
+    lineHeight: pxToRem(10 * 1.57),
+    fontSize: pxToRem(14),
+    color: palette.grey[500],
+    fontWeight: fontWeightMedium
+  },
+  tableHeaderCell: {
+    fontWeight: 500,
+    fontSize: pxToRem(14),
+    lineHeight: pxToRem(21),
+    fontFamily: FONT_PRIMARY_REGULAR,
+  },
+  tableStudentRowCell: {
+    fontWeight: 400,
+    fontSize: pxToRem(14),
+    lineHeight: pxToRem(21),
+    fontFamily: FONT_PRIMARY_REGULAR,
+  },
+  courseChip: {
+    fontFamily: FONT_PRIMARY_MEDIUM,
+    lineHeight: pxToRem(12),
+    fontSize: pxToRem(12),
+    fontWeight: fontWeightMedium
+  },
+  cardText: {
+    fontFamily: FONT_PRIMARY_BOLD,
+    lineHeight: pxToRem(20),
+    fontSize: pxToRem(14),
+    fontWeight: fontWeightMedium
+  }
 };
 
 export default typography;

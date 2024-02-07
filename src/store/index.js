@@ -34,9 +34,9 @@ export const store = configureStore({
     reducer: {
         login: loginSlice.reducer,
         unit: unitSlice.reducer,
-        dashboard: dashboardReducer
-    }
-});
+        dashboard: dashboardReducer,
+    },
+})
 
 export const loginActions = loginSlice.actions
 export const unitActions = unitSlice.actions

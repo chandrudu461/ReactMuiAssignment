@@ -33,7 +33,7 @@ const Header = () => {
                 height: '80px',
                 background: '#ffffff',
                 // position: 'absolute',
-                width: '94vw',
+                width: '93vw',
                 borderBottom: '1px solid #DFE3E8',
             }}>
                 <Typography

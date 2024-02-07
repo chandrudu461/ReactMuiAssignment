@@ -1,16 +1,18 @@
 import { Box, Typography, Grid, Stack } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import AssessmentDetailCard from '../features/Dashboard/components/Assessments/AssessmentDetailCard';
-import CalendarComponent from '../components/common/CalendarComponent'
-import LeaderBoardCard from '../components/common/LeaderBoardCard';
-import Courses from '../components/common/Courses'
+// import CalendarComponent from '../components/common/CalendarComponent'
+import LeaderBoardCard from '../features/Dashboard/components/LeaderBoard/LeaderBoardCard';
+import Courses from '../features/Dashboard/courses/Courses'
 import ContinueReadingCard from '../components/common/ContinueReadingCard';
 import Units from '../components/common/Units';
-import MuiCustomTableWithSortandSelect from '../components/common/MuiCustomTableWithSortandSelect';
+import MuiCustomTableWithSortandSelect from '../features/Dashboard/components/Table/MuiCustomTableWithSortandSelect';
 import CustomTable from '../components/common/CustomTable'
 import { useTheme } from '@mui/material'
-import MuiCustomTableWithSortadnSelect from '../components/common/MuiCustomTableWithSortandSelect'
+import MuiCustomTableWithSortadnSelect from '../features/Dashboard/components/Table/MuiCustomTableWithSortandSelect'
+import ErrorPage from '../components/common/ErrorPage';
+import PdfViewer from '../components/common/pdfViewer';
 import Chart from '../features/Dashboard/components/Chart/Chart';
+
 const TestElement = (props) => {
     const [data, setData] = useState(null);
     const [leaderBoardData, setLeaderBoardData] = useState(null);
@@ -68,7 +70,7 @@ const TestElement = (props) => {
                 }}>
                     {/* <LeaderBoardCard data={leaderBoardData} width='319px' height='425px' /> */}
                     <Courses data={courseData} />
-                    <CalendarComponent />
+                    {/* <CalendarComponent /> */}
                     {/* <CustomTable /> */}
                     {/* <PdfViewerComponent /> */}
                     {/* <Box width="200px" height={"200px"}>
@@ -78,8 +80,11 @@ const TestElement = (props) => {
                             submissionTypesToShowinStudentTable
                         />
                     </Box> */}
-                    <Chart recentAssessmentsData={recentAssessmentsData} />
-
+                    {/* <Chart recentAssessmentsData={recentAssessmentsData} /> */}
+                    {/* <Box width={'500px'} heigh={'500px'}>
+                        <ErrorPage />
+                    </Box> */}
+                    <PdfViewer />
                 </div>
             </div>
 

@@ -1,29 +1,21 @@
 import React from 'react'
 import { Typography, Box, Drawer } from '@mui/material'
-import DashboardChip from '../components/common/DashboardChip'
-import CalenderIcon from '../assets/svg/CalenderIcon'
 import Stack from '@mui/material/Stack'
-import PerformanceIcon from '../assets/svg/PerformanceIcon'
-import AssessmentIcon from '../assets/svg/AssessmentIcon'
-import AssignmentIcon from '../assets/svg/AssignmentIcon'
-import CodingIcon from '../assets/svg/CodingIcon'
-import AssessmentDetailCard from '../features/Dashboard/components/Assessments/AssessmentDetailCard'
 import { Grid } from '@mui/material'
-import MuiColumnChart from '../components/common/MuiColumnChart'
 import { useState, useEffect } from 'react'
-import CalenderComponent from '../components/common/CalendarComponent'
+import CalenderComponent from '../features/Dashboard/components/Calender/CalendarComponent'
 import { useTheme } from '@emotion/react'
-import UserProfile from '../components/common/UserProfile'
-import LeaderBoardCard from '../components/common/LeaderBoardCard'
-import Bubble from '../components/common/Bubble'
-import MuiSmallDropDown from '../components/common/MuiSmallDropDown'
-import Courses from '../components/common/Courses'
+import LeaderBoardCard from '../features/Dashboard/components/LeaderBoard/LeaderBoardCard'
+import Courses from '../features/Dashboard/courses/Courses'
+import UserProfileComponent from '../features/Dashboard/components/UserProfile/UserProfileComponent'
 // import data from '../../src/data/data'
 import { useDispatch, useSelector } from 'react-redux'
-import MuiCustomTableWithSortandSelect from '../components/common/MuiCustomTableWithSortandSelect'
-import LeaderBoardForDrawer from '../components/common/LeaderBoardForDrawer'
+import LeaderBoardForDrawer from '../features/Dashboard/components/LeaderBoard/LeaderBoardForDrawer'
 import Assignments from '../features/Dashboard/components/Assessments/Assessments';
 import Chart from '../features/Dashboard/components/Chart/Chart';
+import { fetchDashboardData } from '../store/actions/dashboard.actions'
+import MuiCustomTable from '../features/Dashboard/components/Table/MuiCustomTable'
+import LeaderBoard from '../features/Dashboard/components/LeaderBoard/LeaderBoard'
 
 const DashboardPage = () => {
     const [data, setData] = useState(null)
@@ -33,19 +25,15 @@ const DashboardPage = () => {
     const [coursesData, setCourseData] = useState(null)
     const isLoggedIn = useSelector((state) => state.login.login)
     const theme = useTheme()
-    const [tableData, setTableData] = useState(null)
-    const [tableAssessmentsData, setTableAssessmentsData] = useState(null)
     const [CurrentSemester, setCurrentSemester] = useState(null)
     const [semesterList, setsemesterList] = useState([])
     const [tableDataWithRank, setTableDataWithRank] = useState(null)
-    const [filteredData, setFilteredData] = useState(null)
-    const [dropDownValue, setDropDownValue] = useState('semester 1')
-    const [drawerState, setDrawerState] = useState(null)
-    const [uniqueSemesters, setUniqueSemesters] = useState(null)
     const tableDataRedux = useSelector(state => state.dashboard);
+    const { dashBoardData, loading, error } = useSelector(
+        (state) => state.dashboard
+    )
     const dispatch = useDispatch()
-
-    console.group("tableDataRedux : ", tableDataRedux);
+    // console.log("tableDataRedux : ", tableDataRedux);
 
     const fetchData = async (url) => {
         try {
@@ -58,14 +46,12 @@ const DashboardPage = () => {
         }
     }
 
-    const headerArr = [
-        { label: 'Subject', isSortable: true, isSelectable: false },
-        { label: 'Time Spent', isSortable: true, isSelectable: true },
-        { label: 'Submission Type', isSortable: true, isSelectable: false },
-        { label: 'Internet Speed', isSortable: true, isSelectable: false },
-        { label: 'Rank', isSortable: true, isSelectable: false },
-        { label: 'Mark', isSortable: true, isSelectable: false },
-    ]
+
+    useEffect(() => {
+        dispatch(fetchDashboardData())
+    }, [dispatch])
+
+    console.log('dashboard', dashBoardData);
 
     useEffect(() => {
         // static data
@@ -88,67 +74,9 @@ const DashboardPage = () => {
                 throw error
             }
         }
-        const fetchTableDataFromApi = async () => {
-            try {
-                const result = await fetchData(
-                    'https://stagingstudentpython.edwisely.com/reactProject/assessments'
-                )
-                setTableData(result)
-                let rankedTableData = result.assessments
-                    ? result.assessments.map((row) => ({
-                        ...row,
-                        rank:
-                            1 +
-                            result.assessments.filter(
-                                (r) => r.percentage_scored > row.percentage_scored
-                            ).length,
-                    }))
-                    : []
-                setTableAssessmentsData(rankedTableData)
-                setFilteredData(rankedTableData)
-                let uniqueValues = [...new Set(rankedTableData.map(item => item.semester))];
-                let semesters = uniqueValues.map(sem => ({
-                    name: "semester " + sem,
-                    value: sem,
-                }))
-                semesters = [...semesters, {
-                    name: "semesters",
-                    value: 0,
-                }]
-                // semesters.sort((a, b) => {
-                //     return a < b;
-                // })
-                setUniqueSemesters(semesters);
-                // console.log(semesters);
-            } catch (error) {
-                throw error
-            }
-        }
-
 
         fetchDataFromApi()
-        fetchTableDataFromApi()
-        console.log('assessments data : ', data);
     }, [])
-
-    const handleSemesterChange = (semester) => {
-        let filteringData = [...tableAssessmentsData]
-        if (semester === 0) {
-            setFilteredData(filteringData)
-            return;
-        }
-        filteringData = filteringData.filter((item) => {
-            console.log(item.semester, semester, item.semester === semester)
-            return (item.semester === semester)
-        })
-        // filteringData.map((row) => {
-        //     console.log(row.semester, semester)
-        //     return row.semester === semester;
-        // });
-        // // setFilteredData(filteringData);
-        console.log(filteringData);
-        setFilteredData(filteringData)
-    }
 
     if (!isLoggedIn) {
         return (
@@ -157,60 +85,6 @@ const DashboardPage = () => {
             </Box>
         )
     }
-
-    const sortHandler = (order, key) => {
-        console.log(order, key)
-        let sortedData = [...tableAssessmentsData]
-        console.log(sortedData)
-
-        sortedData.sort((a, b) => {
-            const valueA =
-                typeof a[key.toLowerCase()] === 'string'
-                    ? a[key.toLowerCase()].toLowerCase()
-                    : a[key.toLowerCase()]
-            const valueB =
-                typeof b[key.toLowerCase()] === 'string'
-                    ? b[key.toLowerCase()].toLowerCase()
-                    : b[key.toLowerCase()]
-
-            if (order === 'asc') {
-                return valueA > valueB ? 1 : valueA < valueB ? -1 : 0
-            } else if (order === 'des') {
-                return valueA < valueB ? 1 : valueA > valueB ? -1 : 0
-            } else {
-                throw new Error('Invalid sort order. Use "asc" or "des".')
-            }
-        })
-        console.log(sortedData)
-
-        setTableAssessmentsData(sortedData)
-
-        let sortedFilteredData = [...filteredData]
-        sortedFilteredData.sort((a, b) => {
-            const valueA =
-                typeof a[key.toLowerCase()] === 'string'
-                    ? a[key.toLowerCase()].toLowerCase()
-                    : a[key.toLowerCase()]
-            const valueB =
-                typeof b[key.toLowerCase()] === 'string'
-                    ? b[key.toLowerCase()].toLowerCase()
-                    : b[key.toLowerCase()]
-
-            if (order === 'asc') {
-                return valueA > valueB ? 1 : valueA < valueB ? -1 : 0
-            } else if (order === 'des') {
-                return valueA < valueB ? 1 : valueA > valueB ? -1 : 0
-            } else {
-                throw new Error('Invalid sort order. Use "asc" or "des".')
-            }
-        })
-        setFilteredData(sortedFilteredData)
-    }
-
-    const toggleDrawer = () => {
-        setDrawerState(!drawerState)
-    }
-
     return (
         <>
             <Box
@@ -240,6 +114,7 @@ const DashboardPage = () => {
                             // fontWeight: 600,
                             // lineHeight: '28px',
                             marginTop: '93px',
+                            // marginLeft: '18px'
                         }}
                     >
                         Dashboard
@@ -259,7 +134,7 @@ const DashboardPage = () => {
                             justifyContent: 'space-between',
                         }}
                     >
-                        <Assignments />
+                        <Assignments loading={loading} />
                     </Grid>
 
                     {/* chart grid */}
@@ -275,38 +150,14 @@ const DashboardPage = () => {
                                 }}
                             >
 
-                                <Chart recentAssessmentsData={recentAssessmentsData} />
+                                <Chart recentAssessmentsData={dashBoardData.recent_assessments} loading={loading} />
 
                                 <Box
                                     sx={{
                                         height: '535px',
                                     }}
                                 >
-                                    <Box>
-                                        <Stack direction='row'>
-                                            <Typography>Assessments</Typography>
-                                            <Box
-                                                sx={{
-                                                    position: 'absolute',
-                                                    right: '30vw',
-                                                }}
-                                            >
-                                                <MuiSmallDropDown
-                                                    data={uniqueSemesters}
-                                                    onChange={handleSemesterChange}
-                                                    dropDownValue={dropDownValue}
-                                                    setDropDownValue={setDropDownValue}
-                                                />
-                                            </Box>
-                                        </Stack>
-                                    </Box>
-                                    <MuiCustomTableWithSortandSelect
-                                        HeaderArr={headerArr}
-                                        tableData={filteredData}
-                                        submissionTypesToShowinStudentTable={[1, 2, 3, 4]}
-                                        sortHandler={sortHandler}
-                                        filtered_studentAssessmentList={filteredData}
-                                    />
+                                    <MuiCustomTable />
                                 </Box>
                                 <Courses data={coursesData} />
                             </Grid>
@@ -326,60 +177,9 @@ const DashboardPage = () => {
                                         padding: '10px',
                                     }}
                                 >
-                                    <Typography
-                                        style={{
-                                            fontSize: '20px',
-                                            fontStyle: 'normal',
-                                            fontWeight: 500,
-                                            lineHeight: '28px',
-                                        }}
-                                    >
-                                        {' '}
-                                        User Profile{' '}
-                                    </Typography>
-                                    <UserProfile
-                                        name={'Maharrm Hasanli'}
-                                        email={'maga.hesenli@gmail.com'}
-                                    />
+                                    <UserProfileComponent />
                                     <CalenderComponent />
-                                    <Box
-                                        onClick={toggleDrawer}
-                                        sx={{
-                                            '&:hover': {
-                                                cursor: 'pointer',
-                                            },
-                                        }}
-                                    >
-                                        <LeaderBoardCard
-                                            data={leaderBoardData}
-                                            width='319px'
-                                            height='425px'
-                                        />
-                                    </Box>
-                                    <Drawer
-                                        anchor='right'
-                                        open={drawerState}
-                                        onClose={toggleDrawer}
-                                        sx={{
-                                            '& .MuiDrawer-paper': {
-                                                width: '30%',
-                                            },
-                                        }}
-                                    >
-                                        <Box
-                                            sx={{
-                                                width: '100%',
-                                                p: 2,
-                                            }}
-                                        >
-                                            <Typography variant='h6'>Leaderboard</Typography>
-                                            <LeaderBoardForDrawer
-                                                data={leaderBoardData}
-                                                width='100%'
-                                                height='100%'
-                                            />
-                                        </Box>
-                                    </Drawer>
+                                    <LeaderBoard leaderBoardData={leaderBoardData} />
                                 </Stack>
                             </Grid>
                         </Grid>

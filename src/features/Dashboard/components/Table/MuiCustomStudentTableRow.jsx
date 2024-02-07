@@ -8,8 +8,8 @@ import {
   Stack,
 } from '@mui/material'
 import { useTheme } from '@mui/material'
-import { RightArrowIcon } from '../../assets/svg/RightButtonIcon'
-import ArrowUp from '../../assets/svg/ArrowUp'
+import { RightArrowIcon } from '../../../../assets/svg/RightButtonIcon'
+import ArrowUp from '../../../../assets/svg/ArrowUp'
 
 function secondsToMinutes(seconds) {
   const minutes = Math.floor(seconds / 60)
@@ -53,18 +53,25 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
         scope='row'
         sx={{ border: 'none', borderRadius: '6px 0 0 6px' }}
       >
-        <Typography variant='body1' sx={{ color: theme.palette.grey[900] }}>
+        <Typography
+          // variant='body1' 
+          variant='tableStudentRowCell'
+          sx={{ color: theme.palette.grey[900] }}>
           {stu.subject}
         </Typography>
       </TableCell>
       <TableCell scope='row' sx={{ border: 'none' }}>
-        <Typography variant='body1' sx={{ color: theme.palette.grey[900] }}>
+        <Typography
+          // variant='body1'
+          variant='tableStudentRowCell'
+          sx={{ color: theme.palette.grey[900] }}>
           {stu.total_timespent} Min
         </Typography>
       </TableCell>
       <TableCell scope='row' sx={{ border: 'none' }}>
         <Typography
-          variant='body1'
+          // variant='body1'
+          variant='tableStudentRowCell'
           sx={{
             color:
               stu.submission_type === 3
@@ -95,13 +102,18 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
         </TableCell>
       ) : null} */}
       <TableCell scope='row' sx={{ border: 'none' }}>
-        <Typography variant='body1' sx={{ color: theme.palette.grey[900] }}>
+        <Typography
+          //  variant='body1'
+          variant='tableStudentRowCell'
+          sx={{ color: theme.palette.grey[900] }}>
           {getInternetQuality(stu.internet_speed)}
         </Typography>
       </TableCell>
 
       <TableCell scope='row' sx={{ border: 'none' }}>
-        <Typography variant='body1' sx={{ color: theme.palette.grey[900] }}>
+        <Typography
+          variant='tableStudentRowCell'
+          sx={{ color: theme.palette.grey[900] }}>
           {stu.rank}
         </Typography>
       </TableCell>
@@ -119,7 +131,10 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
           justifyContent='space-between'
           alignItems='center'
         >
-          <Typography variant='body3' sx={{ color: theme.palette.grey[900] }}>
+          <Typography
+            //  variant='body3'
+            variant='tableStudentRowCell'
+            sx={{ color: theme.palette.grey[900] }}>
             {stu.percentage_scored}%
           </Typography>
           {/* <IconButton

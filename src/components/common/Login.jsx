@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -11,12 +11,24 @@ import { loginActions } from '../../store/index.js'
 import Button from '@mui/material/Button';
 
 const Login = () => {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const login = useSelector((state) => state.login);
+
+    // Check local storage for stored credentials when component mounts
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('username');
+        const storedPassword = localStorage.getItem('password');
+        if (storedUsername && storedPassword) {
+            setUsername(storedUsername);
+            setPassword(storedPassword);
+            setRememberMe(true); // Set rememberMe to true if credentials are found
+        }
+    }, []);
 
     const handleUsername = (event) => {
         setUsername(event.target.value);
@@ -30,36 +42,58 @@ const Login = () => {
         setShowPassword(!showPassword);
     };
 
+    const handleRememberMe = (event) => {
+        setRememberMe(event.target.checked);
+    };
+
     const handleLogin = (event) => {
-        // event.preventDefault(); 
-
-        // const url = `https://stagingstudentpython.edwisely.com/reactProject/loginUser?username=${username}&password=${password}`;
-
-        // fetch(url, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        // })
-        //     .then(response => {
-        //         if (response.ok) {
-        //             dispatch(loginActions.login());
-        //             console.log(login);
-        //             navigate('/dashboard');
-        //         } else {
-        //             console.error('Login failed');
-        //         }
-        //     })
-        //     .catch(error => {
-        //         console.error('Error:', error);
-        //     });
+        event.preventDefault();
 
         if (username === "student@edwisely.com" && password === "edwisely@2024") {
             dispatch(loginActions.login());
-            console.log(login);
+            if (rememberMe) {
+                // Store credentials in local storage
+                localStorage.setItem('username', username);
+                localStorage.setItem('password', password);
+            } else {
+                // Clear stored credentials if "Remember me" is unchecked
+                localStorage.removeItem('username');
+                localStorage.removeItem('password');
+            }
             navigate('/dashboard');
         }
     };
+
+    // const handleLogin = (event) => {
+    //     // event.preventDefault(); 
+
+    //     // const url = `https://stagingstudentpython.edwisely.com/reactProject/loginUser?username=${username}&password=${password}`;
+
+    //     // fetch(url, {
+    //     //     method: 'POST',
+    //     //     headers: {
+    //     //         'Content-Type': 'application/json',
+    //     //     },
+    //     // })
+    //     //     .then(response => {
+    //     //         if (response.ok) {
+    //     //             dispatch(loginActions.login());
+    //     //             console.log(login);
+    //     //             navigate('/dashboard');
+    //     //         } else {
+    //     //             console.error('Login failed');
+    //     //         }
+    //     //     })
+    //     //     .catch(error => {
+    //     //         console.error('Error:', error);
+    //     //     });
+
+    //     if (username === "student@edwisely.com" && password === "edwisely@2024") {
+    //         dispatch(loginActions.login());
+    //         console.log(login);
+    //         navigate('/dashboard');
+    //     }
+    // };
 
     const buttonStyles = {
         width: '381px',
@@ -72,67 +106,33 @@ const Login = () => {
     return (
         <form onSubmit={handleLogin}>
             <Stack spacing={2}>
-                <Typography
-                    style={{
-                        fontSize: 48,
-                        fontFamily: 'Poppins',
-                        fontWeight: 700,
-                        color: '#161C24',
-                    }}
-                >
-                    Login
-                </Typography>
-                <Typography
-                    style={{
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: 500,
-                        color: '#161C24',
-                    }}
-                >
-                    Enter your account details
-                </Typography>
+                <Typography variant='loginHeading'>Login</Typography>
+                <Typography variant='body8'>Enter your account details</Typography>
 
-                <TextField id="standard-basic" label="Username" variant="standard" style={{ width: 381, border: '0px solid red' }}
-                    onChange={handleUsername} />
+                <TextField id="standard-basic" label="Username" variant="standard" style={{ width: 381, border: '0' }} value={username} onChange={handleUsername} />
                 <TextField
                     id="standard-basic"
                     label="Password"
                     variant="standard"
                     type={showPassword ? 'text' : 'password'}
-                    style={{
-                        width: 381,
-                        border: '0px solid red'
-                    }}
+                    style={{ width: 381, border: '0' }}
+                    value={password}
                     onChange={handlePassword}
                     InputProps={{
-                        endAdornment: <Box sx={{
-                            '&:hover': {
-                                cursor: 'pointer',
-                            }
-
-                        }}
-                            onClick={togglePasswordVisibility} > <PasswordIcon /></Box>,
+                        endAdornment: <Box sx={{ '&:hover': { cursor: 'pointer' } }} onClick={togglePasswordVisibility}><PasswordIcon /></Box>,
                     }}
                 />
                 <FormControlLabel
                     control={
                         <Checkbox
-                            style={{
-                                width: '14.823px',
-                                height: '14.823px',
-                                flexShrink: 0,
-                                borderRadius: '3px',
-                                color: '#0B58F5',
-                                marginRight: 9.18,
-                            }}
+                            checked={rememberMe}
+                            onChange={handleRememberMe}
+                            style={{ color: '#0B58F5' }}
                         />
                     }
                     label="Remember me"
                 />
-                <Button type="submit" variant="contained" style={buttonStyles}>
-                    Login
-                </Button>
+                <Button type="submit" variant="contained" style={buttonStyles}>Login</Button>
             </Stack>
         </form>
     );
