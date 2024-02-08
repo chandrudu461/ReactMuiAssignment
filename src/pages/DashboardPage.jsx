@@ -133,11 +133,11 @@ const DashboardPage = () => {
                                 margniLeft: '20px'
                             }}
                         >
-                            <CustomCard>
+                            <CustomCard height='352px'>
                                 <Chart recentAssessmentsData={dashBoardData.recent_assessments} loading={loading} />
                             </CustomCard>
                             <Box marginTop={'21px'} >
-                                <CustomCard>
+                                <CustomCard height='535px'>
                                     <MuiCustomTable />
                                 </CustomCard>
                             </Box>

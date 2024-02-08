@@ -4,6 +4,8 @@ import { Box, Stack, Typography } from '@mui/material';
 import MuiCustomTableWithSortandSelect from './MuiCustomTableWithSortandSelect';
 import MuiSmallDropDown from '../../../../components/common/MuiSmallDropDown';
 import { useDispatch, useSelector } from 'react-redux';
+import LeftArrow from '../../../../assets/svg/LeftArrow';
+import RightArrow from '../../../../assets/svg/RightArrow';
 import { fetchAssessmentData } from '../../../../store/actions/dashboard.actions';
 
 const MuiCustomTable = () => {
@@ -11,7 +13,10 @@ const MuiCustomTable = () => {
     const [tableAssessmentsData, setTableAssessmentsData] = useState(null)
     const [filteredData, setFilteredData] = useState(null)
     const [tableData, setTableData] = useState(null)
-    const [dropDownValue, setDropDownValue] = useState('semester 1')
+    const [currentSemester, setCurrentSemester] = useState({
+        name: 'Semester 01',
+        value: 1,
+    })
     const { assessmentData, loading, error } = useSelector(
         (state) => state.dashboard
     )
@@ -28,6 +33,8 @@ const MuiCustomTable = () => {
             throw error
         }
     }
+
+    console.log('us', uniqueSemesters);
 
     useEffect(() => {
         // dispatch(fetchAssessmentData())
@@ -91,6 +98,28 @@ const MuiCustomTable = () => {
         setFilteredData(sortedFilteredData)
     }
 
+    const leftClickHandle = () => {
+        if (currentSemester.value > 1) {
+            setCurrentSemester(prevSemester => ({
+                name: `Semester 0${prevSemester.value - 1}`,
+                value: prevSemester.value - 1,
+            }));
+        }
+        handleSemesterChange(currentSemester.value - 1)
+        console.log(currentSemester)
+    }
+
+    const rightClickHandle = () => {
+        if (currentSemester.value < uniqueSemesters.length) {
+            setCurrentSemester(prevSemester => ({
+                name: `Semester 0${prevSemester.value + 1}`,
+                value: prevSemester.value + 1,
+            }));
+            handleSemesterChange(currentSemester.value + 1)
+        }
+        console.log(currentSemester)
+    }
+
     const handleSemesterChange = (semester) => {
         let filteringData = [...tableAssessmentsData]
         if (semester === 0) {
@@ -101,18 +130,11 @@ const MuiCustomTable = () => {
             console.log(item.semester, semester, item.semester === semester)
             return (item.semester === semester)
         })
-        // filteringData.map((row) => {
-        //     console.log(row.semester, semester)
-        //     return row.semester === semester;
-        // });
-        // // setFilteredData(filteringData);
         console.log(filteringData);
         setFilteredData(filteringData)
     }
 
-
     useEffect(() => {
-
         const fetchTableDataFromApi = async () => {
             try {
                 const result = await fetchData(
@@ -130,47 +152,61 @@ const MuiCustomTable = () => {
                     }))
                     : []
                 setTableAssessmentsData(rankedTableData)
-                setFilteredData(rankedTableData)
+                // setFilteredData(rankedTableData)
                 let uniqueValues = [...new Set(rankedTableData.map(item => item.semester))];
                 let semesters = uniqueValues.map(sem => ({
-                    name: "semester " + sem,
+                    name: "Semester 0" + sem,
                     value: sem,
                 }))
-                semesters = [...semesters, {
-                    name: "semesters",
-                    value: 0,
-                }]
-                // semesters.sort((a, b) => {
-                //     return a < b;
-                // })
                 setUniqueSemesters(semesters);
-                // console.log(semesters);
+                let filteringData = rankedTableData.filter((item) => {
+                    return (item.semester === currentSemester.value)
+                })
+                setFilteredData(filteringData);
             } catch (error) {
                 throw error
             }
         }
 
         fetchTableDataFromApi()
-
     }, [])
+
+    console.log(filteredData);
 
     return (
         <>
             <Stack direction='row'>
                 <Typography variant='h5'>Assessments</Typography>
-                <Box
+                <Stack
+                    direction={'row'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                    spacing={1}
                     sx={{
                         position: 'absolute',
-                        right: '30vw',
+                        right: '35vw',
                     }}
                 >
-                    <MuiSmallDropDown
+                    {/* <MuiSmallDropDown
                         data={uniqueSemesters}
                         onChange={handleSemesterChange}
                         dropDownValue={dropDownValue}
                         setDropDownValue={setDropDownValue}
-                    />
-                </Box>
+                    /> */}
+                    <Box onClick={leftClickHandle} sx={{
+                        cursor: 'pointer'
+                    }}>
+                        <LeftArrow />
+                    </Box>
+                    <Box>
+                        <Typography variant='body9'>{currentSemester.name}</Typography>
+                    </Box>
+                    <Box onClick={rightClickHandle} sx={{
+                        cursor: 'pointer'
+                    }}>
+                        <RightArrow />
+                    </Box>
+                </Stack>
             </Stack>
             <MuiCustomTableWithSortandSelect
                 HeaderArr={headerArr}

@@ -46,7 +46,8 @@ const CourseCard = ({ id, name, image, tag }) => {
                         }}>{tag}</Typography>
                 </Box>
                 <Box sx={{
-                    height: '40px'
+                    height: '40px',
+                    padding: '0 14px 0 14px'
                 }}>
                     <Typography
                         variant='cardText'

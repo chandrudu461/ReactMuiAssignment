@@ -5,7 +5,6 @@ import Slider from "@mui/material/Slider";
 import { Chip, Box, Typography, Stack, Button } from '@mui/material'
 import palette from "../theme/palette.js";
 import Units from "../components/common/Units.jsx";
-import './CoursePage.css'
 import Search from "../components/common/Search.jsx";
 import CustomCard from "../components/common/CustomCard.jsx";
 import AccordianComponent from "../components/common/AccordianComponent.jsx";
@@ -161,9 +160,31 @@ function CoursePage() {
                             Avg. {data.percentage}%
                         </Typography>
                     </Box>
-                    <Box id="des-div">
-                        <Box id="title-div">What you will learn</Box>
-                        <Box id="para-div" height='250px'>
+                    <Box sx={{
+                        height: '188px',
+                        width: '1095px',
+                        marginLeft: '85px',
+                        marginTop: '31px'
+                    }}>
+                        <Box sx={{
+                            height: '26px',
+                            fontSize: '16px',
+                            fontStyle: 'normal',
+                            fontWeight: '500',
+                            lineHeight: 'normal',
+                            fontFamily: '"Axiforma-SemiBold", sans-serif'
+                        }}>What you will learn</Box>
+                        <Box sx={{
+                            color: '#000',
+                            fontSize: '14px',
+                            fontStyle: 'normal',
+                            fontWeight: '400',
+                            lineHeight: 'normal',
+                            width: '1095px',
+                            height: '154px',
+                            marginTop: '8px',
+                            fontFamily: '"Axiforma-SemiBold", sans-serif'
+                        }} height='250px'>
                             <ul style={{ listStyleType: "disc", marginLeft: "20px" }}>
                                 {data.description.split("\n").map((paragraph, index) => (
                                     <li key={index}>{paragraph}</li>
@@ -171,9 +192,29 @@ function CoursePage() {
                             </ul>
                         </Box>
                     </Box>
-                    <Box id="continue-reading-div">
-                        <Box id="continue-reading">Continue reading</Box>
-                        <Box id="pdfs">
+                    <Box sx={{
+                        width: '899px',
+                        height: '450px',
+                        marginLeft: '56px',
+                        marginTop: '60px'
+                    }}>
+                        <Box sx={{
+                            color: '#000',
+                            fontFamily: '"Axiforma-SemiBold", sans-serif',
+                            fontSize: '20px',
+                            fontStyle: 'normal',
+                            fontWeight: '500',
+                            lineHeight: 'normal',
+                            marginBottom: '10px'
+                        }}>Continue reading</Box>
+                        <Box sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            width: '919px',
+                            height: '80px',
+                            gap: '22px',
+                            marginTop: '10px'
+                        }}>
                             {data.continue_reading.map((pdf) => (
                                 <ContinueReadingCard
                                     key={pdf.id}
@@ -184,7 +225,14 @@ function CoursePage() {
                                 />
                             ))}
                         </Box>
-                        <Box id="units-div">
+                        <Box sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            marginTop: '20px',
+                            alignItems: 'center',
+                            height: '35px',
+                            gap: '35px'
+                        }}>
                             {data.units.map((unit) => (
                                 <Units
                                     unit_name={unit.unit_name}
@@ -196,7 +244,10 @@ function CoursePage() {
                             ))}
                             <Search />
                         </Box>
-                        <Box id="accordians">
+                        <Box sx={{
+                            height: '44px',
+                            marginTop: '24px'
+                        }}>
                             {data.units
                                 .filter(unit => unit.unit_id === selectedUnitId)
                                 .map(unit => (

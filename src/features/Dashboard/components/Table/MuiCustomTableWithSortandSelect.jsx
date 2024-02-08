@@ -66,7 +66,7 @@ const MuiCustomTableWithSortandSelect = (props) => {
               <MuiCustomStudentTableRow
                 stu={stu}
                 key={i}
-                // viewStudentResult={viewStudentResult}
+              // viewStudentResult={viewStudentResult}
               />
             ))}
           </TableBody>
@@ -81,9 +81,9 @@ const MuiCustomTableWithSortandSelect = (props) => {
       >
         <Pagination
           count={Math.ceil(
-            filtered_studentAssessmentList?.filter((stu) =>
+            (filtered_studentAssessmentList?.filter((stu) =>
               submissionTypesToShowinStudentTable.includes(stu.submission_type)
-            ).length / 15
+            ).length / rowsPerPage) + 2
           )}
           page={page}
           onChange={handleChangePage}
