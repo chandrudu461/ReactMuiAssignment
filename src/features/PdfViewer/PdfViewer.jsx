@@ -6,7 +6,7 @@ import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import { pdfjs } from "react-pdf";
 import { useParams } from 'react-router'
-// import { useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import { zoomPlugin } from '@react-pdf-viewer/zoom'
 import BackButtonIcon from '../../assets/svg/BackButtonIcon.jsx'
 import PdfRotateIcon from '../../assets/svg/PdfRotateIcon.jsx'
@@ -52,7 +52,7 @@ const PdfViewer = () => {
     const [currentZoomLevel, setCurrentZoomLevel] = useState(100)
     const rotatePluginInstance = rotatePlugin();
     const { Rotate } = rotatePluginInstance;
-    // const history = useHistory();
+    const history = useHistory();
 
     const customZoomPluginInstance = {
         zoomTo: (newScale) => {
@@ -95,7 +95,7 @@ const PdfViewer = () => {
 
     const handleSelectPage = (i) => {
         setPageNumber(i);
-        localStorage.setItem("selectedPage", i);
+        // localStorage.setItem("selectedPage", i);
     };
 
     const StyledPage = styled(Page)({

@@ -14,6 +14,9 @@ import data from "../data/courseData.js"
 import ContinueReadingCard from "../components/common/ContinueReadingCard.jsx";
 import PresentationIcon from "../components/common/PresentationIcon.jsx";
 import DocumentIcon from "../assets/svg/DocumentIcon.jsx";
+import MuiCustomTab from "../components/common/MuiCustomTab.jsx";
+import SearchStatusIcon from '../assets/svg/SearchStatusIcon.jsx'
+import { useTheme } from '@mui/material'
 
 function CoursePage() {
     const [courseData, setCourseData] = useState({});
@@ -23,6 +26,9 @@ function CoursePage() {
     const data = courseData.data;
     const isLoggedIn = localStorage.getItem("login");
     console.log(isLoggedIn);
+    const [selectedUnitId, setSelectedUnitId] = useState(9876);
+    const [searchValue, setSearchValue] = useState('');
+    const theme = useTheme();
 
     useEffect(() => {
         setTimeout(() => {
@@ -38,24 +44,15 @@ function CoursePage() {
         navigate("/dashboard");
     };
 
-    const openPdf = (url) => {
-        window.open(url, "_blank");
+    const handleTabChange = (event, newValue) => {
+        setSelectedUnitId(newValue);
     };
 
-    //handling selectedUnit
-    const selectedUnitId = useSelector((state) => state.unit.selectedUnitId) || 9876;
-    // console.log(selectedUnitId);
+    const handleSearchChange = (searchValue) => {
+        setSearchValue(searchValue);
+    }
+
     const dispatch = useDispatch();
-    const handleUnitClick = (unitId) => {
-        console.log(unitId);
-        if (selectedUnitId === unitId) {
-            dispatch(unitActions.closeUnit());
-        } else {
-            dispatch(unitActions.openUnit(unitId));
-        }
-    };
-
-    // const readingIcon = <PresentationIcon />;
     if (!isLoggedIn) {
         return (
             <Stack padding='150px' direction={'row'} spacing={3}>
@@ -233,16 +230,11 @@ function CoursePage() {
                             height: '35px',
                             gap: '35px'
                         }}>
-                            {data.units.map((unit) => (
-                                <Units
-                                    unit_name={unit.unit_name}
-                                    key={unit.unit_id}
-                                    topics={unit.topics}
-                                    id={unit.unit_id}
-                                    onClick={handleUnitClick}
-                                />
-                            ))}
-                            <Search />
+                            <MuiCustomTab
+                                data={data.units.map(unit => ({ id: unit.unit_id, name: unit.unit_name }))}
+                                handleTabChange={handleTabChange}
+                            />
+                            <Search backgroundColor={theme.palette.grey[100]} hintText={'search'} startIcon={<SearchStatusIcon />} handleChange={handleSearchChange} />
                         </Box>
                         <Box sx={{
                             height: '44px',

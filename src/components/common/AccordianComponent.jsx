@@ -35,7 +35,7 @@ const AccordianComponent = ({ title, topics, expand }) => {
                             sx={{
                                 width: 600,
                                 boxShadow: "none",
-                                background: palette.grey[100],
+                                background: palette.primary[0],
                                 margin: 0,
                             }}
                         >
