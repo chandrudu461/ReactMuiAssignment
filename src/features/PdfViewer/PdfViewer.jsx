@@ -13,10 +13,6 @@ import FullScreenIcon from '../../assets/svg/FullScreenIcon.jsx'
 import ZoomOutIcon from "../../assets/svg/ZoomOutIcon.jsx";
 import ZoomInIcon from "../../assets/svg/ZoomInIcon.jsx";
 import {
-    fullScreenPlugin,
-    RenderEnterFullScreenProps,
-} from '@react-pdf-viewer/full-screen'
-import {
     pageNavigationPlugin,
     DownArrowIcon,
     NextIcon,
@@ -25,8 +21,6 @@ import {
 } from '@react-pdf-viewer/page-navigation'
 import { useTheme } from '@mui/material'
 import { createStore, PluginFunctions, SpecialZoomLevel } from '@react-pdf-viewer/core';
-import { RotateDirection } from '@react-pdf-viewer/core';
-import { RenderRotateProps, rotatePlugin } from '@react-pdf-viewer/rotate';
 
 const options = {
     cMapUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/cmaps/`,
@@ -42,15 +36,11 @@ const PdfViewer = () => {
     console.log(url)
     const zoomPluginInstance = zoomPlugin()
     const { ZoomInButton, ZoomOutButton, ZoomPopover } = zoomPluginInstance
-    const fullScreenPluginInstance = fullScreenPlugin()
-    const { EnterFullScreen } = fullScreenPluginInstance
     const pageNavigationPluginInstance = pageNavigationPlugin()
     const theme = useTheme();
     const store = React.useMemo(() => createStore(), []);
     const [scale, setScale] = useState(1);
     const [currentZoomLevel, setCurrentZoomLevel] = useState(100)
-    const rotatePluginInstance = rotatePlugin();
-    const { Rotate } = rotatePluginInstance;
 
     const customZoomPluginInstance = {
         zoomTo: (newScale) => {
@@ -177,7 +167,7 @@ const PdfViewer = () => {
 
                 <Box style={{ borderLeft: '1px solid #BDBDC7', height: '20px' }}></Box>
 
-                <fullScreenPluginInstance.EnterFullScreen>
+                {/* <fullScreenPluginInstance.EnterFullScreen>
                     {(props) => <Box onClick={props.onClick}> <FullScreenIcon /></Box>}
                 </fullScreenPluginInstance.EnterFullScreen>
                 <Rotate direction={RotateDirection.Backward}>
@@ -196,7 +186,7 @@ const PdfViewer = () => {
                             Rotate backward
                         </button>
                     )}
-                </Rotate>
+                </Rotate> */}
                 <PdfRotateIcon />
             </Stack >
             <Box width={'100%'} height={'100%'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
@@ -212,7 +202,7 @@ const PdfViewer = () => {
                         onLoadSuccess={onDocumentLoadSuccess}
                     >
                         <Page scale={scale}
-                            plugins={[customZoomPluginInstance, fullScreenPluginInstance, rotatePluginInstance]}
+                            plugins={[customZoomPluginInstance]}
                             width={415.511}
                             height={588}
                             pageNumber={pageNumber} />
