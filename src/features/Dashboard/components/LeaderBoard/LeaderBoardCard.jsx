@@ -5,10 +5,7 @@ import { Skeleton, Stack, Typography } from '@mui/material'
 import LeaderRanking from './LeaderRanking'
 import RightArrow from '../../../../assets/svg/RightArrow'
 
-const LeaderBoardCard = ({ data, width = '100%', height = '100%' }) => {
-
-    // console.log(data, '--> LeaderBoardCard')
-
+const LeaderBoardCard = ({ data, width = '100%', height = '100%', loading }) => {
     return (
         <CustomCard width={width} height={height}>
             <Stack gap={'16px'}>
@@ -23,6 +20,7 @@ const LeaderBoardCard = ({ data, width = '100%', height = '100%' }) => {
                         }}>Leader Board</Typography>
                     <RightArrow />
                 </Stack>
+
                 {data ? <Stack gap={'22px'}>
                     {data.slice(0, 6).map((item, index) => <LeaderRanking key={index + 1} data={item} value={item.percentage} index={item.rank} />)}
                 </Stack> :

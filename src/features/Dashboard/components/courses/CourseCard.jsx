@@ -22,8 +22,7 @@ const CourseCard = ({ id, name, image, tag }) => {
         <>
             <Box spacing={2} style={boxStyles}>
                 <Box sx={{
-                    width: '244px',
-                    height: '183px',
+                    // height: '183px',
                 }}>
                     <img src={image} style={{
                         aspectRatio: '244/183',
@@ -53,13 +52,6 @@ const CourseCard = ({ id, name, image, tag }) => {
                         variant='cardText'
                         sx={{
                             color: '#161C24',
-                            // fontFamily: 'Poppins',
-                            // fontSize: '14px',
-                            // fontStyle: 'normal',
-                            // fontWeight: 500,
-                            // lineHeight: '20px',
-                            // letterSpacing: '-0.14px',
-                            // marginLeft: '14px'
                         }}>{name}</Typography>
                 </Box>
             </Box>

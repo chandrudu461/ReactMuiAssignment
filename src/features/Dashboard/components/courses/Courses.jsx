@@ -7,7 +7,7 @@ const Courses = ({ data }) => {
     return (
         <>
             <Stack sx={{
-                width: '100%',
+                // width: '100%',
                 height: '324px',
                 padding: '2px',
                 marginTop: '50px'
@@ -16,13 +16,6 @@ const Courses = ({ data }) => {
                     variant='h5'
                     style={{
                         color: '#2E3A59',
-                        // fontFamily: 'Poppins',
-                        // fontSize: '20px',
-                        // fontStyle: 'normal',
-                        // fontWeight: 500,
-                        // lineHeight: '28px',
-                        // marginBottom: '15px'
-
                     }}>
                     Your Courses
                 </Typography>

@@ -60,6 +60,7 @@ const Login = () => {
                 localStorage.removeItem('username');
                 localStorage.removeItem('password');
             }
+            localStorage.setItem("login", true);
             navigate('/dashboard');
         }
     };

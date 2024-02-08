@@ -6,13 +6,12 @@ import LeaderBoardForDrawer from './LeaderBoardForDrawer';
 import { Drawer, Stack } from '@mui/material';
 import BackButtonIcon from '../../../../assets/svg/BackButtonIcon'
 
-const LeaderBoard = ({ leaderBoardData }) => {
+const LeaderBoard = ({ leaderBoardData, loading }) => {
     const [drawerState, setDrawerState] = useState(null)
 
     const toggleDrawer = () => {
         setDrawerState(!drawerState)
     }
-
     const closeDrawer = () => {
         setDrawerState(false);
     }
@@ -28,9 +27,10 @@ const LeaderBoard = ({ leaderBoardData }) => {
                 }}
             >
                 <LeaderBoardCard
+                    loading={loading}
                     data={leaderBoardData}
-                    width='319px'
-                    height='425px'
+                // width='319px'
+                // height='430px'
                 />
             </Box>
             <Drawer

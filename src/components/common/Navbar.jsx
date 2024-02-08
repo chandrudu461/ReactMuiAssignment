@@ -13,6 +13,7 @@ const Navbar = () => {
     const dispatch = useDispatch();
     const handleLogout = () => {
         dispatch(loginActions.logout())
+        localStorage.removeItem("login");
         navigate('/');
     }
     const handleDashboardIconClick = () => {

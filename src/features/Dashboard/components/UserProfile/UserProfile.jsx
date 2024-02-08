@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import { Typography, Box, useTheme } from '@mui/material';
 
 
-const UserProfile = ({ name, email }) => {
+const UserProfile = ({ name, email, link }) => {
 
     const theme = useTheme();
 
@@ -15,7 +15,7 @@ const UserProfile = ({ name, email }) => {
             }}>
                 <Stack
                     direction={'row'}>
-                    <UserProfileSvg />
+                    <UserProfileSvg link={link} />
                     <Stack padding={'0 0 0 22px'}>
                         <Typography
                             variant='body8'

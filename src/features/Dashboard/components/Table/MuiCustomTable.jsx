@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { Box, Stack, Typography } from '@mui/material';
 import MuiCustomTableWithSortandSelect from './MuiCustomTableWithSortandSelect';
 import MuiSmallDropDown from '../../../../components/common/MuiSmallDropDown';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAssessmentData } from '../../../../store/actions/dashboard.actions';
 
 const MuiCustomTable = () => {
     const [uniqueSemesters, setUniqueSemesters] = useState(null)
@@ -10,6 +12,11 @@ const MuiCustomTable = () => {
     const [filteredData, setFilteredData] = useState(null)
     const [tableData, setTableData] = useState(null)
     const [dropDownValue, setDropDownValue] = useState('semester 1')
+    const { assessmentData, loading, error } = useSelector(
+        (state) => state.dashboard
+    )
+    const dispatch = useDispatch
+    console.log(assessmentData);
 
     const fetchData = async (url) => {
         try {
@@ -21,6 +28,10 @@ const MuiCustomTable = () => {
             throw error
         }
     }
+
+    useEffect(() => {
+        // dispatch(fetchAssessmentData())
+    }, [dispatch])
 
     const headerArr = [
         { label: 'Subject', isSortable: true, isSelectable: false },

@@ -40,7 +40,7 @@ const Chart = ({ recentAssessmentsData, loading }) => {
             {loading ? (
                 <Skeleton variant='rectangular' height={200} animation="wave" />
             ) : (
-                <>
+                <Stack>
                     <Stack
                         spacing={2}
                         direction='row'
@@ -111,7 +111,7 @@ const Chart = ({ recentAssessmentsData, loading }) => {
                             primaryBarColor={theme.palette.primary[700]}
                         />
                     </Stack>
-                </>
+                </Stack>
             )}
         </>
     )

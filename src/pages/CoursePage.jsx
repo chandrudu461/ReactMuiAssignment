@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import BackButtonIcon from "../assets/svg/BackButtonIcon.jsx";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import Slider from "@mui/material/Slider";
-import { Chip, Box, Typography } from '@mui/material'
+import { Chip, Box, Typography, Stack, Button } from '@mui/material'
 import palette from "../theme/palette.js";
 import Units from "../components/common/Units.jsx";
 import './CoursePage.css'
@@ -22,7 +22,7 @@ function CoursePage() {
     const { courseId } = useParams();
     const id = parseInt(courseId);
     const data = courseData.data;
-    const isLoggedIn = useSelector((state) => state.login)
+    const isLoggedIn = localStorage.getItem("login");
     console.log(isLoggedIn);
 
     useEffect(() => {
@@ -59,9 +59,12 @@ function CoursePage() {
     // const readingIcon = <PresentationIcon />;
     if (!isLoggedIn) {
         return (
-            <Box padding="150px">
+            <Stack padding='150px' direction={'row'} spacing={3}>
                 <Typography>Login before Trying!!!</Typography>
-            </Box>
+                <Link to='/'>
+                    <Button variant='contained'>Login</Button>
+                </Link>
+            </Stack >
         )
     }
 

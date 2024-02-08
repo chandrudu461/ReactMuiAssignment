@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Box, Drawer } from '@mui/material'
+import { Typography, Box, Button } from '@mui/material'
 import Stack from '@mui/material/Stack'
 import { Grid } from '@mui/material'
 import { useState, useEffect } from 'react'
@@ -17,73 +17,65 @@ import Chart from '../features/Dashboard/components/Chart/Chart';
 import { fetchDashboardData } from '../store/actions/dashboard.actions'
 import MuiCustomTable from '../features/Dashboard/components/Table/MuiCustomTable'
 import LeaderBoard from '../features/Dashboard/components/LeaderBoard/LeaderBoard'
+import { Link } from 'react-router-dom'
 
 const DashboardPage = () => {
-    const [data, setData] = useState(null)
-    const [analyticsData, setAnalyticsData] = useState(null)
-    const [leaderBoardData, setLeaderBoardData] = useState(null)
-    const [recentAssessmentsData, setRecentAssessmentsData] = useState(null)
-    const [coursesData, setCourseData] = useState(null)
-    const isLoggedIn = useSelector((state) => state.login.login)
+    const isLoggedIn = localStorage.getItem("login");
     const theme = useTheme()
-    const [CurrentSemester, setCurrentSemester] = useState(null)
-    const [semesterList, setsemesterList] = useState([])
-    const [tableDataWithRank, setTableDataWithRank] = useState(null)
-    const tableDataRedux = useSelector(state => state.dashboard);
     const { dashBoardData, loading, error } = useSelector(
         (state) => state.dashboard
     )
     const dispatch = useDispatch()
-    // console.log("tableDataRedux : ", tableDataRedux);
 
-    const fetchData = async (url) => {
-        try {
-            const response = await fetch(url)
-            const data = await response.json()
-            return data
-        } catch (error) {
-            console.error('Error fetching data:', error)
-            throw error
-        }
-    }
+    // const fetchData = async (url) => {
+    //     try {
+    //         const response = await fetch(url)
+    //         const data = await response.json()
+    //         return data
+    //     } catch (error) {
+    //         console.error('Error fetching data:', error)
+    //         throw error
+    //     }
+    // }
 
 
     useEffect(() => {
         dispatch(fetchDashboardData())
     }, [dispatch])
 
-    console.log('dashboard', dashBoardData);
+    // useEffect(() => {
+    //     // static data
+    //     // setAnalyticsData(data.analytics)
+    //     // setLeaderBoardData(data.leaderboard)
 
-    useEffect(() => {
-        // static data
-        // setAnalyticsData(data.analytics)
-        // setLeaderBoardData(data.leaderboard)
+    //     //api data
+    //     const fetchDataFromApi = async () => {
+    //         try {
+    //             const result = await fetchData(
+    //                 'https://stagingstudentpython.edwisely.com/reactProject/dashboardData'
+    //             )
+    //             setData(result)
+    //             console.log(result);
+    //             setAnalyticsData(result.analytics)
+    //             setLeaderBoardData(result.leaderboard)
+    //             setRecentAssessmentsData(result.recent_assessments)
+    //             setCourseData(result.courses)
+    //         } catch (error) {
+    //             throw error
+    //         }
+    //     }
 
-        //api data
-        const fetchDataFromApi = async () => {
-            try {
-                const result = await fetchData(
-                    'https://stagingstudentpython.edwisely.com/reactProject/dashboardData'
-                )
-                setData(result)
-                console.log(result);
-                setAnalyticsData(result.analytics)
-                setLeaderBoardData(result.leaderboard)
-                setRecentAssessmentsData(result.recent_assessments)
-                setCourseData(result.courses)
-            } catch (error) {
-                throw error
-            }
-        }
-
-        fetchDataFromApi()
-    }, [])
+    //     fetchDataFromApi()
+    // }, [])
 
     if (!isLoggedIn) {
         return (
-            <Box padding='150px'>
+            <Stack padding='150px' direction={'row'} spacing={3}>
                 <Typography>Login before Trying!!!</Typography>
-            </Box>
+                <Link to='/'>
+                    <Button variant='contained'>Login</Button>
+                </Link>
+            </Stack >
         )
     }
     return (
@@ -122,61 +114,52 @@ const DashboardPage = () => {
                 >
                     <Grid
                         container
+                        spacing={3}
                         style={{
                             display: 'flex',
-                            justifyContent: 'space-between',
+                            flexWrap: 'wrap'
+                            // justifyContent: 'space-between',
                         }}
                     >
-                        <Assignments loading={loading} />
+                        <Assignments data={dashBoardData.analytics} loading={loading} />
                     </Grid>
 
-                    <Stack direction={'column'}>
-                        <Grid container>
-                            <Grid
-                                item
-                                xs={8.3}
-                                sx={{
-                                    // border: '1px solid red',
-                                    height: '352px',
-                                    marginTop: '28px',
-                                    margniLeft: '20px'
-                                }}
-                            >
+                    {/* <Stack direction={'column'}> */}
+                    <Stack direction={'row'} display={'flex'} justifyContent={'space-between'} >
+                        <Stack
+                            width={'65%'}
+                            sx={{
+                                marginTop: '28px',
+                                margniLeft: '20px'
+                            }}
+                        >
+                            <CustomCard>
+                                <Chart recentAssessmentsData={dashBoardData.recent_assessments} loading={loading} />
+                            </CustomCard>
+                            <Box marginTop={'21px'} >
                                 <CustomCard>
-                                    <Chart recentAssessmentsData={dashBoardData.recent_assessments} loading={loading} />
+                                    <MuiCustomTable />
                                 </CustomCard>
-                                <Box marginTop={'21px'} >
-                                    <CustomCard>
-                                        <MuiCustomTable />
-                                    </CustomCard>
-                                </Box>
-                                <Courses data={coursesData} />
-                            </Grid>
+                            </Box>
+                        </Stack>
+                        <Stack
+                            spacing={'12px'}
+                            direction={'column'}
+                            sx={{
+                                padding: '10px',
+                                marginTop: '28px',
+                            }}
+                        >
+                            <UserProfileComponent link={dashBoardData.profile_picture} email={dashBoardData.email} name={dashBoardData.name} />
+                            <CalenderComponent />
+                            <LeaderBoard leaderBoardData={dashBoardData.leaderboard} loading={loading} />
+                        </Stack>
 
-                            <Grid
-                                item
-                                xs={3.7}
-                                style={{
-                                    height: '108px',
-                                    marginTop: '28px',
-                                }}
-                            >
-                                <Stack
-                                    spacing={'12px'}
-                                    direction={'column'}
-                                    sx={{
-                                        padding: '10px',
-                                    }}
-                                >
-                                    <UserProfileComponent />
-                                    <CalenderComponent />
-                                    <LeaderBoard leaderBoardData={leaderBoardData} />
-                                </Stack>
-                            </Grid>
-                        </Grid>
                     </Stack>
+                    <Courses data={dashBoardData.courses} />
+                    {/* </Stack> */}
                 </Box>
-            </Box>
+            </Box >
         </>
     )
 }

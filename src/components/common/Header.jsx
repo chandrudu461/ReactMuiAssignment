@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Box, Popover, Button, Stack } from '@mui/material';
-import ProfileImageIcon from '../../assets/svg/UserProfileSvg.jsx';
+import UserProfileSvg from '../../assets/svg/UserProfileSvg.jsx';
 import LogoutIcon from '../../assets/svg/LogoutIcon.jsx';
 import { useNavigate } from 'react-router';
 import { loginActions } from '../../store/index.js'
-import { useDispatch } from 'react-redux';
-// import UserProfileSvg from '../../svg/UserProfileSvg';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchDashboardData } from '../../store/actions/dashboard.actions'
 
 const Header = () => {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
     const navigate = useNavigate();
+    const [profilePicture, setProfilePicture] = useState(null);
+    const { dashBoardData, loading, error } = useSelector(
+        (state) => state.dashboard
+    )
     const dispatch = useDispatch();
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -20,10 +25,16 @@ const Header = () => {
     };
     const handleLogout = () => {
         dispatch(loginActions.logout())
+        localStorage.removeItem("login");
         navigate('/');
     }
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
+
+    useEffect(() => {
+        dispatch(fetchDashboardData())
+    }, [dispatch])
+
     return (
         <>
             <Box style={{
@@ -38,12 +49,6 @@ const Header = () => {
                 <Typography
                     variant="headerText"
                     style={{
-                        // color: 'var(--Basic-700, #2E3A59)',
-                        // fontFamily: 'Poppins',
-                        // fontSize: '24px',
-                        // fontStyle: 'normal',
-                        // fontWeight: 400,
-                        // lineHeight: '32px',
                         marginLeft: '20px'
                     }}
                 >Good morning, Maharram 👋</Typography>
@@ -59,7 +64,7 @@ const Header = () => {
                             cursor: 'pointer',
                         },
                     }} >
-                        <ProfileImageIcon />
+                        <UserProfileSvg link={dashBoardData.profile_picture} />
                     </Box>
                     <Popover
                         id={id}
@@ -72,7 +77,7 @@ const Header = () => {
                         }}
                     >
                         <Stack direction={"column"} display={"flex"} justifyContent={"center"} alignItems={"center"} >
-                            <ProfileImageIcon />
+                            <UserProfileSvg link={dashBoardData.profile_picture} />
                             <Box><Typography>Maharrm Hasanli</Typography></Box>
                             <Box><Typography>maga.hesenli@gmail.com</Typography></Box>
                             <Box><Button startIcon={<LogoutIcon />} onClick={handleLogout}>Logout</Button></Box>

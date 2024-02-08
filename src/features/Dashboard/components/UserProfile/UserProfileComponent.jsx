@@ -2,25 +2,19 @@ import React from 'react'
 import { Typography } from '@mui/material'
 import UserProfile from './UserProfile'
 
-const UserProfileComponent = () => {
+const UserProfileComponent = ({ name, email, link }) => {
     return (
         <>
             <Typography
                 variant='h5'
-            // style={{
-            //     fontSize: '20px',
-            //     fontStyle: 'normal',
-            //     fontWeight: 500,
-            //     lineHeight: '28px',
-            // }}
             >
                 User Profile
             </Typography>
             <UserProfile
-                name={'Maharrm Hasanli'}
-                email={'maga.hesenli@gmail.com'}
+                name={name}
+                email={email}
+                link={link}
             />
-
         </>
     )
 }

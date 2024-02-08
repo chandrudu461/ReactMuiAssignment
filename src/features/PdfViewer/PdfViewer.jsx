@@ -6,6 +6,7 @@ import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import { pdfjs } from "react-pdf";
 import { useParams } from 'react-router'
+// import { useHistory } from 'react-router';
 import { zoomPlugin } from '@react-pdf-viewer/zoom'
 import BackButtonIcon from '../../assets/svg/BackButtonIcon.jsx'
 import PdfRotateIcon from '../../assets/svg/PdfRotateIcon.jsx'
@@ -25,6 +26,9 @@ import {
 } from '@react-pdf-viewer/page-navigation'
 import { useTheme } from '@mui/material'
 import { createStore, PluginFunctions, SpecialZoomLevel } from '@react-pdf-viewer/core';
+import { RotateDirection } from '@react-pdf-viewer/core';
+import { RenderRotateProps, rotatePlugin } from '@react-pdf-viewer/rotate';
+
 const options = {
     cMapUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/cmaps/`,
 };
@@ -46,6 +50,9 @@ const PdfViewer = () => {
     const store = React.useMemo(() => createStore(), []);
     const [scale, setScale] = useState(1);
     const [currentZoomLevel, setCurrentZoomLevel] = useState(100)
+    const rotatePluginInstance = rotatePlugin();
+    const { Rotate } = rotatePluginInstance;
+    // const history = useHistory();
 
     const customZoomPluginInstance = {
         zoomTo: (newScale) => {
@@ -112,7 +119,13 @@ const PdfViewer = () => {
                     marginBottom: '21px'
                 }}
             >
-                <BackButtonIcon />
+                <Box
+                // onClick={() => {
+                // history.goBack();
+                // }}
+                >
+                    <BackButtonIcon />
+                </Box>
                 <Typography variant="body5" sx={{
                     color: '#252525',
                 }}>File Name</Typography>
@@ -169,6 +182,23 @@ const PdfViewer = () => {
                 <fullScreenPluginInstance.EnterFullScreen>
                     {(props) => <Box onClick={props.onClick}> <FullScreenIcon /></Box>}
                 </fullScreenPluginInstance.EnterFullScreen>
+                <Rotate direction={RotateDirection.Backward}>
+                    {(props) => (
+                        <button
+                            style={{
+                                backgroundColor: '#357edd',
+                                border: 'none',
+                                borderRadius: '4px',
+                                color: '#ffffff',
+                                cursor: 'pointer',
+                                padding: '8px',
+                            }}
+                            onClick={props.onClick}
+                        >
+                            Rotate backward
+                        </button>
+                    )}
+                </Rotate>
                 <PdfRotateIcon />
             </Stack >
             <Box width={'100%'} height={'100%'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
@@ -184,7 +214,7 @@ const PdfViewer = () => {
                         onLoadSuccess={onDocumentLoadSuccess}
                     >
                         <Page scale={scale}
-                            plugins={[customZoomPluginInstance, fullScreenPluginInstance]}
+                            plugins={[customZoomPluginInstance, fullScreenPluginInstance, rotatePluginInstance]}
                             width={415.511}
                             height={588}
                             pageNumber={pageNumber} />
