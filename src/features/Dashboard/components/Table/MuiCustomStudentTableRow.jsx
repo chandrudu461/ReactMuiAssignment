@@ -65,7 +65,8 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
           // variant='body1'
           variant='tableStudentRowCell'
           sx={{ color: theme.palette.grey[900] }}>
-          {stu.total_timespent} Min
+          {stu.total_timespent == null ? 0 : stu.total_timespent} Min
+
         </Typography>
       </TableCell>
       <TableCell scope='row' sx={{ border: 'none' }}>

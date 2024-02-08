@@ -99,14 +99,14 @@ const MuiCustomTable = () => {
     }
 
     const leftClickHandle = () => {
-        if (currentSemester.value > 1) {
+        if (currentSemester.value > 0) {
             setCurrentSemester(prevSemester => ({
                 name: `Semester 0${prevSemester.value - 1}`,
                 value: prevSemester.value - 1,
             }));
         }
         handleSemesterChange(currentSemester.value - 1)
-        console.log(currentSemester)
+        // console.log(currentSemester)
     }
 
     const rightClickHandle = () => {
@@ -124,14 +124,14 @@ const MuiCustomTable = () => {
         let filteringData = [...tableAssessmentsData]
         if (semester === 0) {
             setFilteredData(filteringData)
-            return;
         }
-        filteringData = filteringData.filter((item) => {
-            console.log(item.semester, semester, item.semester === semester)
-            return (item.semester === semester)
-        })
-        console.log(filteringData);
-        setFilteredData(filteringData)
+        else {
+            filteringData = filteringData.filter((item) => {
+                return (item.semester === semester)
+            })
+            console.log(filteringData);
+            setFilteredData(filteringData)
+        }
     }
 
     useEffect(() => {
@@ -158,6 +158,12 @@ const MuiCustomTable = () => {
                     name: "Semester 0" + sem,
                     value: sem,
                 }))
+                semesters = [...semesters,
+                {
+                    name: "All Semesters",
+                    value: 0,
+                }
+                ]
                 setUniqueSemesters(semesters);
                 let filteringData = rankedTableData.filter((item) => {
                     return (item.semester === currentSemester.value)
@@ -199,7 +205,9 @@ const MuiCustomTable = () => {
                         <LeftArrow />
                     </Box>
                     <Box>
-                        <Typography variant='body9'>{currentSemester.name}</Typography>
+                        <Typography variant='body9'>
+                            {currentSemester.name == "Semester 00" ? "All Semester" : currentSemester.name}
+                        </Typography>
                     </Box>
                     <Box onClick={rightClickHandle} sx={{
                         cursor: 'pointer'
