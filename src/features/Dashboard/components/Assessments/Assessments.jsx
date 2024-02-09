@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid } from '@mui/material'
+import { Grid, useTheme } from '@mui/material'
 import AssessmentDetailCard from '../../../../components/common/AssessmentDetailCard'
 import CalenderIcon from '../../../../assets/svg/CalenderIcon'
 import PerformanceIcon from '../../../../assets/svg/PerformanceIcon'
@@ -9,6 +9,7 @@ import CodingIcon from '../../../../assets/svg/CodingIcon'
 import { Skeleton, Stack } from '@mui/material';
 
 const Assessments = ({ loading }) => {
+    const theme = useTheme()
     return (
         <>
             {loading ? (
@@ -24,7 +25,7 @@ const Assessments = ({ loading }) => {
                     <Grid item xs>
                         <AssessmentDetailCard
                             icon={<CalenderIcon />}
-                            iconBgColor={'#E7EEFE'}
+                            iconBgColor={theme.palette.primary[100]}
                             title={'Attendance'}
                             contentMagnitude={92}
                             contentType={'percent'}
@@ -34,7 +35,7 @@ const Assessments = ({ loading }) => {
                     <Grid item xs>
                         <AssessmentDetailCard
                             icon={<PerformanceIcon />}
-                            iconBgColor={'#E6F2FD'}
+                            iconBgColor={theme.palette.info[0]}
                             title={'Avg. Performance'}
                             contentMagnitude={88}
                             contentType={'percent'}
@@ -44,7 +45,7 @@ const Assessments = ({ loading }) => {
                     <Grid item xs>
                         <AssessmentDetailCard
                             icon={<AssessmentIcon />}
-                            iconBgColor={'#FFF8EC'}
+                            iconBgColor={theme.palette.warning[100]}
                             title={'Assessment'}
                             contentMagnitude={45}
                             contentType={'percent'}
@@ -54,7 +55,7 @@ const Assessments = ({ loading }) => {
                     <Grid item xs>
                         <AssessmentDetailCard
                             icon={<AssignmentIcon />}
-                            iconBgColor={'#FEECEB'}
+                            iconBgColor={theme.palette.error[100]}
                             title={'Assignment'}
                             contentMagnitude={79}
                             contentType={'percent'}
@@ -64,7 +65,7 @@ const Assessments = ({ loading }) => {
                     <Grid item xs>
                         <AssessmentDetailCard
                             icon={<CodingIcon />}
-                            iconBgColor={'#EDFAEE'}
+                            iconBgColor={theme.palette.success[100]}
                             title={'code'}
                             contentMagnitude={65}
                             contentType={'percent'}

@@ -38,7 +38,7 @@ const Chart = ({ recentAssessmentsData, loading }) => {
     return (
         <>
             {loading ? (
-                <Skeleton variant='rectangular' height={200} animation="wave" />
+                <Skeleton variant='rectangular' height={300} animation="wave" />
             ) : (
                 <Stack>
                     <Stack
@@ -56,14 +56,6 @@ const Chart = ({ recentAssessmentsData, loading }) => {
                         >
                             <Typography
                                 variant='h5'
-                                sx={{
-                                    // color: '#161C24',
-                                    // fontFamily: 'Poppins',
-                                    // fontSize: '20px',
-                                    // fontStyle: 'normal',
-                                    // fontWeight: 500,
-                                    // lineHeight: '28px',
-                                }}
                             >
                                 Recent Assessments
                             </Typography>
@@ -78,7 +70,7 @@ const Chart = ({ recentAssessmentsData, loading }) => {
                             <Box sx={{
                                 marginTop: '0px'
                             }}>
-                                <Bubble color={'#0B58F5'} />
+                                <Bubble color={theme.palette.primary.main} />
                             </Box>
                             <Box>
                                 <Typography variant='body9'>Attempted</Typography>
@@ -86,7 +78,7 @@ const Chart = ({ recentAssessmentsData, loading }) => {
                             <Box sx={{
                                 marginTop: '0px'
                             }}>
-                                <Bubble color={'#F44336'} />
+                                <Bubble color={theme.palette.error.main} />
                             </Box>
                             <Box>
                                 <Typography variant='body9'>Unattempted</Typography>

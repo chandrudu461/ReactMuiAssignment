@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography, Skeleton } from '@mui/material';
 import MuiCustomTableWithSortandSelect from './MuiCustomTableWithSortandSelect';
 import MuiSmallDropDown from '../../../../components/common/MuiSmallDropDown';
 import { useDispatch, useSelector } from 'react-redux';
@@ -181,48 +181,48 @@ const MuiCustomTable = () => {
 
     return (
         <>
-            <Stack direction='row'>
-                <Typography variant='h5'>Assessments</Typography>
-                <Stack
-                    direction={'row'}
-                    justifyContent={'center'}
-                    alignItems={'center'}
-                    spacing={1}
-                    sx={{
-                        position: 'absolute',
-                        right: '35vw',
-                    }}
-                >
-                    {/* <MuiSmallDropDown
-                        data={uniqueSemesters}
-                        onChange={handleSemesterChange}
-                        dropDownValue={dropDownValue}
-                        setDropDownValue={setDropDownValue}
-                    /> */}
-                    <Box onClick={leftClickHandle} sx={{
-                        cursor: 'pointer'
-                    }}>
-                        <LeftArrow />
-                    </Box>
-                    <Box>
-                        <Typography variant='body9'>
-                            {currentSemester.name == "Semester 00" ? "All Semester" : currentSemester.name}
-                        </Typography>
-                    </Box>
-                    <Box onClick={rightClickHandle} sx={{
-                        cursor: 'pointer'
-                    }}>
-                        <RightArrow />
-                    </Box>
-                </Stack>
-            </Stack>
-            <MuiCustomTableWithSortandSelect
-                HeaderArr={headerArr}
-                tableData={filteredData}
-                submissionTypesToShowinStudentTable={[1, 2, 3, 4]}
-                sortHandler={sortHandler}
-                filtered_studentAssessmentList={filteredData}
-            />
+            {loading ? (
+                <Skeleton variant="rectangular" width={'100%'} height={400} />
+            ) :
+                <>
+                    <Stack direction='row'>
+                        <Typography variant='h5'>Assessments</Typography>
+                        <Stack
+                            direction={'row'}
+                            justifyContent={'center'}
+                            alignItems={'center'}
+                            spacing={1}
+                            sx={{
+                                position: 'absolute',
+                                right: '35vw',
+                            }}
+                        >
+                            <Box onClick={leftClickHandle} sx={{
+                                cursor: 'pointer'
+                            }}>
+                                <LeftArrow />
+                            </Box>
+                            <Box>
+                                <Typography variant='body9'>
+                                    {currentSemester.name == "Semester 00" ? "All Semester" : currentSemester.name}
+                                </Typography>
+                            </Box>
+                            <Box onClick={rightClickHandle} sx={{
+                                cursor: 'pointer'
+                            }}>
+                                <RightArrow />
+                            </Box>
+                        </Stack>
+                    </Stack>
+                    <MuiCustomTableWithSortandSelect
+                        HeaderArr={headerArr}
+                        tableData={filteredData}
+                        submissionTypesToShowinStudentTable={[1, 2, 3, 4]}
+                        sortHandler={sortHandler}
+                        filtered_studentAssessmentList={filteredData}
+                    />
+                </>
+            }
         </>
     )
 }

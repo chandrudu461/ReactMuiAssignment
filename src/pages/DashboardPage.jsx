@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Box, Button } from '@mui/material'
+import { Typography, Box, Button, Skeleton } from '@mui/material'
 import Stack from '@mui/material/Stack'
 import { Grid } from '@mui/material'
 import { useState, useEffect } from 'react'
@@ -28,46 +28,9 @@ const DashboardPage = () => {
     )
     const dispatch = useDispatch()
 
-    // const fetchData = async (url) => {
-    //     try {
-    //         const response = await fetch(url)
-    //         const data = await response.json()
-    //         return data
-    //     } catch (error) {
-    //         console.error('Error fetching data:', error)
-    //         throw error
-    //     }
-    // }
-
-
     useEffect(() => {
         dispatch(fetchDashboardData())
     }, [dispatch])
-
-    // useEffect(() => {
-    //     // static data
-    //     // setAnalyticsData(data.analytics)
-    //     // setLeaderBoardData(data.leaderboard)
-
-    //     //api data
-    //     const fetchDataFromApi = async () => {
-    //         try {
-    //             const result = await fetchData(
-    //                 'https://stagingstudentpython.edwisely.com/reactProject/dashboardData'
-    //             )
-    //             setData(result)
-    //             console.log(result);
-    //             setAnalyticsData(result.analytics)
-    //             setLeaderBoardData(result.leaderboard)
-    //             setRecentAssessmentsData(result.recent_assessments)
-    //             setCourseData(result.courses)
-    //         } catch (error) {
-    //             throw error
-    //         }
-    //     }
-
-    //     fetchDataFromApi()
-    // }, [])
 
     if (!isLoggedIn) {
         return (
@@ -89,23 +52,27 @@ const DashboardPage = () => {
                     flexDirection: 'column',
                 }}
             >
-                <Box
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        width: '100%',
-                        marginLeft: '98px',
-                    }}
-                >
-                    <Typography
-                        variant='h6'
-                        sx={{
-                            marginTop: '12px',
+                {loading ? (
+                    <Skeleton width={1} />
+                ) :
+                    <Box
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            width: '100%',
+                            marginLeft: '98px',
                         }}
                     >
-                        Dashboard
-                    </Typography>
-                </Box>
+                        <Typography
+                            variant='h6'
+                            sx={{
+                                marginTop: '12px',
+                            }}
+                        >
+                            Dashboard
+                        </Typography>
+                    </Box>
+                }
                 <Box
                     style={{
                         marginLeft: '94px',
@@ -139,7 +106,7 @@ const DashboardPage = () => {
                             </CustomCard>
                             <Box marginTop={'21px'} >
                                 <CustomCard height='535px'>
-                                    <MuiCustomTable />
+                                    <MuiCustomTable loading={loading} />
                                 </CustomCard>
                             </Box>
                         </Stack>
@@ -151,14 +118,13 @@ const DashboardPage = () => {
                                 marginTop: '28px',
                             }}
                         >
-                            <UserProfileComponent link={dashBoardData.profile_picture} email={dashBoardData.email} name={dashBoardData.name} />
-                            <CalenderComponent />
+                            <UserProfileComponent link={dashBoardData.profile_picture} email={dashBoardData.email} name={dashBoardData.name} loading={loading} />
+                            <CalenderComponent loading={loading} />
                             <LeaderBoard leaderBoardData={dashBoardData.leaderboard} loading={loading} />
                         </Stack>
 
                     </Stack>
-                    <Courses data={dashBoardData.courses} />
-                    {/* </Stack> */}
+                    <Courses data={dashBoardData.courses} loading={loading} />
                 </Box>
             </Box >
         </>

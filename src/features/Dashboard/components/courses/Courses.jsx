@@ -3,7 +3,7 @@ import { Stack, Typography } from '@mui/material'
 import CourseCard from './CourseCard';
 import { Link } from 'react-router-dom';
 
-const Courses = ({ data }) => {
+const Courses = ({ data, loading }) => {
     const scrollToTop = () => {
         window.scrollTo(0, 0);
     }
@@ -30,7 +30,8 @@ const Courses = ({ data }) => {
                                 id={course.id}
                                 name={course.name}
                                 tag={course.tag}
-                                image={course.image} />
+                                image={course.image}
+                                loading={loading} />
                         </Link>
                     ))}
                 </Stack>
