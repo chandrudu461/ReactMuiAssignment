@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Skeleton, Stack, Typography, Box } from '@mui/material';
 import Bubble from '../../../../components/common/Bubble';
 import MuiSmallDropDown from '../../../../components/common/MuiSmallDropDown';
-import MuiColumnChart from '../../../../components/common/MuiColumnChart';
+import MuiColumnChart from './MuiColumnChart';
 import { useTheme } from '@mui/material';
 
 const Chart = ({ recentAssessmentsData, loading }) => {

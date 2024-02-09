@@ -104,20 +104,20 @@ const MuiCustomTable = () => {
                 name: `Semester 0${prevSemester.value - 1}`,
                 value: prevSemester.value - 1,
             }));
+            handleSemesterChange(currentSemester.value - 1)
         }
-        handleSemesterChange(currentSemester.value - 1)
-        // console.log(currentSemester)
+        console.log('cs', currentSemester)
     }
 
     const rightClickHandle = () => {
-        if (currentSemester.value < uniqueSemesters.length) {
+        if (currentSemester.value < uniqueSemesters.length - 1) {
             setCurrentSemester(prevSemester => ({
                 name: `Semester 0${prevSemester.value + 1}`,
                 value: prevSemester.value + 1,
             }));
             handleSemesterChange(currentSemester.value + 1)
         }
-        console.log(currentSemester)
+        // console.log(currentSemester)
     }
 
     const handleSemesterChange = (semester) => {

@@ -21,6 +21,7 @@ import {
 } from '@react-pdf-viewer/page-navigation'
 import { useTheme } from '@mui/material'
 import { createStore, PluginFunctions, SpecialZoomLevel } from '@react-pdf-viewer/core';
+import { useNavigate } from "react-router";
 
 const options = {
     cMapUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/cmaps/`,
@@ -41,6 +42,8 @@ const PdfViewer = () => {
     const store = React.useMemo(() => createStore(), []);
     const [scale, setScale] = useState(1);
     const [currentZoomLevel, setCurrentZoomLevel] = useState(100)
+    const fileName = localStorage.getItem("pdfFileName");
+    const navigate = useNavigate()
 
     const customZoomPluginInstance = {
         zoomTo: (newScale) => {
@@ -108,15 +111,20 @@ const PdfViewer = () => {
                 }}
             >
                 <Box
-                // onClick={() => {
-                // history.goBack();
-                // }}
+                    sx={{
+                        cursor: 'pointer'
+                    }}
+                    onClick={
+                        () => {
+                            navigate(-1);
+                        }
+                    }
                 >
                     <BackButtonIcon />
                 </Box>
                 <Typography variant="body5" sx={{
                     color: '#252525',
-                }}>File Name</Typography>
+                }}>{fileName}</Typography>
 
                 <Stack direction={'row'} spacing={1}>
                     <Box width={'24px'} height={'24px'} sx={{
@@ -151,7 +159,9 @@ const PdfViewer = () => {
                 <Box style={{ borderLeft: '1px solid #BDBDC7', height: '20px' }}></Box>
 
                 <Stack direction={"row"} spacing={2}>
-                    <Box onClick={zoomOut}>
+                    <Box onClick={zoomOut} sx={{
+                        cursor: 'pointer'
+                    }}>
                         <ZoomOutIcon />
                     </Box>
                     <Box height={'24px'} padding={'8px 7px 8px 7px'} display={'flex'}
@@ -160,7 +170,9 @@ const PdfViewer = () => {
                             {currentZoomLevel}
                         </Typography>
                     </Box>
-                    <Box onClick={zoomIn}>
+                    <Box onClick={zoomIn} sx={{
+                        cursor: 'pointer'
+                    }}>
                         <ZoomInIcon />
                     </Box>
                 </Stack>

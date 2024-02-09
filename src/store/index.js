@@ -1,8 +1,8 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
 import dashboardReducer from './reducers/dashboard.reducers'
+import courseReducer from './reducers/course.reducers'
 
 const initialLoginState = { login: true }
-const initialUnitState = { selectedUnitId: null }
 
 const loginSlice = createSlice({
     name: 'loginSlice',
@@ -17,26 +17,12 @@ const loginSlice = createSlice({
     }
 })
 
-const unitSlice = createSlice({
-    name: 'unitSlice',
-    initialState: initialUnitState,
-    reducers: {
-        openUnit(state, action) {
-            state.selectedUnitId = action.payload;
-        },
-        closeUnit(state) {
-            state.selectedUnitId = null;
-        }
-    }
-})
-
 export const store = configureStore({
     reducer: {
         login: loginSlice.reducer,
-        unit: unitSlice.reducer,
         dashboard: dashboardReducer,
+        course: courseReducer,
     },
 })
 
 export const loginActions = loginSlice.actions
-export const unitActions = unitSlice.actions

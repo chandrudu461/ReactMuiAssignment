@@ -1,18 +1,7 @@
 import { Box, Typography, Grid, Stack } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-// import CalendarComponent from '../components/common/CalendarComponent'
-import LeaderBoardCard from '../features/Dashboard/components/LeaderBoard/LeaderBoardCard';
-import Courses from '../features/Dashboard/components/courses/Courses'
-import ContinueReadingCard from '../components/common/ContinueReadingCard';
-import Units from '../components/common/Units';
-import MuiCustomTableWithSortandSelect from '../features/Dashboard/components/Table/MuiCustomTableWithSortandSelect';
-import CustomTable from '../components/common/CustomTable'
 import { useTheme } from '@mui/material'
-import MuiCustomTableWithSortadnSelect from '../features/Dashboard/components/Table/MuiCustomTableWithSortandSelect'
-import ErrorPage from '../components/common/ErrorPage';
 import PdfViewer from '../features/PdfViewer/PdfViewer';
-import Chart from '../features/Dashboard/components/Chart/Chart';
-import MuiCustomTab from '../components/common/MuiCustomTab'
 
 const TestElement = (props) => {
     const [data, setData] = useState(null);

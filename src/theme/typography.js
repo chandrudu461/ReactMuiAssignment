@@ -65,7 +65,7 @@ const typography = {
     fontWeight: fontWeightMedium,
     lineHeight: pxToRem(25 * 1.6),
     fontSize: pxToRem(25),
-    ...responsiveFontSizes({ sm: 40, md: 44, lg: 25 }),
+    // ...responsiveFontSizes({ sm: 40, md: 44, lg: 25 }),
   },
   h3: {
     fontFamily: FONT_PRIMARY_BOLD,
@@ -272,6 +272,24 @@ const typography = {
     fontFamily: FONT_PRIMARY_REGULAR,
     fontWeight: 500,
     fontSize: pxToRem(12),
+  },
+  continueReading: {
+    fontFamily: FONT_PRIMARY_MEDIUM,
+    fontWeight: 500,
+    fontSize: pxToRem(20),
+    lineHeight: pxToRem(30),
+  },
+  muiTab: {
+    fontFamily: FONT_PRIMARY,
+    fontWeight: 400,
+    fontSize: pxToRem(15),
+    lineHeight: pxToRem(22.5)
+  },
+  coursePageChip: {
+    fontFamily: FONT_PRIMARY_MEDIUM,
+    fontWeight: 500,
+    fontSize: pxToRem(14),
+    lineHeight: pxToRem(12)
   }
 };
 

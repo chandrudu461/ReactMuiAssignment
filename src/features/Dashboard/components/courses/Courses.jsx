@@ -4,6 +4,9 @@ import CourseCard from './CourseCard';
 import { Link } from 'react-router-dom';
 
 const Courses = ({ data }) => {
+    const scrollToTop = () => {
+        window.scrollTo(0, 0);
+    }
     return (
         <>
             <Stack sx={{
@@ -21,7 +24,7 @@ const Courses = ({ data }) => {
                 </Typography>
                 <Stack spacing={'22px'} direction={'row'}>
                     {data && data.length > 0 && data.map((course, index) => (
-                        <Link to={`/course/${index + 1}`} >
+                        <Link to={`/course/${index + 1}`} onClick={scrollToTop} >
                             <CourseCard
                                 key={course.id}
                                 id={course.id}

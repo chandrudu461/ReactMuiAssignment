@@ -18,6 +18,7 @@ import { fetchDashboardData } from '../store/actions/dashboard.actions'
 import MuiCustomTable from '../features/Dashboard/components/Table/MuiCustomTable'
 import LeaderBoard from '../features/Dashboard/components/LeaderBoard/LeaderBoard'
 import { Link } from 'react-router-dom'
+import { fetchCourseData } from '../store/actions/course.actions'
 
 const DashboardPage = () => {
     const isLoggedIn = localStorage.getItem("login");

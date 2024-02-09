@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Tab, Tabs, IconButton, Skeleton, Chip } from '@mui/material'
+import { Box, Tab, Tabs, IconButton, Skeleton, Chip, Typography } from '@mui/material'
 // import { EditIcon } from '../../assets/Svg/EditIcon'
 import { styled } from '@mui/material/styles'
-import MuiCustomChipCount from './MuiCustomChipCount'
+import MuiCustomChipCount from '../../../../components/common/MuiCustomChipCount'
 
 const CustomTab = styled(Tabs)(({ theme }) => ({
   display: 'flex !important',
   justifyContent: 'space-around !important',
-  borderBottom: '1px solid #DFE3E8',
+  // borderBottom: '1px solid #DFE3E8',
   '& .MuiTabs-indicator': {
     display: 'flex',
     justifyContent: 'center',
     backgroundColor: 'transparent',
-    height: '2px',
+    height: '3px',
     // marginBottom: '8px'
   },
   '& .MuiTabs-indicatorSpan': {
     maxWidth: '80%',
     width: '100%',
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: '#0946C4',
   },
 }))
 function a11yProps(index) {
@@ -44,7 +44,9 @@ export default function MuiCustomTab({ handleTabChange, value, data, edit }) {
             key={part.id}
             label={
               <span>
+                {/* <Typography variant='muiTab' > */}
                 {part.name}
+                {/* </Typography> */}
                 {part.count || part.count == 0 ? (
                   <MuiCustomChipCount
                     label={part.count}
@@ -55,14 +57,14 @@ export default function MuiCustomTab({ handleTabChange, value, data, edit }) {
             }
             // TabIndicatorProps={{ sx: { width: "50px" } }}
             sx={(theme) => ({
-              fontWeight: 300,
+              fontWeight: 400,
               color: '#919EAB',
               fontSize: '15px',
               pl: index > 0 ? 2 : '',
               pb: '0px',
               '&.Mui-selected': {
-                color: '#161C24',
-                fontWeight: '600',
+                color: '#0946C4',
+                fontWeight: '400',
               },
               '&::before':
                 part.group === 'changed'
