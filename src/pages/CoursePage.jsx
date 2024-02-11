@@ -43,13 +43,12 @@ function CoursePage() {
         )
     }
     return (
-        <Box id="course-page" sx={{
+        <Box sx={{
             position: 'absolute',
-            // top: '80px',
             left: '5rem',
             backgroundColor: "#ffffff",
             width: '93vw',
-            height: '1000px'
+            height: '1200px',
         }}>
             {Object.keys(courseData).length > 0 ? (
                 <>

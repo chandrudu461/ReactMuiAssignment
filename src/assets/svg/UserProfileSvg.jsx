@@ -1,19 +1,20 @@
 import React from 'react';
 import { Box } from '@mui/material'
-const UserProfileSvg = ({ link }) => {
+const UserProfileSvg = ({ link, editIcon, customRadius }) => {
     return (
-        <Box>
+        <Box position={'relative'}>
             <img
                 src={link}
-                alt="Description of the image"
+                alt="user profile"
                 width={50}
                 height={50}
                 style={{
-                    borderRadius: '24px',
-                    marginTop: '15px',
-                    marginBottom: '15px'
+                    borderRadius: customRadius ? "24px" : 0,
                 }}
             />
+            <Box position={'absolute'} right={0} bottom={0} height={'15px'} width={'15px'}>
+                {editIcon}
+            </Box>
         </Box>
     )
 }

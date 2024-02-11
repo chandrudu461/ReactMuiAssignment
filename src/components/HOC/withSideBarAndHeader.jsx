@@ -23,6 +23,7 @@ import { useNavigate, useLocation, useParams } from 'react-router';
 import { loginActions } from '../../store/index.js'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDashboardData } from '../../store/actions/dashboard.actions'
+import EditProfileIcon from "../../assets/svg/EditProfileIcon.jsx"
 
 const drawerWidth = 80
 
@@ -71,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
         flexShrink: 0,
     },
     drawerPaper: {
-        width: drawerWidth,
         backgroundColor: theme.palette.grey[100],
         border: "none",
     },
@@ -158,7 +158,7 @@ function withSidebarAndHeader(WrappedComponent) {
                                         },
                                     }}
                                 >
-                                    <UserProfileSvg link={dashBoardData.profile_picture} />
+                                    <UserProfileSvg link={dashBoardData.profile_picture} customRadius={true} />
                                 </Box>
                                 <Popover
                                     id={id}
@@ -169,38 +169,56 @@ function withSidebarAndHeader(WrappedComponent) {
                                         vertical: "bottom",
                                         horizontal: "right",
                                     }}
+                                    transformOrigin={{
+                                        vertical: "top",
+                                        horizontal: "right",
+                                    }}
+                                    getContentAnchorEl={null}
                                 >
+
                                     <Stack
                                         direction={"column"}
                                         display={"flex"}
                                         justifyContent={"center"}
                                         alignItems={"center"}
+                                        height="170px"
+                                        width="215px"
+                                        // padding={"10px 15px 10px 15px"}
+                                        sx={{
+                                            backgroundColor: theme.palette.grey[100]
+                                        }}
+
                                     >
-                                        <UserProfileSvg link={dashBoardData.profile_picture} />
-                                        <Box>
-                                            <Typography>Maharrm Hasanli</Typography>
+                                        <UserProfileSvg link={dashBoardData.profile_picture} editIcon={<EditProfileIcon />} customRadius={true} />
+                                        <Box marginTop={'7px'}>
+                                            <Typography variant="popOverDisplayName" >Maharrm Hasanli</Typography>
                                         </Box>
-                                        <Box>
-                                            <Typography>maga.hesenli@gmail.com</Typography>
+                                        <Box marginTop={'3px'}>
+                                            <Typography variant="popOverEmailName">maga.hesenli@gmail.com</Typography>
                                         </Box>
-                                        <Box>
-                                            <Button startIcon={<LogoutIcon />} onClick={handleLogout}>
+                                        <Stack width={195} height={45} borderRadius={'10px'} direction={'row'} justifyContent={'center'} alignItems={'center'} sx={{
+                                            marginTop: '5px'
+                                        }}
+                                            backgroundColor={theme.palette.primary[0]}
+                                        > <LogoutIcon />
+                                            <Button onClick={handleLogout}>
                                                 Logout
                                             </Button>
-                                        </Box>
+                                        </Stack>
                                     </Stack>
                                 </Popover>
                             </Stack>
                         </Stack>
                     </Toolbar>
-                </AppBar>
+                </AppBar >
                 {/* Sidebar */}
-                <Drawer
+                < Drawer
                     className={classes.drawer}
                     variant="permanent"
                     classes={{
                         paper: classes.drawerPaper,
-                    }}
+                    }
+                    }
                     anchor="left"
                 >
                     <Stack
@@ -258,11 +276,11 @@ function withSidebarAndHeader(WrappedComponent) {
                             </div>
                         </Stack>
                     </Stack>
-                </Drawer>
+                </Drawer >
                 <main className={classes.content}>
                     <WrappedComponent {...props} />
                 </main>
-            </Box>
+            </Box >
         )
     }
 }

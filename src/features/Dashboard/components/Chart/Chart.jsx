@@ -64,7 +64,8 @@ const Chart = ({ recentAssessmentsData, loading }) => {
                             direction='row'
                             spacing={2}
                             sx={{
-                                justifyContent: 'flex-end',
+                                justifyContent: 'center',
+                                alignItems: "center"
                             }}
                         >
                             <Box sx={{

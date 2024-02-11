@@ -312,7 +312,19 @@ const typography = {
     fontWeight: 500,
     fontSize: pxToRem(14),
     lineHeight: pxToRem(12)
-  }
+  },
+  popOverDisplayName: {
+    fontFamily: FONT_PRIMARY,
+    fontWeight: fontWeightMedium,
+    fontSize: pxToRem(16),
+    lineHeight: pxToRem(24),
+  },
+  popOverEmailName: {
+    fontFamily: FONT_PRIMARY,
+    fontWeight: 400,
+    fontSize: pxToRem(12),
+    lineHeight: pxToRem(16),
+  },
 };
 
 export default typography;

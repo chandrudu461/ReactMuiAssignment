@@ -20,7 +20,7 @@ function secondsToMinutes(seconds) {
 }
 
 function getInternetQuality(speed) {
-  if (speed >= 1 && speed <= 3) return 'Poor'
+  if (speed === null || speed >= 1 && speed <= 3) return 'Poor'
   else if (speed >= 4 && speed <= 7) return 'Average'
   else return 'Excellent'
 }
@@ -29,6 +29,73 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
   const theme = useTheme()
   // const { currentSectionTab } = useSelector((state) => state.assessment)
   const currentSectionTab = "tab1";
+
+  if (stu.total_timespent === null && stu.submission_type === null && stu.internet_speed === null && stu.percentage_scored === null) {
+    return (
+      <TableRow
+        onClick={() => {
+          // viewStudentResult(stu)
+        }}
+        key={key}
+        sx={{
+          cursor: 'pointer',
+          background: theme.palette.error[100],
+          '&:hover': {
+            background:
+              stu.submission_type === 'not attempted'
+                ? theme.palette.error[300]
+                : theme.palette.grey[100], // Set your desired background color
+          },
+        }}
+      >
+        <TableCell
+          scope='row'
+          sx={{ border: 'none', borderRadius: '6px 0 0 6px' }}
+        >
+          <Typography
+            // variant='body1' 
+            variant='tableStudentRowCell'
+            sx={{ color: theme.palette.grey[900] }}>
+            {stu.subject}
+          </Typography>
+        </TableCell>
+
+
+        <TableCell sx={{}}></TableCell>
+
+        <TableCell>
+          <Typography
+            // variant='body1' 
+            variant='tableStudentRowCell'
+            sx={{
+              color: theme.palette.error[700],
+              padding: 0,
+            }}>
+            Not Attempted
+          </Typography>
+        </TableCell>
+
+
+
+        <TableCell sx={{}}></TableCell>
+
+
+        <TableCell sx={{}}></TableCell>
+
+        <TableCell sx={{}}>
+          <Typography
+            // variant='body1' 
+            variant='tableStudentRowCell'
+            sx={{ color: theme.palette.error[700] }}>
+            0%
+          </Typography>
+        </TableCell>
+
+
+      </TableRow>
+    )
+  }
+
   return (
     <TableRow
       onClick={() => {
@@ -37,6 +104,7 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
       key={key}
       sx={{
         cursor: 'pointer',
+        borderRadius: '5px',
         background:
           stu.submission_type === 'not attempted'
             ? theme.palette.error[200]
@@ -137,7 +205,7 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
             //  variant='body3'
             variant='tableStudentRowCell'
             sx={{ color: theme.palette.grey[900] }}>
-            {stu.percentage_scored}%
+            {stu.percentage_scored == null ? 0 : stu.percentage_scored}%
           </Typography>
           {/* <IconButton
             aria-label='delete'

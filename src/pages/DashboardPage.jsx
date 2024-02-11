@@ -85,7 +85,6 @@ const DashboardPage = () => {
                 style={{
                     backgroundColor: theme.palette.primary[0],
                     width: '100%',
-                    display: 'flex',
                     flexDirection: 'column',
                     padding: '1rem'
                 }}

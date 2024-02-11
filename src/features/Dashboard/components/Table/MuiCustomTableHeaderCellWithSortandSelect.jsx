@@ -81,7 +81,7 @@ const MuiCustomTableHeaderCellWithSortandSelect = ({
     <>
       <TableCell
         sx={{
-          padding: '5px 0 5px 16px',
+          // padding: '5px 0 5px 16px',
           borderRadius:
             index === 0
               ? '5px 0 0 5px'

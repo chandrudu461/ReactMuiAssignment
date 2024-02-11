@@ -16,7 +16,7 @@ const UserProfile = ({ name, email, link }) => {
                 <Stack
                     direction={'row'}>
                     <UserProfileSvg link={link} />
-                    <Stack padding={'0 0 0 22px'}>
+                    <Stack padding={'0 0 0 22px'} alignItems={'flex-start'} justifyContent={'center'}>
                         <Typography
                             variant='body8'
                             sx={{

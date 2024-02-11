@@ -8,6 +8,7 @@ import {
   Skeleton,
   Stack,
   Pagination,
+  Box
 } from '@mui/material'
 import MuiCustomTableHeaderRowWithSortandSelect from './MuiCustomTableHeaderRowWithSortandSelect'
 import MuiCustomStudentTableRow from './MuiCustomStudentTableRow'

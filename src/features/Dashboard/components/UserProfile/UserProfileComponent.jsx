@@ -16,6 +16,7 @@ const UserProfileComponent = ({ name, email, link, loading }) => {
                     name={name}
                     email={email}
                     link={link}
+                    customRadius={false}
                 />
             </>
             )}

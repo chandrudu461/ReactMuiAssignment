@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import { Box, Typography } from '@mui/material'
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -16,6 +16,11 @@ const AccordianComponent = ({ title, topics, expand }) => {
         localStorage.setItem("pdfFileName", pdfFileName);
     }
 
+    const [expanded, setExpanded] = useState(null);
+    const handleChange = (panel) => (event, isExpanded) => {
+        setExpanded(isExpanded ? panel : null);
+    };
+
     return (
         <div style={{ marginBottom: 2 }}>
             <Box
@@ -27,52 +32,52 @@ const AccordianComponent = ({ title, topics, expand }) => {
                     margin: 0,
                 }}
             >
-                {topics.map((topic) => (
-                    <>
-                        <Accordion
-                            square
-                            sx={{
-                                width: 600,
-                                boxShadow: "none",
-                                background: palette.primary[0],
-                                margin: 0,
-                            }}
-                        >
-                            <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content" id="panel1-header">
-                                <Typography variant='leaderboardEmail'>
-                                    {topic.topic_name}
-                                </Typography>
-                            </AccordionSummary>
+                {topics.map((topic, index) => (
+                    <Accordion
+                        key={index}
+                        square
+                        expanded={expanded === `panel${index}`}
+                        onChange={handleChange(`panel${index}`)}
+                        sx={{
+                            width: 600,
+                            boxShadow: "none",
+                            background: palette.primary[0],
+                            margin: 0,
+                        }}
+                    >
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`panel${index}-content`} id={`panel${index}-header`}>
+                            <Typography variant='leaderboardEmail'>
+                                {topic.topic_name}
+                            </Typography>
+                        </AccordionSummary>
 
-                            {topic.materials.map((material) => (
-                                <AccordionDetails key={topic.topic_id}>
-                                    <div id="titles">
-                                        <DocumentIcon width='16px' height='16px' />
-                                        <Typography variant="tableStudentRowCell">
-                                            {material.name}
-                                        </Typography>
-                                    </div>
-                                    <div id="start-button">
-                                        <Link to={`/pdfview/${encodeURIComponent(material.url)}`} onClick={() => scrollToTop(material.name)}
-                                            style={{
-                                                textDecoration: 'none'
-                                            }}
-                                        >
-                                            <Box id="start">Start</Box>
-                                        </Link>
-                                        <span id="button">
-                                            <RightButtonIcon />
-                                        </span>
-                                    </div>
-                                </AccordionDetails>
-                            ))}
-
-                        </Accordion>
-                    </>
+                        {topic.materials.map((material, subIndex) => (
+                            <AccordionDetails key={subIndex}>
+                                <div id="titles">
+                                    <DocumentIcon width='16px' height='16px' />
+                                    <Typography variant="tableStudentRowCell">
+                                        {material.name}
+                                    </Typography>
+                                </div>
+                                <div id="start-button">
+                                    <Link to={`/pdfview/${encodeURIComponent(material.url)}`} onClick={() => scrollToTop(material.name)}
+                                        style={{
+                                            textDecoration: 'none'
+                                        }}
+                                    >
+                                        <Box id="start">Start</Box>
+                                    </Link>
+                                    <span id="button">
+                                        <RightButtonIcon />
+                                    </span>
+                                </div>
+                            </AccordionDetails>
+                        ))}
+                    </Accordion>
                 ))}
             </Box>
             <hr style={{ width: "600px", margin: "0" }} />
-        </div >
+        </div>
     );
 }
 
