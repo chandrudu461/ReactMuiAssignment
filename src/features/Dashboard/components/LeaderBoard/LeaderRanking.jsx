@@ -34,18 +34,10 @@ const LeaderRanking = ({ data, index, value }) => {
           <Stack>
             <Typography
               variant='leaderboardEmail'
-              component={'p'} sx={{
-                fontFamily: 'Poppins-Medium',
-                fontSize: '14px',
-                // color: (theme) => theme.palette.grey[900]
-              }}>{data.name}</Typography>
+              component={'p'} >{data.name}</Typography>
             <Typography
               variant='leaderboardText'
-              component={'p'} sx={{
-                fontFamily: 'Poppins-SemiBold',
-                fontSize: '14px',
-                // color: (theme) => theme.palette.grey[800]
-              }}>Avg: {value}%</Typography>
+              component={'p'} >Avg: {value}%</Typography>
           </Stack>
         </Stack>
 

@@ -24,28 +24,50 @@ export function responsiveFontSizes({ sm, md, lg }) {
 
 // ----------------------------------------------------------------------
 const lineHeightRatio = 80 / 64;
+// const FONT_PRIMARY = [
+//   'Axiforma-Book',
+//   'Axiforma-Medium',
+//   'Axiforma-SemiBold',
+//   'Arial',
+//   'sans-serif',
+// ].join(',');
+// const FONT_PRIMARY_REGULAR = [
+//   'Axiforma-Book',
+//   'Arial',
+//   'sans-serif',
+// ].join(',');
+// const FONT_PRIMARY_MEDIUM = [
+//   'Axiforma-Medium',
+//   'Arial',
+//   'sans-serif',
+// ].join(',');
+// const FONT_PRIMARY_BOLD = [
+//   'Axiforma-SemiBold',
+//   'Arial',
+//   'sans-serif',
+// ].join(',');
+
 const FONT_PRIMARY = [
-  'Axiforma-Book',
-  'Axiforma-Medium',
-  'Axiforma-SemiBold',
+  'Poppins',
   'Arial',
   'sans-serif',
 ].join(',');
 const FONT_PRIMARY_REGULAR = [
-  'Axiforma-Book',
+  'Poppins',
   'Arial',
   'sans-serif',
 ].join(',');
 const FONT_PRIMARY_MEDIUM = [
-  'Axiforma-Medium',
+  'Poppins',
   'Arial',
   'sans-serif',
 ].join(',');
 const FONT_PRIMARY_BOLD = [
-  'Axiforma-SemiBold',
+  'Poppins',
   'Arial',
   'sans-serif',
 ].join(',');
+
 // const FONT_SECONDARY = 'CircularStd, sans-serif'; // Local Font
 const fontWeightRegular = 300, fontWeightMedium = 500, fontWeightBold = 600;
 const typography = {

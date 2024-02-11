@@ -7,31 +7,45 @@ import ErrorPage from './components/common/ErrorPage';
 import Layout from './components/common/Layout'
 import DashboardPage from './pages/DashboardPage';
 import CoursePage from './pages/CoursePage';
-import PdfViewer from './features/PdfViewer/PdfViewer'
+import PdfPage from './pages/PdfPage';
+// import withSidebarAndHeader from './components/HOC/withSideBarAndHeader';
+
+// const SidebarAndHeaderComponent = withSidebarAndHeader
 
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <LoginPage />,
-    errorElement: <ErrorPage />
+    errorElement: <ErrorPage />,
   },
   {
-    path: '/',
-    element: <Layout />,
+    path: "/dashboard",
+    element: <DashboardPage />,
     errorElement: <ErrorPage />,
-    children: [
-      { path: 'dashboard', element: <DashboardPage /> },
-      { path: 'test', element: <TestElement /> },
-      { path: '/course/:courseId', element: <CoursePage /> },
-      {
-        path: '/pdfview/:url',
-        element: <PdfViewer />,
-        errorElement: <ErrorPage />
-      }
-    ]
   },
-
+  { path: "/course/:courseId", element: <CoursePage /> },
+  { path: "/test", element: <TestElement /> },
+  {
+    path: "/pdfview/:url",
+    element: <PdfPage />,
+    errorElement: <ErrorPage />,
+  },
+  // {
+  //   path: "/",
+  //   element: <Layout />,
+  //   errorElement: <ErrorPage />,
+  //   children: [
+  //     { path: "dashboard", element: <DashboardPage /> },
+  //     { path: "test", element: <TestElement /> },
+  //     { path: "/course/:courseId", element: <CoursePage /> },
+  //     {
+  //       path: "/pdfview/:url",
+  //       element: <PdfViewer />,
+  //       errorElement: <ErrorPage />,
+  //     },
+  //   ],
+  // },
 ])
 
 const AppRouter = () => {

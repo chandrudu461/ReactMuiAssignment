@@ -230,7 +230,7 @@ const PdfViewer = () => {
                             className="p-4"
                             style={{
                                 right: 31,
-                                top: 170,
+                                top: '169px',
                                 position: "absolute",
                                 overflowY: "scroll",
                                 height: "100vh",

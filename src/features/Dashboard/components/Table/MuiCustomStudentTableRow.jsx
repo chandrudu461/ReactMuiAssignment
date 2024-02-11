@@ -131,6 +131,7 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
           direction='row'
           justifyContent='space-between'
           alignItems='center'
+          height="30px"
         >
           <Typography
             //  variant='body3'

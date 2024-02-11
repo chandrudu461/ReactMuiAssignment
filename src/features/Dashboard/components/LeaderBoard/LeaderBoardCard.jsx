@@ -11,14 +11,17 @@ const LeaderBoardCard = ({ data, width = '100%', height = '100%', loading }) => 
             <Stack gap={'16px'}>
                 <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'} gap={'8px'}>
                     {/* <img src={crownSvg} width={20} height={20} alt='crownSvg'></img> */}
-                    <Typography
-                        variant='h5'
-                        sx={{
-                            // fontFamily: 'Poppins-SemiBold',
-                            // fontSize: '16px',
-                            // color: 'grey.900'
-                        }}>Leader Board</Typography>
-                    <RightArrow />
+                    {loading ?
+                        <Skeleton variant='rectangular' width={320} />
+                        :
+                        <>
+                            <Typography
+                                variant='h5'
+                                sx={{
+                                }}>Leader Board</Typography>
+                            <RightArrow />
+                        </>
+                    }
                 </Stack>
 
                 {data ? <Stack gap={'22px'}>

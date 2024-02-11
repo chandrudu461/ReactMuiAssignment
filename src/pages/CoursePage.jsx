@@ -7,6 +7,8 @@ import { useTheme } from '@mui/material'
 import { fetchCourseData } from "../store/actions/course.actions.jsx";
 import CourseDescription from "../features/Courses/components/course/CourseDescription.jsx";
 import ContinueReading from "../features/Courses/components/course/ContinueReading.jsx";
+import withSidebarAndHeader from '../components/HOC/withSideBarAndHeader'
+import { Skeleton } from "@mui/material";
 
 function CoursePage() {
     const navigate = useNavigate();
@@ -43,22 +45,42 @@ function CoursePage() {
     return (
         <Box id="course-page" sx={{
             position: 'absolute',
-            top: '80px',
+            // top: '80px',
             left: '5rem',
             backgroundColor: "#ffffff",
             width: '93vw',
             height: '1000px'
         }}>
-            {Object.keys(courseData).length > 0 && (
+            {Object.keys(courseData).length > 0 ? (
                 <>
-                    <CourseDescription data={data} />
-                    <ContinueReading data={data} />
-                    <UnitsComponent data={data} />
+                    <CourseDescription loading={loading} data={data} />
+                    <ContinueReading loading={loading} data={data} />
+                    <UnitsComponent loading={loading} data={data} />
                 </>
-            )
+            ) :
+
+                <>
+                    <Stack margin={'50px'} spacing={4}>
+                        <Skeleton variant="rectangular" width={1000} height={50} />
+                        <Skeleton variant="rectangular" width={1000} height={150} />
+                    </Stack>
+
+                    <Box marginLeft={'50px'}>
+                        <Skeleton variant="rectangular" width={200} height={30} />
+                    </Box>
+
+                    <Stack marginTop={'20px'} marginLeft={'50px'} spacing={4} direction={'row'}>
+                        <Skeleton variant="rectangular" width={300} height={80} />
+                        <Skeleton variant="rectangular" width={300} height={80} />
+                        <Skeleton variant="rectangular" width={300} height={80} />
+                    </Stack>
+                    <Box marginLeft={'50px'} marginTop={'50px'}>
+                        <Skeleton variant="rectangular" width={800} height={300} />
+                    </Box>
+                </>
             }
         </Box >
     );
 }
 
-export default CoursePage;
+export default withSidebarAndHeader(CoursePage);

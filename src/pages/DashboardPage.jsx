@@ -18,7 +18,7 @@ import { fetchDashboardData } from '../store/actions/dashboard.actions'
 import MuiCustomTable from '../features/Dashboard/components/Table/MuiCustomTable'
 import LeaderBoard from '../features/Dashboard/components/LeaderBoard/LeaderBoard'
 import { Link } from 'react-router-dom'
-import { fetchCourseData } from '../store/actions/course.actions'
+import withSidebarAndHeader from '../components/HOC/withSideBarAndHeader'
 
 const DashboardPage = () => {
     const isLoggedIn = localStorage.getItem("login");
@@ -28,9 +28,46 @@ const DashboardPage = () => {
     )
     const dispatch = useDispatch()
 
+    // const fetchData = async (url) => {
+    //     try {
+    //         const response = await fetch(url)
+    //         const data = await response.json()
+    //         return data
+    //     } catch (error) {
+    //         console.error('Error fetching data:', error)
+    //         throw error
+    //     }
+    // }
+
+
     useEffect(() => {
         dispatch(fetchDashboardData())
     }, [dispatch])
+
+    // useEffect(() => {
+    //     // static data
+    //     // setAnalyticsData(data.analytics)
+    //     // setLeaderBoardData(data.leaderboard)
+
+    //     //api data
+    //     const fetchDataFromApi = async () => {
+    //         try {
+    //             const result = await fetchData(
+    //                 'https://stagingstudentpython.edwisely.com/reactProject/dashboardData'
+    //             )
+    //             setData(result)
+    //             console.log(result);
+    //             setAnalyticsData(result.analytics)
+    //             setLeaderBoardData(result.leaderboard)
+    //             setRecentAssessmentsData(result.recent_assessments)
+    //             setCourseData(result.courses)
+    //         } catch (error) {
+    //             throw error
+    //         }
+    //     }
+
+    //     fetchDataFromApi()
+    // }, [])
 
     if (!isLoggedIn) {
         return (
@@ -50,41 +87,37 @@ const DashboardPage = () => {
                     width: '100%',
                     display: 'flex',
                     flexDirection: 'column',
+                    padding: '1rem'
                 }}
             >
-                {loading ? (
-                    <Skeleton width={1} />
-                ) :
-                    <Box
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            width: '100%',
-                            marginLeft: '98px',
-                        }}
-                    >
-                        <Typography
-                            variant='h6'
-                            sx={{
-                                marginTop: '12px',
-                            }}
-                        >
-                            Dashboard
-                        </Typography>
-                    </Box>
-                }
                 <Box
                     style={{
-                        marginLeft: '94px',
-                        maxWidth: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        width: '100%',
+                    }}
+                >
+                    <Typography
+                        variant='h6'
+                        sx={{
+                            marginTop: '12px',
+                        }}
+                    >
+                        Dashboard
+                    </Typography>
+                </Box>
+
+                <Box
+                    style={{
+                        width: '100%',
                         marginTop: '20px',
                     }}
                 >
                     <Grid
                         container
-                        spacing={3}
+                        justifyContent={'space-between'}
+                        alignItems='center'
                         style={{
-                            display: 'flex',
                             flexWrap: 'wrap'
                             // justifyContent: 'space-between',
                         }}
@@ -92,43 +125,52 @@ const DashboardPage = () => {
                         <Assignments data={dashBoardData.analytics} loading={loading} />
                     </Grid>
 
-                    {/* <Stack direction={'column'}> */}
-                    <Stack direction={'row'} display={'flex'} justifyContent={'space-between'} >
-                        <Stack
-                            width={'65%'}
-                            sx={{
-                                marginTop: '28px',
-                                margniLeft: '20px'
-                            }}
-                        >
-                            <CustomCard height='352px'>
-                                <Chart recentAssessmentsData={dashBoardData.recent_assessments} loading={loading} />
-                            </CustomCard>
-                            <Box marginTop={'21px'} >
-                                <CustomCard height='535px'>
-                                    <MuiCustomTable loading={loading} />
+                    <Stack direction={'column'}>
+                        <Stack direction={'row'} display={'flex'} justifyContent={'space-between'} >
+                            <Stack
+                                width={'65%'}
+                                sx={{
+                                    marginTop: '28px',
+                                    margniLeft: '20px'
+                                }}
+                            >
+                                <CustomCard height='352px'>
+                                    <Chart recentAssessmentsData={dashBoardData.recent_assessments} loading={loading} />
                                 </CustomCard>
-                            </Box>
-                        </Stack>
-                        <Stack
-                            spacing={'12px'}
-                            direction={'column'}
-                            sx={{
-                                padding: '10px',
-                                marginTop: '28px',
-                            }}
-                        >
-                            <UserProfileComponent link={dashBoardData.profile_picture} email={dashBoardData.email} name={dashBoardData.name} loading={loading} />
-                            <CalenderComponent loading={loading} />
-                            <LeaderBoard leaderBoardData={dashBoardData.leaderboard} loading={loading} />
-                        </Stack>
+                                <Box marginTop={'21px'} >
+                                    <CustomCard>
+                                        <MuiCustomTable />
+                                    </CustomCard>
+                                </Box>
+                            </Stack>
+                            <Stack
+                                spacing={'12px'}
+                                direction={'column'}
+                                sx={{
+                                    padding: '10px',
+                                    marginTop: '28px',
+                                }}
+                            >
+                                {loading ?
+                                    <> <Skeleton variant='rectangular' width={320} height={100} />
+                                        <Skeleton variant='rectangular' width={320} height={300} />
+                                    </>
+                                    :
+                                    <>
+                                        <UserProfileComponent link={dashBoardData.profile_picture} email={dashBoardData.email} name={dashBoardData.name} />
+                                        <CalenderComponent />
+                                    </>
+                                }
+                                <LeaderBoard leaderBoardData={dashBoardData.leaderboard} loading={loading} />
+                            </Stack>
 
+                        </Stack>
+                        <Courses data={dashBoardData.courses} />
                     </Stack>
-                    <Courses data={dashBoardData.courses} loading={loading} />
                 </Box>
             </Box >
         </>
     )
 }
 
-export default DashboardPage
+export default withSidebarAndHeader(DashboardPage)

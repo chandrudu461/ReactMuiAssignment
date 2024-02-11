@@ -4,10 +4,9 @@ import DocumentIcon from '../../../../assets/svg/DocumentIcon'
 import PresentationIcon from '../../../../components/common/PresentationIcon'
 import ContinueReadingCard from './ContinueReadingCard'
 
-const ContinueReading = ({ data }) => {
+const ContinueReading = ({ data, loading }) => {
     const scrollToTop = () => {
         window.scrollTo(0, 0);
-        console.log('clickde')
     }
 
     return (
@@ -27,17 +26,15 @@ const ContinueReading = ({ data }) => {
                     flexDirection={'row'}
                     // justifyContent={'space-around'}
                     sx={{
-                        // width: '30rem',
-                        // height: '80px',
                         gap: '1.375rem',
                         marginTop: '12px',
-                        // border: '1px solid red'
                     }}>
                     {data.continue_reading.map((pdf, index) => (
                         <ContinueReadingCard
                             key={pdf.id}
                             name={pdf.name}
                             url={pdf.url}
+                            loading={loading}
                             icon={(index === 0) ? <DocumentIcon /> : <PresentationIcon />}
                         />
                     ))}

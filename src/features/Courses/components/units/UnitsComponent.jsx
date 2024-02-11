@@ -6,9 +6,10 @@ import AccordianComponent from './AccordianComponent'
 import { useState } from 'react'
 
 const UnitsComponent = ({ data }) => {
-    const [selectedUnitId, setSelectedUnitId] = useState();
+    const [selectedUnitId, setSelectedUnitId] = useState((data.units.length > 0 ? data.units[0].unit_id : undefined));
     const [searchValue, setSearchValue] = useState('');
 
+    console.log(selectedUnitId)
     const handleTabChange = (event, newValue) => {
         setSelectedUnitId(newValue);
     };
