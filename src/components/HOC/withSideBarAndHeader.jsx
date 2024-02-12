@@ -197,13 +197,22 @@ function withSidebarAndHeader(WrappedComponent) {
                                             <Typography variant="popOverEmailName">maga.hesenli@gmail.com</Typography>
                                         </Box>
                                         <Stack width={195} height={45} borderRadius={'10px'} direction={'row'} justifyContent={'center'} alignItems={'center'} sx={{
-                                            marginTop: '5px'
+                                            marginTop: '5px',
+                                            padding: '5px',
+                                            transition: 'background-color 0.3s', // Add transition for smooth color change
+                                            '&:hover': {
+                                                cursor: 'pointer',
+                                                backgroundColor: theme.palette.grey[100],
+                                            },
                                         }}
                                             backgroundColor={theme.palette.primary[0]}
-                                        > <LogoutIcon />
-                                            <Button onClick={handleLogout}>
+                                        >
+                                            <LogoutIcon />
+                                            <Typography onClick={handleLogout} variant="logoutButton" color={theme.palette.grey[800]} sx={{
+                                                marginLeft: '9px'
+                                            }}>
                                                 Logout
-                                            </Button>
+                                            </Typography>
                                         </Stack>
                                     </Stack>
                                 </Popover>
@@ -265,15 +274,17 @@ function withSidebarAndHeader(WrappedComponent) {
                             alignItems="center"
                             sx={{
                                 height: "100%",
+                                cursor: 'pointer'
                                 // border: '2px solid red'
                             }}
+
                         >
-                            <div
+                            <Box
                                 onClick={handleLogout}
-                                style={{ marginTop: "auto", marginBottom: 12 }}
+                                style={{ marginTop: "auto", marginBottom: 12, }}
                             >
                                 <LogoutIcon />
-                            </div>
+                            </Box>
                         </Stack>
                     </Stack>
                 </Drawer >

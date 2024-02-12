@@ -1,11 +1,10 @@
 import { Box } from '@mui/material';
 import React from 'react'
 import Typography from '@mui/material/Typography';
-import Calender from './CalendarComponent'
 
 const DashboardChip = ({ backgroundColor, label, percentage, icon }) => {
     return (
-        <div>
+        <Box>
             <Box
                 display="flex"
                 width="230px"
@@ -18,7 +17,7 @@ const DashboardChip = ({ backgroundColor, label, percentage, icon }) => {
                 boxShadow="10px 10px 32px 0px rgba(22, 22, 22, 0.04)"
                 margin='20px 12px 28px 14px'
             >
-                <div style={{
+                <Box style={{
                     width: 60,
                     height: 60,
                     background: backgroundColor,
@@ -28,8 +27,8 @@ const DashboardChip = ({ backgroundColor, label, percentage, icon }) => {
                     alignItems: 'center'
                 }}>
                     {icon}
-                </div>
-                <div>
+                </Box>
+                <Box>
                     <Typography
                         variant="body1"
                         sx={{
@@ -57,9 +56,9 @@ const DashboardChip = ({ backgroundColor, label, percentage, icon }) => {
                     >
                         {percentage}%
                     </Typography>
-                </div>
+                </Box>
             </Box >
-        </div >
+        </Box >
     )
 }
 

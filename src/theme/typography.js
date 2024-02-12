@@ -330,6 +330,18 @@ const typography = {
     fontWeight: 400,
     fontSize: pxToRem(40),
     lineHeight: pxToRem(60),
+  },
+  logoutButton: {
+    fontFamily: FONT_PRIMARY_REGULAR,
+    fontWeight: 400,
+    fontSize: pxToRem(12),
+    lineHeight: pxToRem(18)
+  },
+  errorReloadMessage: {
+    fontFamily: FONT_PRIMARY_REGULAR,
+    fontWeight: 400,
+    fontSize: pxToRem(20),
+    lineHeight: pxToRem(30)
   }
 };
 

@@ -15,6 +15,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
+    const [helper, setHelper] = useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const login = useSelector((state) => state.login);
@@ -46,53 +47,30 @@ const Login = () => {
     };
 
     const handleLogin = (event) => {
-        event.preventDefault();
-
-        // rememberMe functionality
-        if (username === "student@edwisely.com" && password === "edwisely@2024") {
-            dispatch(loginActions.login());
-            if (rememberMe) {
-                localStorage.setItem('username', username);
-                localStorage.setItem('password', password);
-            } else {
-                localStorage.removeItem('username');
-                localStorage.removeItem('password');
-            }
-            localStorage.setItem("login", true);
-            navigate('/dashboard');
+        fetch(
+            `https://stagingstudentpython.edwisely.com/reactProject/loginUser?username=${username}&password=${password}`
+        )
+            .then((resposne) => resposne.json())
+            .then((res) => {
+                if (res.status === 200) {
+                    dispatch(loginActions.login())
+                    navigate('/dashboard')
+                    setHelper((prevState) => !prevState)
+                } else {
+                    // alert(res.message)
+                    setHelper((prevState) => !prevState)
+                }
+            })
+        if (rememberMe) {
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+        } else {
+            localStorage.removeItem('username');
+            localStorage.removeItem('password');
         }
+        localStorage.setItem("login", true);
+        dispatch(loginActions.login());
     };
-
-    // const handleLogin = (event) => {
-    //     // event.preventDefault(); 
-
-    //     // const url = `https://stagingstudentpython.edwisely.com/reactProject/loginUser?username=${username}&password=${password}`;
-
-    //     // fetch(url, {
-    //     //     method: 'POST',
-    //     //     headers: {
-    //     //         'Content-Type': 'application/json',
-    //     //     },
-    //     // })
-    //     //     .then(response => {
-    //     //         if (response.ok) {
-    //     //             dispatch(loginActions.login());
-    //     //             console.log(login);
-    //     //             navigate('/dashboard');
-    //     //         } else {
-    //     //             console.error('Login failed');
-    //     //         }
-    //     //     })
-    //     //     .catch(error => {
-    //     //         console.error('Error:', error);
-    //     //     });
-
-    //     if (username === "student@edwisely.com" && password === "edwisely@2024") {
-    //         dispatch(loginActions.login());
-    //         console.log(login);
-    //         navigate('/dashboard');
-    //     }
-    // };
 
     const buttonStyles = {
         width: '381px',
@@ -112,7 +90,7 @@ const Login = () => {
                 <Typography variant='loginHeading'>Login</Typography>
                 <Typography variant='body8'>Enter your account details</Typography>
 
-                <TextField id="standard-basic" label="Username" variant="standard" style={{ width: 381, border: '0' }} value={username} onChange={handleUsername} />
+                <TextField id="standard-basic" label="Username" variant="standard" style={{ width: 381, border: '0' }} value={username} onChange={handleUsername} helperText={helper && '*Enter valid username'} />
                 <TextField
                     id="standard-basic"
                     label="Password"
@@ -121,6 +99,7 @@ const Login = () => {
                     style={{ width: 381, border: '0' }}
                     value={password}
                     onChange={handlePassword}
+                    helperText={helper && '*Enter Valid Username'}
                     InputProps={{
                         endAdornment: <Box sx={{ '&:hover': { cursor: 'pointer' } }} onClick={togglePasswordVisibility}><PasswordIcon /></Box>,
                     }}

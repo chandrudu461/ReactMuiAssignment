@@ -22,7 +22,7 @@ const AccordianComponent = ({ title, topics, expand }) => {
     };
 
     return (
-        <div style={{ marginBottom: 2 }}>
+        <Box style={{ marginBottom: 2 }}>
             <Box
                 square
                 sx={{
@@ -53,13 +53,13 @@ const AccordianComponent = ({ title, topics, expand }) => {
 
                         {topic.materials.map((material, subIndex) => (
                             <AccordionDetails key={subIndex}>
-                                <div id="titles">
+                                <Box id="titles">
                                     <DocumentIcon width='16px' height='16px' />
                                     <Typography variant="tableStudentRowCell">
                                         {material.name}
                                     </Typography>
-                                </div>
-                                <div id="start-button">
+                                </Box>
+                                <Box id="start-button">
                                     <Link to={`/pdfview/${encodeURIComponent(material.url)}`} onClick={() => scrollToTop(material.name)}
                                         style={{
                                             textDecoration: 'none'
@@ -70,14 +70,14 @@ const AccordianComponent = ({ title, topics, expand }) => {
                                     <span id="button">
                                         <RightButtonIcon />
                                     </span>
-                                </div>
+                                </Box>
                             </AccordionDetails>
                         ))}
                     </Accordion>
                 ))}
             </Box>
             <hr style={{ width: "600px", margin: "0" }} />
-        </div>
+        </Box>
     );
 }
 

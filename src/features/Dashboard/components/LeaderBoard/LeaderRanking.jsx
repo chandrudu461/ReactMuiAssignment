@@ -22,7 +22,7 @@ const LeaderRanking = ({ data, index, value }) => {
   }, [index, theme.palette.primary]);
 
   return (
-    <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ bgcolor: backgroundColor }}>
+    <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ bgcolor: backgroundColor, borderRadius: '5px' }} >
       <Stack direction={'row'} alignItems={'center'} gap={'27px'} justifyContent={'space-between'}>
         {/* <Typography component={'p'} sx={{
           fontFamily: 'Poppins-Medium',
@@ -40,46 +40,10 @@ const LeaderRanking = ({ data, index, value }) => {
               component={'p'} >Avg: {value}%</Typography>
           </Stack>
         </Stack>
-
       </Stack>
       {/* ratings */}
 
       <Stack direction={'row'} alignItems={'center'} gap={'8px'}>
-        <Stack direction={'row'} alignItems={'center'} gap={0}>
-          <Box sx={{
-            width: 20,
-            height: 20,
-            svg: {
-              path: {
-                fill: (theme) => theme.palette.warning.main
-              }
-            }
-          }}>
-            {/* <StarSvg /> */}
-          </Box>
-          <Box sx={{
-            width: 20,
-            height: 20,
-            svg: {
-              path: {
-                fill: (theme) => value >= 80 ? theme.palette.warning.main : theme.palette.warning[300]
-              }
-            }
-          }}>
-            {/* <StarSvg /> */}
-          </Box>
-          <Box sx={{
-            width: 20,
-            height: 20,
-            svg: {
-              path: {
-                fill: (theme) => (value >= 90 && value <= 100) ? theme.palette.warning.main : theme.palette.warning[300]
-              }
-            }
-          }}>
-            {/* <StarSvg /> */}
-          </Box>
-        </Stack>
         {/* <Typography component={'p'} sx={{
           fontFamily: 'Poppins-SemiBold',
           fontSize: '14px',
@@ -97,7 +61,6 @@ const LeaderRanking = ({ data, index, value }) => {
           <Typography >{index}</Typography>
         </Box>
       </Stack>
-
     </Stack>
   )
 }

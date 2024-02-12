@@ -90,6 +90,19 @@ const MuiCustomTableWithSortandSelect = (props) => {
             Math.ceil(filtered_studentAssessmentList?.length / rowsPerPage)}
           page={page}
           onChange={handleChangePage}
+          color="primary"
+          sx={{
+            '& .MuiPaginationItem-page': {
+              fontFamily: 'Poppins',
+              fontSize: '12px',
+              fontWeight: 400,
+              lineHeight: '18px',
+            },
+            '& .MuiPaginationItem-previous, & .MuiPaginationItem-next': {
+              backgroundColor: '#DFE3E8',
+              borderRadius: '50%',
+            },
+          }}
         />
       </Stack>
     </>

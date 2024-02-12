@@ -184,7 +184,7 @@ const MuiCustomTable = () => {
                 <ErrorComponent />
             ) :
                 <>
-                    <Stack direction='row'>
+                    <Stack direction='row' alignItems={'center'} sx={{ position: 'relative' }}>
                         <Typography variant='h5'>Assessments</Typography >
                         <Stack
                             direction={'row'}
@@ -193,7 +193,7 @@ const MuiCustomTable = () => {
                             spacing={1}
                             sx={{
                                 position: 'absolute',
-                                right: '35vw',
+                                right: '13px',
                             }}
                         >
                             <Box onClick={leftClickHandle} sx={{

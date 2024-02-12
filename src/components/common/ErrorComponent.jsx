@@ -7,8 +7,13 @@ const ErrorComponent = () => {
     return (
         <Stack alignItems={'center'} justifyContent={'center'} marginY={0} height={'535px'}>
             <ErrorIcon />
-            <Typography variant='errorMessage'> Error Loading Assessment</Typography>
-            <Typography color={theme.palette.info.main}> Reload </Typography>
+            <Typography variant='errorMessage' color={theme.palette.grey[400]}> Error Loading Assessment</Typography>
+            <Typography variant='errorReloadMessage' color={theme.palette.info.main}
+                sx={{
+                    cursor: 'pointer'
+                }}
+                onClick={() => window.location.reload()
+                }> Reload </Typography>
         </Stack>
     )
 }

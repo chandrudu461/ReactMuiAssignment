@@ -128,12 +128,9 @@ const DashboardPage = () => {
                         <Stack direction={'row'}  >
                             <Stack
                                 sx={{
-                                    maxWidth: '897px', // Set maximum width
-                                    // margin: 'auto', // Center align horizontally
-                                    // width: '100%', // Ensure it takes full width of the container
+                                    maxWidth: '897px',
                                     marginTop: '28px',
                                     margniLeft: '20px',
-                                    width: '70%',
                                     minWidth: '550px',
                                     '@media (min-width: 1200px)': {
                                         width: '100%',
@@ -159,10 +156,10 @@ const DashboardPage = () => {
                                     // padding: '10px',
                                     marginTop: '28px',
                                     // width: '30%',
-                                    width: '319px',
+                                    // width: '319px',
                                     minWidth: '260px',
                                     padding: '0 0 22px 22px ',
-                                    maxWidth: '319px'
+                                    // maxWidth: '319px'
                                 }}
                             >
                                 {loading ?
@@ -171,16 +168,27 @@ const DashboardPage = () => {
                                     </>
                                     :
                                     <>
-                                        <UserProfileComponent link={dashBoardData.profile_picture} email={dashBoardData.email} name={dashBoardData.name} />
-                                        <CalenderComponent />
+                                        <Box>
+                                            <UserProfileComponent link={dashBoardData.profile_picture} email={dashBoardData.email} name={dashBoardData.name} />
+                                        </Box>
+                                        <Box sx={{
+                                            marginTop: '30px'
+                                        }}>
+                                            <CalenderComponent />
+                                        </Box>
                                     </>
                                 }
-                                <LeaderBoard leaderBoardData={dashBoardData.leaderboard} loading={loading} />
+                                <Box sx={{
+                                    marginTop: '30px'
+                                }}>
+                                    <LeaderBoard leaderBoardData={dashBoardData.leaderboard} loading={loading} />
+                                </Box>
                             </Stack>
 
                         </Stack>
                         <Courses data={dashBoardData.courses} />
                     </Stack>
+
                 </Box>
             </Box >
         </>

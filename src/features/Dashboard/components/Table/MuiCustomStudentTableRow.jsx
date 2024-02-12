@@ -33,6 +33,7 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
   if (stu.total_timespent === null && stu.submission_type === null && stu.internet_speed === null && stu.percentage_scored === null) {
     return (
       <TableRow
+        height={'30px'}
         onClick={() => {
           // viewStudentResult(stu)
         }}
@@ -44,13 +45,13 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
             background:
               stu.submission_type === 'not attempted'
                 ? theme.palette.error[300]
-                : theme.palette.grey[100], // Set your desired background color
+                : theme.palette.grey[100],
           },
         }}
       >
         <TableCell
           scope='row'
-          sx={{ border: 'none', borderRadius: '6px 0 0 6px' }}
+          sx={{ border: 'none', borderTopLeftRadius: '5px', borderEndStartRadius: '5px', padding: '9px' }}
         >
           <Typography
             // variant='body1' 
@@ -61,15 +62,16 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
         </TableCell>
 
 
-        <TableCell sx={{}}></TableCell>
+        <TableCell sx={{ padding: '9px', }}></TableCell>
 
-        <TableCell>
+        <TableCell sx={{
+          padding: '9px',
+        }}>
           <Typography
             // variant='body1' 
             variant='tableStudentRowCell'
             sx={{
               color: theme.palette.error[700],
-              padding: 0,
             }}>
             Not Attempted
           </Typography>
@@ -77,16 +79,16 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
 
 
 
-        <TableCell sx={{}}></TableCell>
+        <TableCell sx={{ padding: '9px', }}></TableCell>
 
 
-        <TableCell sx={{}}></TableCell>
+        <TableCell sx={{ padding: '9px', }}></TableCell>
 
-        <TableCell sx={{}}>
+        <TableCell sx={{ padding: '9px', borderTopRightRadius: '5px', borderEndEndRadius: '5px' }}>
           <Typography
             // variant='body1' 
             variant='tableStudentRowCell'
-            sx={{ color: theme.palette.error[700] }}>
+            sx={{ color: theme.palette.grey[900] }}>
             0%
           </Typography>
         </TableCell>
@@ -104,7 +106,7 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
       key={key}
       sx={{
         cursor: 'pointer',
-        borderRadius: '5px',
+        // borderRadius: '5px',
         background:
           stu.submission_type === 'not attempted'
             ? theme.palette.error[200]
@@ -116,10 +118,11 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
               : theme.palette.grey[100], // Set your desired background color
         },
       }}
+    // height={'30px'}
     >
       <TableCell
         scope='row'
-        sx={{ border: 'none', borderRadius: '6px 0 0 6px' }}
+        sx={{ border: 'none', borderTopLeftRadius: '5px', borderEndStartRadius: '5px', padding: '9px' }}
       >
         <Typography
           // variant='body1' 
@@ -128,7 +131,7 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
           {stu.subject}
         </Typography>
       </TableCell>
-      <TableCell scope='row' sx={{ border: 'none' }}>
+      <TableCell scope='row' sx={{ border: 'none', padding: '9px' }}>
         <Typography
           // variant='body1'
           variant='tableStudentRowCell'
@@ -137,7 +140,7 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
 
         </Typography>
       </TableCell>
-      <TableCell scope='row' sx={{ border: 'none' }}>
+      <TableCell scope='row' sx={{ border: 'none', padding: '9px' }}>
         <Typography
           // variant='body1'
           variant='tableStudentRowCell'
@@ -170,7 +173,7 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
           </Typography>
         </TableCell>
       ) : null} */}
-      <TableCell scope='row' sx={{ border: 'none' }}>
+      <TableCell scope='row' sx={{ border: 'none', padding: '9px' }}>
         <Typography
           //  variant='body1'
           variant='tableStudentRowCell'
@@ -179,7 +182,7 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
         </Typography>
       </TableCell>
 
-      <TableCell scope='row' sx={{ border: 'none' }}>
+      <TableCell scope='row' sx={{ border: 'none', padding: '9px' }}>
         <Typography
           variant='tableStudentRowCell'
           sx={{ color: theme.palette.grey[900] }}>
@@ -193,13 +196,13 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
       </TableCell> */}
       <TableCell
         scope='row'
-        sx={{ border: 'none', borderRadius: '0 6px 6px 0' }}
+        sx={{ border: 'none', borderRadius: '5px', padding: '9px', borderTopRightRadius: '5px', borderEndEndRadius: '5px' }}
       >
         <Stack
           direction='row'
           justifyContent='space-between'
           alignItems='center'
-          height="30px"
+        // height="30px"
         >
           <Typography
             //  variant='body3'
@@ -213,7 +216,7 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
               viewStudentResult(stu)
             }}
             sx={{
-              height: '24px',
+              // height: '24px',
               width: '24px',
               background: theme.palette.grey[500],
               borderRadius: '6px',
@@ -233,7 +236,7 @@ const MuiCustomStudentTableRow = ({ key, stu, viewStudentResult }) => {
           </IconButton> */}
         </Stack>
       </TableCell>
-    </TableRow>
+    </TableRow >
   )
 }
 

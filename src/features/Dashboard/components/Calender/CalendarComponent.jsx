@@ -10,7 +10,8 @@ const CalendarComponent = ({ loading }) => {
         <>
             {
                 !loading ?
-                    <Box width={'319px'}>
+                    <Box
+                    >
                         < Typography
                             variant='h5'
                         >

@@ -3,7 +3,8 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import { FormLabel } from '@mui/material'
-import { Typography } from '@mui/material'
+import { Typography, useTheme } from '@mui/material'
+import ArrowDown from '../../assets/svg/ArrowDown'
 // import { DownArrowIcon } from '../../assets/Svg/DownArrowIcon'
 // import { ArrowDropDown } from '@mui/icons-material'
 export default function MuiSmallDropDown({
@@ -16,6 +17,8 @@ export default function MuiSmallDropDown({
   disabled,
   ...props
 }) {
+
+  const theme = useTheme()
   const handleChange = (event) => {
     // console.log('value changed')
     setDropDownValue(event.target.value)
@@ -46,7 +49,7 @@ export default function MuiSmallDropDown({
             padding: '2.5px 12px',
           },
           '& .MuiSelect-select:focus': {
-            backgroundColor: (theme) => theme.palette.grey[100],
+            // backgroundColor: (theme) => theme.palette.grey[100],
           },
           '& .MuiOutlinedInput-notchedOutline': {
             borderColor: '#ccc',
@@ -68,8 +71,7 @@ export default function MuiSmallDropDown({
           value={dropDownValue ? dropDownValue : ''}
           displayEmpty
           onChange={handleChange}
-          // disabled={isDisabled}
-          // IconComponent={ArrowDropDown}
+          // IconComponent={'none'}
           sx={{
             padding: '5px',
             '& .css-eghtey-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input': {
@@ -90,7 +92,7 @@ export default function MuiSmallDropDown({
                 }}
                 value={input?.value}
               >
-                <Typography variant='body2'>{input?.name}</Typography>
+                <Typography color={theme.palette.grey[400]} variant='body2'>{input?.name}</Typography>
               </MenuItem>
             ))}
         </Select>

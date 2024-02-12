@@ -4,6 +4,7 @@ import Bubble from '../../../../components/common/Bubble';
 import MuiSmallDropDown from '../../../../components/common/MuiSmallDropDown';
 import MuiColumnChart from './MuiColumnChart';
 import { useTheme } from '@mui/material';
+import ArrowDown from '../../../../assets/svg/ArrowDown'
 
 const Chart = ({ recentAssessmentsData, loading }) => {
     const theme = useTheme();

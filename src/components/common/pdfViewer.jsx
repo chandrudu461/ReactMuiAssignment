@@ -97,7 +97,7 @@ const PdfViewer = () => {
                         </Worker>
                     </Box>
                 </Box>
-                <div className="thumbnails">
+                <Box className="thumbnails">
                     {/* Generate small instances of pages */}
                     {[...Array(totalPages).keys()].map((pageNumber) => (
                         <div
@@ -112,7 +112,7 @@ const PdfViewer = () => {
                             </Worker>
                         </div>
                     ))}
-                </div>
+                </Box>
             </Box>
         </>
     )
