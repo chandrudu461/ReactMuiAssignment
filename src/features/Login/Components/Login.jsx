@@ -3,11 +3,11 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
-import PasswordIcon from '../../assets/svg/PasswordIcon.jsx';
+import PasswordIcon from '../../../assets/svg/PasswordIcon.jsx';
 import { Box, FormControlLabel } from '@mui/material';
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom'
-import { loginActions } from '../../store/index.js'
+import { loginActions } from '../../../store/index.js'
 import Button from '@mui/material/Button';
 
 const Login = () => {
@@ -19,7 +19,6 @@ const Login = () => {
     const navigate = useNavigate();
     const login = useSelector((state) => state.login);
 
-    // Check local storage for stored credentials when component mounts
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
         const storedPassword = localStorage.getItem('password');
@@ -49,14 +48,13 @@ const Login = () => {
     const handleLogin = (event) => {
         event.preventDefault();
 
+        // rememberMe functionality
         if (username === "student@edwisely.com" && password === "edwisely@2024") {
             dispatch(loginActions.login());
             if (rememberMe) {
-                // Store credentials in local storage
                 localStorage.setItem('username', username);
                 localStorage.setItem('password', password);
             } else {
-                // Clear stored credentials if "Remember me" is unchecked
                 localStorage.removeItem('username');
                 localStorage.removeItem('password');
             }
@@ -105,7 +103,11 @@ const Login = () => {
     };
 
     return (
-        <form onSubmit={handleLogin}>
+        <Stack
+            alignItems={'center'}
+            justifyContent={'center'}
+            alignContent={'center'}
+            marginX={'auto'}>
             <Stack spacing={2}>
                 <Typography variant='loginHeading'>Login</Typography>
                 <Typography variant='body8'>Enter your account details</Typography>
@@ -133,9 +135,9 @@ const Login = () => {
                     }
                     label="Remember me"
                 />
-                <Button type="submit" variant="contained" style={buttonStyles}>Login</Button>
+                <Button type="submit" variant="contained" style={buttonStyles} onClick={handleLogin}>Login</Button>
             </Stack>
-        </form>
+        </Stack>
     );
 };
 

@@ -325,6 +325,12 @@ const typography = {
     fontSize: pxToRem(12),
     lineHeight: pxToRem(16),
   },
+  errorMessage: {
+    fontFamily: FONT_PRIMARY,
+    fontWeight: 400,
+    fontSize: pxToRem(40),
+    lineHeight: pxToRem(60),
+  }
 };
 
 export default typography;

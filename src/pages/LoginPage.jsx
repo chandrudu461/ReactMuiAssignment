@@ -1,7 +1,7 @@
 // import { Typography } from '@mui/material';
-import Login from '../components/common/Login.jsx'
+import Login from '../features/Login/Components/Login.jsx'
 import LoginIcon from '../assets/svg/LoginIcon.jsx'
-// import './App.css';
+import { Stack } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Navigate } from 'react-router-dom';
 
@@ -14,15 +14,6 @@ const theme = createTheme({
 
 
 function LoginPage() {
-    const containerStyle = {
-        display: 'flex',
-        width: '100%',
-    };
-
-    const loginStyle = {
-        margin: 'auto'
-    }
-
     const isLoggedIn = localStorage.getItem('login');
     console.log('login', isLoggedIn)
 
@@ -33,16 +24,16 @@ function LoginPage() {
 
     return (
         // <Login />
-        <div>
-            <div style={containerStyle}>
-                <div>
-                    <LoginIcon />
-                </div>
-                <div style={loginStyle}>
-                    <Login />
-                </div>
-            </div>
-        </div>
+        <Stack
+            direction={'row'}
+            sx={{
+                width: '100%',
+                maxWidth: '1500px',
+            }}
+        >
+            <LoginIcon />
+            <Login />
+        </Stack>
     );
 }
 

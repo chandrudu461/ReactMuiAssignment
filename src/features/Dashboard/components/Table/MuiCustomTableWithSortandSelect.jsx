@@ -81,11 +81,13 @@ const MuiCustomTableWithSortandSelect = (props) => {
         sx={{ marginTop: '1rem' }}
       >
         <Pagination
-          count={Math.ceil(
-            (filtered_studentAssessmentList?.filter((stu) =>
-              submissionTypesToShowinStudentTable.includes(stu.submission_type)
-            ).length / rowsPerPage) + 2
-          )}
+          // count={Math.ceil(
+          //   (filtered_studentAssessmentList?.filter((stu) =>
+          //     submissionTypesToShowinStudentTable.includes(stu.submission_type)
+          //   ).length / rowsPerPage)
+          // )}
+          count={
+            Math.ceil(filtered_studentAssessmentList?.length / rowsPerPage)}
           page={page}
           onChange={handleChangePage}
         />

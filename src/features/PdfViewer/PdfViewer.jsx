@@ -22,6 +22,7 @@ import {
 import { useTheme } from '@mui/material'
 import { createStore, PluginFunctions, SpecialZoomLevel } from '@react-pdf-viewer/core';
 import { useNavigate } from "react-router";
+// import { FullScreen } from '@react-pdf-viewer/full-screen';
 
 const options = {
     cMapUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/cmaps/`,
@@ -44,6 +45,9 @@ const PdfViewer = () => {
     const [currentZoomLevel, setCurrentZoomLevel] = useState(100)
     const fileName = localStorage.getItem("pdfFileName");
     const navigate = useNavigate()
+    const [isFullScreen, setIsFullScreen] = useState(false);
+    const [rotation, setRotation] = useState(0);
+
 
     const customZoomPluginInstance = {
         zoomTo: (newScale) => {
@@ -89,124 +93,132 @@ const PdfViewer = () => {
         // localStorage.setItem("selectedPage", i);
     };
 
-    const StyledPage = styled(Page)({
-        border: "3px solid #ff0000",
-        width: "40px",
-        marginBottom: "5px",
-    });
-
     let pageCount = 1;
+    const handleFullScreenToggle = () => {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+    };
+
+    const handleRotate = () => {
+        setRotation(rotation + 90);
+    };
+
+
 
     return (
-        <>
+        <Box>
             <Stack
                 direction={'row'}
                 alignItems={'center'}
-                justifyContent={'space-evenly'}
+                justifyContent={'flex-start'}
+                width={"100%"}
+                position={'fixed'}
+                zIndex={1000}
+                spacing={"250px"}
                 sx={{
                     padding: '16px',
                     boxShadow: `10px 10px 32px 0px rgba(22, 22, 22, 0.04)`,
                     backgroundColor: theme.palette.primary[0],
-                    marginBottom: '21px'
                 }}
             >
-                <Box
-                    sx={{
-                        cursor: 'pointer'
-                    }}
-                    onClick={
-                        () => {
-                            navigate(-1);
-                        }
-                    }
-                >
-                    <BackButtonIcon />
-                </Box>
-                <Typography variant="body5" sx={{
-                    color: '#252525',
-                }}>{fileName}</Typography>
-
-                <Stack direction={'row'} spacing={1}>
-                    <Box width={'24px'} height={'24px'} sx={{
-                        backgroundColor: '#F4F6F8'
-                    }}
-                        display={'flex'}
-                        justifyContent={'center'}
-                        alignItems={'center'}>
-                        <Typography variant="pageNumber" sx={{
-                            color: '#252525'
-                        }}>{pageNumber}</Typography>
-                    </Box>
+                <Stack direction={'row'} spacing={4}>
                     <Box
-                        display={'flex'}
-                        justifyContent={'center'}
-                        alignItems={'center'}>
-                        <Typography variant="pageNumber" sx={{
-                            color: '#252525'
+                        sx={{
+                            cursor: 'pointer'
                         }}
-                        >/</Typography>
+                        onClick={
+                            () => {
+                                navigate(-1);
+                            }
+                        }
+                    >
+                        <BackButtonIcon />
                     </Box>
-                    <Box
-                        display={'flex'}
-                        justifyContent={'center'}
-                        alignItems={'center'}>
-                        <Typography variant="pageNumber" sx={{
-                            color: '#252525'
-                        }}>{numPages}</Typography>
-                    </Box>
+                    <Typography variant="body5" sx={{
+                        color: '#252525',
+                    }}>{fileName}</Typography>
                 </Stack>
 
-                <Box style={{ borderLeft: '1px solid #BDBDC7', height: '20px' }}></Box>
-
-                <Stack direction={"row"} spacing={2}>
-                    <Box onClick={zoomOut} sx={{
-                        cursor: 'pointer'
-                    }}>
-                        <ZoomOutIcon />
-                    </Box>
-                    <Box height={'24px'} padding={'8px 7px 8px 7px'} display={'flex'}
-                        justifyContent={'center'} alignItems={'center'}>
-                        <Typography variant="courseChip">
-                            {currentZoomLevel}
-                        </Typography>
-                    </Box>
-                    <Box onClick={zoomIn} sx={{
-                        cursor: 'pointer'
-                    }}>
-                        <ZoomInIcon />
-                    </Box>
-                </Stack>
-
-                <Box style={{ borderLeft: '1px solid #BDBDC7', height: '20px' }}></Box>
-
-                {/* <fullScreenPluginInstance.EnterFullScreen>
-                    {(props) => <Box onClick={props.onClick}> <FullScreenIcon /></Box>}
-                </fullScreenPluginInstance.EnterFullScreen>
-                <Rotate direction={RotateDirection.Backward}>
-                    {(props) => (
-                        <button
-                            style={{
-                                backgroundColor: '#357edd',
-                                border: 'none',
-                                borderRadius: '4px',
-                                color: '#ffffff',
-                                cursor: 'pointer',
-                                padding: '8px',
+                <Stack direction={'row'} spacing={4} alignItems={'center'} justifyContent={'center'}>
+                    <Stack direction={'row'} spacing={1}>
+                        <Box width={'24px'} height={'24px'} sx={{
+                            backgroundColor: '#F4F6F8',
+                            marginLeft: '24px'
+                        }}
+                            display={'flex'}
+                            justifyContent={'center'}
+                            alignItems={'center'}>
+                            <Typography variant="pageNumber" sx={{
+                                color: '#252525'
+                            }}>{pageNumber}</Typography>
+                        </Box>
+                        <Box
+                            display={'flex'}
+                            justifyContent={'center'}
+                            alignItems={'center'}>
+                            <Typography variant="pageNumber" sx={{
+                                color: '#252525'
                             }}
-                            onClick={props.onClick}
-                        >
-                            Rotate backward
-                        </button>
-                    )}
-                </Rotate> */}
-                <PdfRotateIcon />
+                            >/</Typography>
+                        </Box>
+                        <Box
+                            display={'flex'}
+                            justifyContent={'center'}
+                            alignItems={'center'}>
+                            <Typography variant="pageNumber" sx={{
+                                color: '#252525'
+                            }}>{numPages}</Typography>
+                        </Box>
+                    </Stack>
+
+                    <Box style={{ borderLeft: '1px solid #BDBDC7', height: '20px' }}></Box>
+
+                    <Stack direction={"row"} spacing={2}>
+                        <Box onClick={zoomOut} sx={{
+                            cursor: 'pointer'
+                        }}>
+                            <ZoomOutIcon />
+                        </Box>
+                        <Box height={'24px'} padding={'8px 7px 8px 7px'} display={'flex'}
+                            justifyContent={'center'} alignItems={'center'}>
+                            <Typography variant="courseChip">
+                                {currentZoomLevel}
+                            </Typography>
+                        </Box>
+                        <Box onClick={zoomIn} sx={{
+                            cursor: 'pointer'
+                        }}>
+                            <ZoomInIcon />
+                        </Box>
+                    </Stack>
+
+                    <Box style={{ borderLeft: '1px solid #BDBDC7', height: '20px' }}></Box>
+
+                    <Box onClick={handleFullScreenToggle} style={{ cursor: 'pointer' }}>
+                        <FullScreenIcon />
+                    </Box>
+
+                    <Box onClick={handleRotate} style={{ cursor: 'pointer' }}>
+                        <PdfRotateIcon />
+                    </Box>
+                </Stack>
             </Stack >
-            <Box width={'100%'} height={'100%'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
+            <Box width={'100%'} height={'100%'} display={'flex'} alignItems={'center'}>
                 <Box sx={{
                     boxShadow: `1px 2px 12px 0px rgba(0, 0, 0, 0.15)`,
                     width: '415.511px',
-                    height: '588px',
-                    marginLeft: '100px'
+                    marginTop: '87px',
+                    height: '588px', marginLeft: '516px', // Default marginLeft for screens larger than 1366px
+                    transform: `rotate(${rotation}deg)`,
+                    transition: 'transform 0.5s ease-in-out',
+                    '@media (max-width: 1500px) and (min-width: 900px)': {
+                        marginLeft: 'calc(50vw - 207.755px)' // Responsive marginLeft for screens between 900px and 1500px
+                    }
                 }}>
                     <Document
                         options={options}
@@ -217,7 +229,8 @@ const PdfViewer = () => {
                             plugins={[customZoomPluginInstance]}
                             width={415.511}
                             height={588}
-                            pageNumber={pageNumber} />
+                            pageNumber={pageNumber}
+                            rotate={rotation} />
                     </Document>
                 </Box>
                 <Box style={{ width: "30px", height: "40px" }}>
@@ -266,8 +279,10 @@ const PdfViewer = () => {
                     </Document>
                 </Box>
             </Box>
-        </>
-
+            {/* {isFullScreen && (
+                <FullScreen target={document.body} onClose={() => setIsFullScreen(false)} />
+            )} */}
+        </Box>
     );
 };
 

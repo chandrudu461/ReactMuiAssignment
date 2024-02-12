@@ -1,6 +1,7 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
 import dashboardReducer from './reducers/dashboard.reducers'
 import courseReducer from './reducers/course.reducers'
+import assessmentReducers from './reducers/assessment.reducers'
 
 const initialLoginState = { login: true }
 
@@ -22,6 +23,7 @@ export const store = configureStore({
         login: loginSlice.reducer,
         dashboard: dashboardReducer,
         course: courseReducer,
+        assessment: assessmentReducers
     },
 })
 

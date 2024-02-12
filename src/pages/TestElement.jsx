@@ -2,6 +2,7 @@ import { Box, Typography, Grid, Stack } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useTheme } from '@mui/material'
 import PdfViewer from '../features/PdfViewer/PdfViewer';
+import ErrorComponent from '../components/common/ErrorComponent';
 
 const TestElement = (props) => {
     const [data, setData] = useState(null);
@@ -113,7 +114,8 @@ const TestElement = (props) => {
                         ))}
                     </div> */}
 
-                    <PdfViewer />
+                    {/* <PdfViewer /> */}
+                    <ErrorComponent />
 
                 </div>
             </div>

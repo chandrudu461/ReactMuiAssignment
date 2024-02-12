@@ -2,14 +2,11 @@ import { BrowserRouter as Router, Routes, Route, createBrowserRouter, RouterProv
 import React from 'react';
 import TestElement from './pages/TestElement';
 import LoginPage from './pages/LoginPage'
-import Login from './components/common/Login';
 import ErrorPage from './components/common/ErrorPage';
-import Layout from './components/common/Layout'
 import DashboardPage from './pages/DashboardPage';
 import CoursePage from './pages/CoursePage';
 import PdfPage from './pages/PdfPage';
 // import withSidebarAndHeader from './components/HOC/withSideBarAndHeader';
-
 // const SidebarAndHeaderComponent = withSidebarAndHeader
 
 

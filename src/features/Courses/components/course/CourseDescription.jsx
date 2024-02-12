@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Typography, Slider, Grid, List, ListItem } from '@mui/material'
 import { useNavigate } from 'react-router';
 import BackButtonIcon from '../../../../assets/svg/BackButtonIcon';
+import MuiCustomSlider from './MuiCustomSlider';
 import { useTheme } from '@mui/material';
 
 const CourseDescription = ({ data }) => {
@@ -69,9 +70,10 @@ const CourseDescription = ({ data }) => {
                 alignItems: 'center',
                 display: 'flex',
             }}>
-                <Slider
+
+                <MuiCustomSlider
                     size="medium"
-                    defaultValue={data.percentage}
+                    data={data}
                     valueLabelDisplay="auto"
                     max={100}
                     min={0}

@@ -158,7 +158,7 @@ function withSidebarAndHeader(WrappedComponent) {
                                         },
                                     }}
                                 >
-                                    <UserProfileSvg link={dashBoardData.profile_picture} customRadius={true} />
+                                    <UserProfileSvg link={dashBoardData.profile_picture} customRadius={'24px'} />
                                 </Box>
                                 <Popover
                                     id={id}
@@ -189,7 +189,7 @@ function withSidebarAndHeader(WrappedComponent) {
                                         }}
 
                                     >
-                                        <UserProfileSvg link={dashBoardData.profile_picture} editIcon={<EditProfileIcon />} customRadius={true} />
+                                        <UserProfileSvg link={dashBoardData.profile_picture} editIcon={<EditProfileIcon />} customRadius={'24px'} />
                                         <Box marginTop={'7px'}>
                                             <Typography variant="popOverDisplayName" >Maharrm Hasanli</Typography>
                                         </Box>

@@ -125,13 +125,21 @@ const DashboardPage = () => {
                     </Grid>
 
                     <Stack direction={'column'}>
-                        <Stack direction={'row'} display={'flex'} justifyContent={'space-between'} >
+                        <Stack direction={'row'}  >
                             <Stack
-                                width={'65%'}
                                 sx={{
+                                    maxWidth: '897px', // Set maximum width
+                                    // margin: 'auto', // Center align horizontally
+                                    // width: '100%', // Ensure it takes full width of the container
                                     marginTop: '28px',
-                                    margniLeft: '20px'
+                                    margniLeft: '20px',
+                                    width: '70%',
+                                    minWidth: '550px',
+                                    '@media (min-width: 1200px)': {
+                                        width: '100%',
+                                    }
                                 }}
+
                             >
                                 <CustomCard height='352px'>
                                     <Chart recentAssessmentsData={dashBoardData.recent_assessments} loading={loading} />
@@ -146,8 +154,15 @@ const DashboardPage = () => {
                                 spacing={'12px'}
                                 direction={'column'}
                                 sx={{
-                                    padding: '10px',
+                                    // maxWidth: '319px',
+                                    // width: '100%',
+                                    // padding: '10px',
                                     marginTop: '28px',
+                                    // width: '30%',
+                                    width: '319px',
+                                    minWidth: '260px',
+                                    padding: '0 0 22px 22px ',
+                                    maxWidth: '319px'
                                 }}
                             >
                                 {loading ?

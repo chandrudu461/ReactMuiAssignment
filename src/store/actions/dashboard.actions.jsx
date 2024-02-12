@@ -18,17 +18,3 @@ export const fetchDashboardData = () => {
         }
     }
 }
-
-export const fetchAssessmentData = () => {
-    return async (dispatch) => {
-        try {
-            dispatch(fetchDataRequest())
-            const response = await axios.get(
-                'https://stagingstudentpython.edwisely.com/reactProject/assessments'
-            )
-            dispatch(fetchDataSuccess(response.data))
-        } catch (error) {
-            dispatch(fetchDataFailure(error.message))
-        }
-    }
-}

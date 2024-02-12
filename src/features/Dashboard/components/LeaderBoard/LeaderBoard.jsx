@@ -20,6 +20,7 @@ const LeaderBoard = ({ leaderBoardData, loading }) => {
         <>
             <Box
                 onClick={toggleDrawer}
+                width={'319px'}
                 sx={{
                     '&:hover': {
                         cursor: 'pointer',

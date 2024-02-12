@@ -6,8 +6,8 @@ import MuiSmallDropDown from '../../../../components/common/MuiSmallDropDown';
 import { useDispatch, useSelector } from 'react-redux';
 import LeftArrow from '../../../../assets/svg/LeftArrow';
 import RightArrow from '../../../../assets/svg/RightArrow';
-import { fetchAssessmentData } from '../../../../store/actions/dashboard.actions';
-
+import { fetchAssessmentData } from '../../../../store/actions/assessment.actions';
+import ErrorComponent from '../../../../components/common/ErrorComponent'
 const MuiCustomTable = () => {
     const [uniqueSemesters, setUniqueSemesters] = useState(null)
     const [tableAssessmentsData, setTableAssessmentsData] = useState(null)
@@ -18,10 +18,10 @@ const MuiCustomTable = () => {
         value: 1,
     })
     const { assessmentData, loading, error } = useSelector(
-        (state) => state.dashboard
+        (state) => state.assessment
     )
-    const dispatch = useDispatch
-    console.log(assessmentData);
+    const dispatch = useDispatch()
+    console.log(assessmentData, loading, error);
 
     const fetchData = async (url) => {
         try {
@@ -33,8 +33,6 @@ const MuiCustomTable = () => {
             throw error
         }
     }
-
-    console.log('us', uniqueSemesters);
 
     useEffect(() => {
         // dispatch(fetchAssessmentData())
@@ -152,7 +150,6 @@ const MuiCustomTable = () => {
                     }))
                     : []
                 setTableAssessmentsData(rankedTableData)
-                // setFilteredData(rankedTableData)
                 let uniqueValues = [...new Set(rankedTableData.map(item => item.semester))];
                 let semesters = uniqueValues.map(sem => ({
                     name: "Semester 0" + sem,
@@ -175,18 +172,20 @@ const MuiCustomTable = () => {
         }
 
         fetchTableDataFromApi()
-    }, [])
 
-    console.log(filteredData);
+        dispatch(fetchAssessmentData())
+    }, [dispatch])
 
     return (
         <>
             {loading ? (
                 <Skeleton variant="rectangular" width={'100%'} height={400} />
+            ) : (tableAssessmentsData?.length === 0) ? (
+                <ErrorComponent />
             ) :
                 <>
                     <Stack direction='row'>
-                        <Typography variant='h5'>Assessments</Typography>
+                        <Typography variant='h5'>Assessments</Typography >
                         <Stack
                             direction={'row'}
                             justifyContent={'center'}
@@ -213,7 +212,7 @@ const MuiCustomTable = () => {
                                 <RightArrow />
                             </Box>
                         </Stack>
-                    </Stack>
+                    </Stack >
                     <MuiCustomTableWithSortandSelect
                         HeaderArr={headerArr}
                         tableData={filteredData}

@@ -9,7 +9,7 @@ const UserProfileSvg = ({ link, editIcon, customRadius }) => {
                 width={50}
                 height={50}
                 style={{
-                    borderRadius: customRadius ? "24px" : 0,
+                    borderRadius: customRadius,
                 }}
             />
             <Box position={'absolute'} right={0} bottom={0} height={'15px'} width={'15px'}>
