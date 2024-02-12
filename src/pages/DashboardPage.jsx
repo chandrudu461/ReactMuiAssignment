@@ -128,7 +128,7 @@ const DashboardPage = () => {
                         <Stack direction={'row'}  >
                             <Stack
                                 sx={{
-                                    maxWidth: '897px',
+                                    maxWidth: '1000px',
                                     marginTop: '28px',
                                     margniLeft: '20px',
                                     minWidth: '550px',

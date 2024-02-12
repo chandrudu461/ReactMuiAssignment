@@ -342,6 +342,12 @@ const typography = {
     fontWeight: 400,
     fontSize: pxToRem(20),
     lineHeight: pxToRem(30)
+  },
+  accordianStartButton: {
+    fontFamily: FONT_PRIMARY_REGULAR,
+    fontWeight: 400,
+    fontSize: pxToRem(14),
+    lineHeight: pxToRem(21)
   }
 };
 

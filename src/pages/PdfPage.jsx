@@ -1,5 +1,5 @@
 import React from 'react'
-import PdfViewer from '../features/PdfViewer/PdfViewer'
+import PdfViewer from '../features/PdfViewer/components/PdfViewer'
 import withSidebarAndHeader from '../components/HOC/withSideBarAndHeader'
 
 const PdfPage = () => {

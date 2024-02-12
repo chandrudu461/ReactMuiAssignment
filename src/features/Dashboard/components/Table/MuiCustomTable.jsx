@@ -14,8 +14,8 @@ const MuiCustomTable = () => {
     const [filteredData, setFilteredData] = useState(null)
     const [tableData, setTableData] = useState(null)
     const [currentSemester, setCurrentSemester] = useState({
-        name: 'Semester 01',
-        value: 1,
+        name: "All Semesters",
+        value: 0,
     })
     const { assessmentData, loading, error } = useSelector(
         (state) => state.assessment
@@ -162,10 +162,7 @@ const MuiCustomTable = () => {
                 }
                 ]
                 setUniqueSemesters(semesters);
-                let filteringData = rankedTableData.filter((item) => {
-                    return (item.semester === currentSemester.value)
-                })
-                setFilteredData(filteringData);
+                setFilteredData(rankedTableData);
             } catch (error) {
                 throw error
             }
@@ -178,41 +175,41 @@ const MuiCustomTable = () => {
 
     return (
         <>
+            <Stack direction='row' alignItems={'center'} sx={{ position: 'relative' }}>
+                <Typography variant='h5'>Assessments</Typography >
+                <Stack
+                    direction={'row'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                    spacing={1}
+                    sx={{
+                        position: 'absolute',
+                        right: '13px',
+                    }}
+                >
+                    <Box onClick={leftClickHandle} sx={{
+                        cursor: 'pointer'
+                    }}>
+                        <LeftArrow />
+                    </Box>
+                    <Box>
+                        <Typography variant='body9'>
+                            {currentSemester.name == "Semester 00" ? "All Semester" : currentSemester.name}
+                        </Typography>
+                    </Box>
+                    <Box onClick={rightClickHandle} sx={{
+                        cursor: 'pointer'
+                    }}>
+                        <RightArrow />
+                    </Box>
+                </Stack>
+            </Stack >
             {loading ? (
                 <Skeleton variant="rectangular" width={'100%'} height={400} />
             ) : (tableAssessmentsData?.length === 0) ? (
                 <ErrorComponent />
             ) :
                 <>
-                    <Stack direction='row' alignItems={'center'} sx={{ position: 'relative' }}>
-                        <Typography variant='h5'>Assessments</Typography >
-                        <Stack
-                            direction={'row'}
-                            justifyContent={'center'}
-                            alignItems={'center'}
-                            spacing={1}
-                            sx={{
-                                position: 'absolute',
-                                right: '13px',
-                            }}
-                        >
-                            <Box onClick={leftClickHandle} sx={{
-                                cursor: 'pointer'
-                            }}>
-                                <LeftArrow />
-                            </Box>
-                            <Box>
-                                <Typography variant='body9'>
-                                    {currentSemester.name == "Semester 00" ? "All Semester" : currentSemester.name}
-                                </Typography>
-                            </Box>
-                            <Box onClick={rightClickHandle} sx={{
-                                cursor: 'pointer'
-                            }}>
-                                <RightArrow />
-                            </Box>
-                        </Stack>
-                    </Stack >
                     <MuiCustomTableWithSortandSelect
                         HeaderArr={headerArr}
                         tableData={filteredData}

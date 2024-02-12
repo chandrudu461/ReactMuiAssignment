@@ -10,7 +10,8 @@ const ErrorComponent = () => {
             <Typography variant='errorMessage' color={theme.palette.grey[400]}> Error Loading Assessment</Typography>
             <Typography variant='errorReloadMessage' color={theme.palette.info.main}
                 sx={{
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    textDecoration: 'underline'
                 }}
                 onClick={() => window.location.reload()
                 }> Reload </Typography>

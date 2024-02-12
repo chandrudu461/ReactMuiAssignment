@@ -7,11 +7,11 @@ import "react-pdf/dist/Page/AnnotationLayer.css";
 import { pdfjs } from "react-pdf";
 import { useParams } from 'react-router'
 import { zoomPlugin } from '@react-pdf-viewer/zoom'
-import BackButtonIcon from '../../assets/svg/BackButtonIcon.jsx'
-import PdfRotateIcon from '../../assets/svg/PdfRotateIcon.jsx'
-import FullScreenIcon from '../../assets/svg/FullScreenIcon.jsx'
-import ZoomOutIcon from "../../assets/svg/ZoomOutIcon.jsx";
-import ZoomInIcon from "../../assets/svg/ZoomInIcon.jsx";
+import BackButtonIcon from '../../../assets/svg/BackButtonIcon.jsx'
+import PdfRotateIcon from '../../../assets/svg/PdfRotateIcon.jsx'
+import FullScreenIcon from '../../../assets/svg/FullScreenIcon.jsx'
+import ZoomOutIcon from "../../../assets/svg/ZoomOutIcon.jsx";
+import ZoomInIcon from "../../../assets/svg/ZoomInIcon.jsx";
 import {
     pageNavigationPlugin,
     DownArrowIcon,
@@ -124,6 +124,9 @@ const PdfViewer = () => {
                     padding: '16px',
                     boxShadow: `10px 10px 32px 0px rgba(22, 22, 22, 0.04)`,
                     backgroundColor: theme.palette.primary[0],
+                    '@media (max-width: 1100px) and (min-width: 900px)': {
+                        spacing: "50px"
+                    }
                 }}
             >
                 <Stack direction={'row'} spacing={4}>
@@ -147,7 +150,7 @@ const PdfViewer = () => {
                 <Stack direction={'row'} spacing={4} alignItems={'center'} justifyContent={'center'}>
                     <Stack direction={'row'} spacing={1}>
                         <Box width={'24px'} height={'24px'} sx={{
-                            backgroundColor: '#F4F6F8',
+                            backgroundColor: theme.palette.grey,
                             marginLeft: '24px'
                         }}
                             display={'flex'}
@@ -214,8 +217,8 @@ const PdfViewer = () => {
                     width: '415.511px',
                     marginTop: '87px',
                     height: '588px', marginLeft: '516px', // Default marginLeft for screens larger than 1366px
-                    transform: `rotate(${rotation}deg)`,
-                    transition: 'transform 0.5s ease-in-out',
+                    // transform: `rotate(${rotation}deg)`,
+                    // transition: 'transform 0.5s ease-in-out',
                     '@media (max-width: 1500px) and (min-width: 900px)': {
                         marginLeft: 'calc(50vw - 207.755px)' // Responsive marginLeft for screens between 900px and 1500px
                     }

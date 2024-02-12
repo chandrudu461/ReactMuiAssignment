@@ -16,7 +16,7 @@ import {
     Button,
     List,
     ListItem,
-    ListItemText,
+    ListItemText
 } from "@mui/material"
 import { useTheme } from '@mui/styles'
 import { useNavigate, useLocation, useParams } from 'react-router';
@@ -95,9 +95,9 @@ function withSidebarAndHeader(WrappedComponent) {
         const { dashBoardData, loading, error } = useSelector(
             (state) => state.dashboard
         )
-        console.log('param', param);
+        // console.log('param', param);
 
-        console.log('location : ', location.pathname);
+        // console.log('location : ', location.pathname);
 
         const handleClick = (event) => {
             setAnchorEl(event.currentTarget)
@@ -187,14 +187,17 @@ function withSidebarAndHeader(WrappedComponent) {
                                         sx={{
                                             backgroundColor: theme.palette.grey[100]
                                         }}
-
                                     >
                                         <UserProfileSvg link={dashBoardData.profile_picture} editIcon={<EditProfileIcon />} customRadius={'24px'} />
                                         <Box marginTop={'7px'}>
-                                            <Typography variant="popOverDisplayName" >Maharrm Hasanli</Typography>
+                                            <Typography variant="popOverDisplayName" >
+                                                {dashBoardData.name}
+                                            </Typography>
                                         </Box>
                                         <Box marginTop={'3px'}>
-                                            <Typography variant="popOverEmailName">maga.hesenli@gmail.com</Typography>
+                                            <Typography variant="popOverEmailName">
+                                                {dashBoardData.email}
+                                            </Typography>
                                         </Box>
                                         <Stack width={195} height={45} borderRadius={'10px'} direction={'row'} justifyContent={'center'} alignItems={'center'} sx={{
                                             marginTop: '5px',
@@ -240,34 +243,46 @@ function withSidebarAndHeader(WrappedComponent) {
                             height: "100%",
                         }}
                     >
-                        <Stack direction="column" gap={1} alignItems={"center"}>
+                        <Stack direction="column" gap={2} alignItems={"center"}>
                             <EdwiselyIcon />
-                            <MyIconButton
-                                currentLocation={location.pathname}
-                                page={'dashboard'}
+                            <Box width={'40px'} height={'40px'} backgroundColor={
+                                location.pathname === '/dashboard' ? theme.palette.primary[200] : 'transparent'}
+                                sx={{
+                                    borderRadius: '8px'
+                                }}>
+                                <MyIconButton
+                                    currentLocation={location.pathname}
+                                    page={'dashboard'}
 
-                            >
-                                <DashboardIcon
-                                    fontColor={
-                                        location.pathname === `/dashboard`
-                                            ? theme.palette.info[700]
-                                            : theme.palette.grey[500]
-                                    }
-                                />
-                            </MyIconButton>
-                            <MyIconButton
-                                currentLocation={location.pathname}
-                                page={'course'}
-                                disabled={location.pathname === `/course/${param?.courseId}`}
-                            >
-                                <BookIcon
-                                    fontColor={
-                                        location.pathname === `/course/${param?.courseId}`
-                                            ? theme.palette.info[700]
-                                            : theme.palette.grey[500]
-                                    }
-                                />
-                            </MyIconButton>
+                                >
+                                    <DashboardIcon
+                                        fontColor={
+                                            location.pathname === `/dashboard`
+                                                ? theme.palette.info[700]
+                                                : theme.palette.grey[500]
+                                        }
+                                    />
+                                </MyIconButton>
+                            </Box>
+                            <Box width={'40px'} height={'40px'} backgroundColor={
+                                location.pathname === '/dashboard' ? 'transparent' : theme.palette.primary[200]}
+                                sx={{
+                                    borderRadius: '8px'
+                                }}>
+                                <MyIconButton
+                                    currentLocation={location.pathname}
+                                    page={'course'}
+                                    disabled={location.pathname === `/course/${param?.courseId}`}
+                                >
+                                    <BookIcon
+                                        fontColor={
+                                            location.pathname === `/course/${param?.courseId}`
+                                                ? theme.palette.info[700]
+                                                : theme.palette.grey[500]
+                                        }
+                                    />
+                                </MyIconButton>
+                            </Box>
                         </Stack>
                         <Stack
                             justifyContent="flex-end"

@@ -57,7 +57,7 @@ const CourseCard = ({ id, name, image, tag, loading }) => {
                         <Typography
                             variant='cardText'
                             sx={{
-                                color: '#161C24',
+                                color: theme.palette.grey[900],
                             }}>{name}</Typography>
                     </Box>
                 </Box>

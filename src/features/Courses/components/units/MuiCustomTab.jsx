@@ -18,7 +18,7 @@ const CustomTab = styled(Tabs)(({ theme }) => ({
   '& .MuiTabs-indicatorSpan': {
     maxWidth: '80%',
     width: '100%',
-    backgroundColor: '#0946C4',
+    backgroundColor: theme.palette.primary.gradient800,
   },
 }))
 function a11yProps(index) {
@@ -57,13 +57,12 @@ export default function MuiCustomTab({ handleTabChange, value, data, edit }) {
             }
             // TabIndicatorProps={{ sx: { width: "50px" } }}
             sx={(theme) => ({
-              fontWeight: 400,
-              color: '#919EAB',
+              color: theme.palette.grey[400],
               fontSize: '15px',
               pl: index > 0 ? 2 : '',
               pb: '0px',
               '&.Mui-selected': {
-                color: '#0946C4',
+                color: theme.palette.primary.gradient800,
                 fontWeight: '400',
               },
               '&::before':

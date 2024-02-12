@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Stack from '@mui/material/Stack';
+import { useTheme } from '@mui/material'
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import PasswordIcon from '../../../assets/svg/PasswordIcon.jsx';
 import { Box, FormControlLabel } from '@mui/material';
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom'
 import { loginActions } from '../../../store/index.js'
 import Button from '@mui/material/Button';
@@ -18,7 +19,7 @@ const Login = () => {
     const [helper, setHelper] = useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const login = useSelector((state) => state.login);
+    const theme = useTheme()
 
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
@@ -77,7 +78,7 @@ const Login = () => {
         padding: '10px',
         gap: '10px',
         borderRadius: "10px",
-        background: '#0B58F5',
+        background: theme.palette.primary.main,
     };
 
     return (
@@ -109,7 +110,7 @@ const Login = () => {
                         <Checkbox
                             checked={rememberMe}
                             onChange={handleRememberMe}
-                            style={{ color: '#0B58F5' }}
+                            style={{ color: theme.palette.primary.main }}
                         />
                     }
                     label="Remember me"

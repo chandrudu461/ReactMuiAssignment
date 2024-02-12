@@ -10,7 +10,7 @@ const UserProfileComponent = ({ name, email, link, loading }) => {
                 <Skeleton variant="rectangular" width={'100%'} height={150} />
             ) : (<>
 
-                <Stack width={'319px'}>
+                <Stack  >
                     <Typography variant='h5'>
                         User Profile
                     </Typography>

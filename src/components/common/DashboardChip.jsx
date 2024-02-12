@@ -1,8 +1,10 @@
 import { Box } from '@mui/material';
 import React from 'react'
 import Typography from '@mui/material/Typography';
+import { useTheme } from '@emotion/react';
 
 const DashboardChip = ({ backgroundColor, label, percentage, icon }) => {
+    const theme = useTheme()
     return (
         <Box>
             <Box
@@ -12,8 +14,9 @@ const DashboardChip = ({ backgroundColor, label, percentage, icon }) => {
                 alignItems="center"
                 gap="15px"
                 borderRadius="10px"
-                border="1px solid #F4F6F8"
-                bgcolor="#FFF"
+                border="1px solid"
+                borderColor={theme.palette.grey[100]}
+                bgcolor={theme.palette.primary[0]}
                 boxShadow="10px 10px 32px 0px rgba(22, 22, 22, 0.04)"
                 margin='20px 12px 28px 14px'
             >

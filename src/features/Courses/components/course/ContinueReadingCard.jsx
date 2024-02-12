@@ -1,4 +1,4 @@
-import { Box, Skeleton, Stack, Typography, useMediaQuery } from '@mui/material'
+import { Box, Skeleton, Stack, Typography, useMediaQuery, useTheme } from '@mui/material'
 import React from 'react'
 import RightButtonIcon from '../../../../assets/svg/RightButtonIcon'
 import DocumentIcon from '../../../../assets/svg/DocumentIcon'
@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 
 const ContinueReadingCard = ({ name, url, icon, loading }) => {
     const matches = useMediaQuery('(min-width:900px) and (max-width:1000px)');
+    const theme = useTheme()
     const scrollToTop = () => {
         window.scrollTo(0, 0);
         localStorage.setItem("pdfFileName", name);
@@ -35,11 +36,11 @@ const ContinueReadingCard = ({ name, url, icon, loading }) => {
                             width: '3.75rem',
                             height: '60px',
                             padding: '15px',
-                            backgroundColor: '#dfe3e8',
+                            backgroundColor: theme.palette.grey[200],
                             borderRadius: '5px',
                         }}> {icon} </Box>
                         <Box sx={{
-                            color: '#161C24',
+                            color: theme.palette.grey[900],
                             paddingTop: '10px',
                         }}>
                             <Typography variant='tableStudentRowCell' >

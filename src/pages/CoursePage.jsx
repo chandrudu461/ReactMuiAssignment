@@ -46,7 +46,7 @@ function CoursePage() {
         <Box sx={{
             position: 'absolute',
             left: '5rem',
-            backgroundColor: "#ffffff",
+            backgroundColor: theme.palette.primary[0],
             width: '93vw',
             height: '1200px',
         }}>

@@ -49,7 +49,7 @@ const CourseDescription = ({ data }) => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         padding: '4px 6px 4px 6px',
-                        backgroundColor: '#E7EEFE',
+                        backgroundColor: theme.palette.primary[100],
                         marginLeft: '14px',
                         height: '20px',
                         width: '63px'
@@ -57,7 +57,7 @@ const CourseDescription = ({ data }) => {
                         <Typography
                             variant='coursePageChip'
                             sx={{
-                                color: '#0B58F5'
+                                color: theme.palette.primary.main
                             }}>DESIGN</Typography>
                     </Box>
                 </Box>

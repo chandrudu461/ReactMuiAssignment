@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { InputBase } from '@mui/material';
+import { InputBase, useTheme } from '@mui/material';
 import SearchStatusIcon from '../../../../assets/svg/SearchStatusIcon';
 
 const Search = ({ value, setValue, handleSearchChange }) => {
@@ -7,6 +7,7 @@ const Search = ({ value, setValue, handleSearchChange }) => {
         handleSearchChange(event.target.value);
         setValue(event.target.value);
     }
+    const theme = useTheme()
     return (
         <InputBase
             placeholder="Search topics"
@@ -15,8 +16,9 @@ const Search = ({ value, setValue, handleSearchChange }) => {
             onChange={handleSearchInputChange}
             sx={{
                 borderRadius: '6.64px',
-                border: '1px solid #F4F6F8',
-                background: '#F4F6F8',
+                border: '1px solid',
+                borderColor: theme.palette.grey[100],
+                background: theme.palette.grey[100],
                 display: 'flex',
                 height: '35px',
                 width: '144px',
@@ -25,7 +27,8 @@ const Search = ({ value, setValue, handleSearchChange }) => {
                 gap: '11.383px',
                 flexShrink: 0,
                 '&:hover': {
-                    border: '1px solid #919EAB',
+                    border: '1px solid',
+                    borderColor: theme.palette.grey[400]
                 },
             }}
         />

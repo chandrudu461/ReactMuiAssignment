@@ -28,6 +28,7 @@ const router = createBrowserRouter([
     element: <PdfPage />,
     errorElement: <ErrorPage />,
   },
+  { path: "*", element: <ErrorPage /> },
   // {
   //   path: "/",
   //   element: <Layout />,

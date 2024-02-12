@@ -1,13 +1,11 @@
 import React from 'react'
-import { Grid, Typography, List, ListItem, Box, Stack } from '@mui/material'
+import { Grid, Typography, List, ListItem, Box, Stack, useTheme } from '@mui/material'
 import DocumentIcon from '../../../../assets/svg/DocumentIcon'
 import PresentationIcon from '../../../../components/common/PresentationIcon'
 import ContinueReadingCard from './ContinueReadingCard'
 
 const ContinueReading = ({ data, loading }) => {
-    const scrollToTop = () => {
-        window.scrollTo(0, 0);
-    }
+    const theme = useTheme()
 
     return (
         <>
@@ -18,7 +16,7 @@ const ContinueReading = ({ data, loading }) => {
                 <Typography
                     variant='continueReading'
                     sx={{
-                        color: '#000',
+                        color: theme.palette.primary[0],
                         marginBottom: '10px'
                     }}>Continue reading</Typography>
                 <Stack

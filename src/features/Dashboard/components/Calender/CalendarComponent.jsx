@@ -53,7 +53,7 @@ const CalendarComponent = ({ loading }) => {
                                         '& .MuiPickersCalendarHeader-label': {
                                             margin: '0px',
                                             padding: '0px',
-                                            color: '#0B58F5',
+                                            color: theme.palette.primary.main,
                                             fontStyle: 'normal',
                                             fontWeight: '600',
                                             lineHeight: 'normal',
@@ -105,7 +105,7 @@ const CalendarComponent = ({ loading }) => {
                                             width: '36px',
                                             height: '28px',
                                             borderRadius: '3.57px',
-                                            color: '#212B36',
+                                            color: theme.palette.grey[800],
                                             fontStyle: 'normal',
                                             fontWeight: 500,
                                             lineHeight: 'normal',
