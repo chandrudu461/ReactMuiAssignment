@@ -8,7 +8,7 @@ import AssignmentIcon from '../../../../assets/svg/AssignmentIcon'
 import CodingIcon from '../../../../assets/svg/CodingIcon'
 import { Skeleton, Stack } from '@mui/material';
 
-const Assessments = ({ loading }) => {
+const Assessments = ({ data, loading }) => {
     const theme = useTheme()
     return (
         <>

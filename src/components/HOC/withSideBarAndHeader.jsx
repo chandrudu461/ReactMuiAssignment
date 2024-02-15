@@ -5,6 +5,7 @@ import UserProfileSvg from "../../assets/svg/UserProfileSvg"
 import EdwiselyIcon from "../../assets/svg/EdwiselyIcon.jsx"
 import DashboardIcon from "../../assets/svg/DashboardIcon.jsx"
 import BookIcon from "../../assets/svg/BookIcon.jsx"
+import { Link } from "react-router-dom"
 import {
     Drawer,
     AppBar,
@@ -54,7 +55,7 @@ const MyIconButton = styled(IconButton)(
 const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
-        maxWidth: 1536, // Restrict max width of the HOC
+        maxWidth: 1536,
         margin: "0px",
     },
     appBar: {
@@ -77,8 +78,8 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         flexGrow: 1,
-        maxWidth: 1536, // Restrict max width of the content
-        margin: "65px auto 0 auto", // Center align the content
+        maxWidth: 1536,
+        margin: "65px auto 0 auto",
     },
 }))
 
@@ -91,13 +92,9 @@ function withSidebarAndHeader(WrappedComponent) {
         const dispatch = useDispatch()
         const [anchorEl, setAnchorEl] = useState(null)
         const navigate = useNavigate()
-        const [profilePicture, setProfilePicture] = useState(null)
         const { dashBoardData, loading, error } = useSelector(
             (state) => state.dashboard
         )
-        // console.log('param', param);
-
-        // console.log('location : ', location.pathname);
 
         const handleClick = (event) => {
             setAnchorEl(event.currentTarget)
@@ -175,7 +172,6 @@ function withSidebarAndHeader(WrappedComponent) {
                                     }}
                                     getContentAnchorEl={null}
                                 >
-
                                     <Stack
                                         direction={"column"}
                                         display={"flex"}
@@ -199,7 +195,7 @@ function withSidebarAndHeader(WrappedComponent) {
                                                 {dashBoardData.email}
                                             </Typography>
                                         </Box>
-                                        <Stack width={195} height={45} borderRadius={'10px'} direction={'row'} justifyContent={'center'} alignItems={'center'} sx={{
+                                        <Stack width={195} height={45} borderRadius={'10px'} direction={'row'} justifyContent={'center'} alignItems={'center'} onClick={handleLogout} sx={{
                                             marginTop: '5px',
                                             padding: '5px',
                                             transition: 'background-color 0.3s', // Add transition for smooth color change
@@ -250,19 +246,21 @@ function withSidebarAndHeader(WrappedComponent) {
                                 sx={{
                                     borderRadius: '8px'
                                 }}>
-                                <MyIconButton
-                                    currentLocation={location.pathname}
-                                    page={'dashboard'}
+                                <Link to='/dashboard'>
+                                    <MyIconButton
+                                        currentLocation={location.pathname}
+                                        page={'dashboard'}
 
-                                >
-                                    <DashboardIcon
-                                        fontColor={
-                                            location.pathname === `/dashboard`
-                                                ? theme.palette.info[700]
-                                                : theme.palette.grey[500]
-                                        }
-                                    />
-                                </MyIconButton>
+                                    >
+                                        <DashboardIcon
+                                            fontColor={
+                                                location.pathname === `/dashboard`
+                                                    ? theme.palette.info[700]
+                                                    : theme.palette.grey[500]
+                                            }
+                                        />
+                                    </MyIconButton>
+                                </Link>
                             </Box>
                             <Box width={'40px'} height={'40px'} backgroundColor={
                                 location.pathname === '/dashboard' ? 'transparent' : theme.palette.primary[200]}
@@ -290,7 +288,6 @@ function withSidebarAndHeader(WrappedComponent) {
                             sx={{
                                 height: "100%",
                                 cursor: 'pointer'
-                                // border: '2px solid red'
                             }}
 
                         >

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     dashBoardData: [],
     loading: false,
-    error: null,
+    error: false,
 }
 
 const dashboardSlice = createSlice({

@@ -9,7 +9,6 @@ import PdfPage from './pages/PdfPage';
 // import withSidebarAndHeader from './components/HOC/withSideBarAndHeader';
 // const SidebarAndHeaderComponent = withSidebarAndHeader
 
-
 const router = createBrowserRouter([
   {
     path: "/",

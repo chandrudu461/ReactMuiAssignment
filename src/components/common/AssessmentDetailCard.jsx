@@ -1,7 +1,6 @@
 import React from 'react'
 import { Box, Stack, Typography, Icon } from '@mui/material'
 import CountUp from 'react-countup'
-import { useTheme } from '@mui/material'
 
 const AssessmentDetailCard = ({
   icon,
@@ -12,10 +11,6 @@ const AssessmentDetailCard = ({
   contentType,
   showCountingAnimation,
 }) => {
-
-  const theme = useTheme();
-  const greyColor = theme.palette.grey[100]
-  // console.log(greyColor)
 
   return (
     <Box

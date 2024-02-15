@@ -3,7 +3,6 @@ import './App.css';
 import AppRouter from './Routes';
 import ThemeProvider from './theme';
 import ReactErrorBoundary from './components/common/ReactErrorBoundary';
-import Layout from './components/common/Layout'
 
 function App() {
 
