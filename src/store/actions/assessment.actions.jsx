@@ -9,7 +9,7 @@ export const fetchAssessmentData = () => {
     return async (dispatch) => {
         try {
             dispatch(fetchAssessmentDataRequest());
-            const response = await axios.get(`https://stagingstudentpython.edwisely.com/reactProject/assessments`);
+            const response = await fetch(`https://stagingstudentpython.edwisely.com/reactProject/assessments`);
             dispatch(fetchAssessmentDataSuccess(response.data));
         } catch (error) {
             dispatch(fetchAssessmentDataFailure(error.message));

@@ -151,7 +151,7 @@ const DashboardPage = () => {
                                 spacing={'12px'}
                                 direction={'column'}
                                 sx={{
-                                    // maxWidth: '319px',
+                                    width: '400px',
                                     // width: '100%',
                                     // padding: '10px',
                                     marginTop: '28px',
@@ -169,7 +169,7 @@ const DashboardPage = () => {
                                     :
                                     <>
                                         <Box>
-                                            <UserProfileComponent link={dashBoardData.profile_picture} email={dashBoardData.email} name={dashBoardData.name} />
+                                            <UserProfileComponent link={dashBoardData.profile_picture} email={dashBoardData.email} name={dashBoardData.name} width='400px' />
                                         </Box>
                                         <Box sx={{
                                             marginTop: '30px'

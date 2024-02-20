@@ -3,11 +3,11 @@ import { Typography, Skeleton } from '@mui/material'
 import UserProfile from './UserProfile'
 import { Stack } from '@mui/material'
 
-const UserProfileComponent = ({ name, email, link, loading }) => {
+const UserProfileComponent = ({ name, email, link, loading, width }) => {
     return (
         <>
             {loading ? (
-                <Skeleton variant="rectangular" width={'100%'} height={150} />
+                <Skeleton variant="rectangular" width={width} height={150} />
             ) : (<>
 
                 <Stack  >
@@ -19,6 +19,7 @@ const UserProfileComponent = ({ name, email, link, loading }) => {
                         email={email}
                         link={link}
                         customRadius={false}
+                        width={width}
                     />
                 </Stack>
             </>

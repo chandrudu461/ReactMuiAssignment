@@ -4,15 +4,15 @@ import Stack from '@mui/material/Stack';
 import { Typography, Box, useTheme } from '@mui/material';
 
 
-const UserProfile = ({ name, email, link }) => {
+const UserProfile = ({ name, email, link, width }) => {
 
     const theme = useTheme();
 
     return (
         <>
-            <Box backgroundColor={theme.palette.grey[100]} sx={{
-                maxWidth: '319px',
-            }}>
+            <Box backgroundColor={theme.palette.grey[100]}
+                maxWidth={width}>
+
                 <Stack
                     direction={'row'}>
                     <Box margin={'10px'}>
